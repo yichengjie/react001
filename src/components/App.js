@@ -1,6 +1,8 @@
 'use strict';
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+import Names from './Names.js' ;
+
 class Li extends Component {
     render(){
         return <li>{this.props.i}</li>
@@ -33,6 +35,6 @@ class Hello extends Component {
     }
 } 
 ReactDOM.render(
-  <Hello name="John" />,
+  <Names/>,
   document.getElementById('app')
 );
