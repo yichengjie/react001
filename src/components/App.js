@@ -34,7 +34,8 @@ class Hello extends Component {
         return <div>Hello {span},{newSpan}</div>; //Hello VaJoy,CNBlog
     }
 } 
+
 ReactDOM.render(
-  <Names/>,
+  <HelloMessage/>,
   document.getElementById('app')
 );
