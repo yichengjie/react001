@@ -1,14 +1,14 @@
 
 'use strict';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
-
+var HtmlWebpackPlugin = require('html-webpack-plugin') ;
 module.exports = {
     devtool: 'eval-source-map',
     entry: __dirname + '/src/entry.js', //唯一入口文件
     output: {
-        path: __dirname + '/dist/static', //打包后的文件存放的地方
+        path: __dirname + '/dist', //打包后的文件存放的地方
         filename: 'bundle.js', //打包后输出文件的文件名
-        publicPath:'./dist/static'
+        publicPath:'/dist'/**注意合理一定不能使用 `./dist`,否则找不到 */
     },
 
     module: {
@@ -33,7 +33,7 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin('main.css')
+        new ExtractTextPlugin('main.css'),
     ]
 
 }
