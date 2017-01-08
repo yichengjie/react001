@@ -1,4 +1,3 @@
-
 'use strict';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
