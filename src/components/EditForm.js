@@ -5,21 +5,18 @@ export default class EditForm extends Component{
     constructor(props){
         super(props) ;
         this.state= {
-            formSchema:{
-                name:'',
-                fields:[]
-            },
+            schemaFields:[],
             formData:{}
         } ;
     }
     componentDidMount(){
         let promise = Api.getEditFormSchema() ;
-        promise.then((formSchema)=>{
-            //console.info('formData  : ' + JSON.stringify(formData)) ;
-            let formData = getFormData(formSchema) ;
+        promise.then((schemaFields)=>{
+            console.info('schemafields  : ' + JSON.stringify(schemaFields)) ;
+            let formData = getFormData(schemaFields) ;
             this.setState({formData}) ;
             //将formSchema放到state中
-            this.setState({formSchema}) ;
+            this.setState({schemaFields}) ;
         }) ;
     }
     handleChange(name,event){
@@ -32,14 +29,15 @@ export default class EditForm extends Component{
 
     }
     render(){
-        let fields = this.state.formSchema.fields.map((field,index)=>{
+        let fields = this.state.schemaFields.map((field,index)=>{
             return renderFieldItem.call(this,field,index) ;
         }) ;
         let saveBtn = null ;
         if(fields.length>0){
             saveBtn = (<div className="form-group">
                 <div className="col-sm-offset-2 col-sm-10">
-                    <button type="button" className="btn btn-default" onClick ={this.handleSubmitForm.bind(this)}>保存</button>
+                    <button type="button" className="btn btn-default" 
+                        onClick ={this.handleSubmitForm.bind(this)}>保存</button>
                 </div>
               </div>) ;
         }
@@ -108,9 +106,9 @@ function renderTextareaField(name){
 // }
 
 /**从后台formSchema定义中获取到formData */
-function getFormData(formSchema){
+function getFormData(schemaFields){
     let obj = {} ;
-    formSchema.fields.forEach(field=>{
+    schemaFields.forEach(field=>{
         //console.info('field : ' + JSON.stringify(field)) ;
         let name = field['name'] ;
         obj[name] = '' ;
