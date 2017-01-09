@@ -18,7 +18,19 @@ module.exports = {
             { test: /\.js$/, loader: "jsx!babel", include: /src/},
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss")},
             { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css!postcss!sass")},
-            { test: /\.(png|jpg)$/, loader: 'url?limit=8192'}
+            { test: /\.(png|jpg)$/, loader: 'url?limit=8192'},
+            {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'url',
+             query: {
+                limit: 10000,
+                name: 'fonts/[name].[hash:7].[ext]'
+             }
+            },
+            {test: /\.(png|jpg|gif|svg)$/,loader: 'file',
+             query: {
+                limit: 10000,
+                name: 'img/[name].[hash:7].[ext]'
+             }
+            }
         ]
     },
     postcss: [

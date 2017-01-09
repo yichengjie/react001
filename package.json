@@ -20,6 +20,7 @@
     "babel-loader": "^5.1.4",
     "css-loader": "^0.14.5",
     "extract-text-webpack-plugin": "~1.0.1",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
     "jsx-loader": "^0.13.2",
     "node-libs-browser": "^0.5.2",
@@ -33,6 +34,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   }
