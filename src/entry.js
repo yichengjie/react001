@@ -7,7 +7,7 @@ import UserEditPage from './views/UserEditPage.jsx';
 import UserQueryPage from './views/UserQueryPage.jsx' ;
 
 ReactDOM.render(
-  <UserQueryPage/>,
+  <UserEditPage/>,
   document.getElementById('app')
 );
 
