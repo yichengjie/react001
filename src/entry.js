@@ -1,7 +1,12 @@
 
 'use strict';
-
-//引入样式文件
-import './styles/app.scss';
+import React,{Component} from 'react';
+import ReactDOM from 'react-dom';
 //引入组件
-import './components/App.jsx';
+import UserEditPage from './views/UserEditPage.jsx';
+ReactDOM.render(
+  <UserEditPage/>,
+  document.getElementById('app')
+);
+
+

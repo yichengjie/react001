@@ -1,7 +1,6 @@
 import React,{Component} from 'react' ;
-import Chain,{nextFlagStr} from './chain.js'; 
-import Api from './Api' ;
-export default class EditForm extends Component{
+
+export default class SimpleEditForm extends Component{
     constructor(props){
         super(props) ;
         this.state= {
@@ -10,7 +9,7 @@ export default class EditForm extends Component{
         } ;
     }
     componentDidMount(){
-        let promise = Api.getEditFormSchema() ;
+        let promise = this.props.getEditFormSchema() ;
         promise.then((schemaFields)=>{
             console.info('schemafields  : ' + JSON.stringify(schemaFields)) ;
             let formData = getFormData(schemaFields) ;
@@ -23,7 +22,6 @@ export default class EditForm extends Component{
             this.setState({formData:newFormData}) ;
         }) ;
     }
-    
 
     handleChange(name,event){
         let formData = {[name]:event.target.value} ;
@@ -31,8 +29,10 @@ export default class EditForm extends Component{
         this.setState({formData:newFormData}) ;
     }
     handleSubmitForm(){
-        console.info('formData : ' + JSON.stringify(this.state.formData)) ;
-
+        //console.info('formData : ' + JSON.stringify(this.state.formData)) ;
+        if(this.props.handleSubmitForm){
+            this.props.handleSubmitForm(this.state.formData)
+        }
     }
     render(){
         let fields = this.state.schemaFields.map((field,index)=>{
@@ -55,7 +55,6 @@ export default class EditForm extends Component{
         ) ;
     } 
 }
-
 
 function renderFieldItem(fieldSchema,index){
     let fn = fieldItemFactory[fieldSchema.type] ;
@@ -80,7 +79,6 @@ let fieldItemFactory={
     textarea:renderTextareaField,
     select:renderSelectField
 } ;
-
 
 function renderSimpleInputField(fieldSchema){
     let {type,name} = fieldSchema ;
