@@ -24,8 +24,8 @@ export default class SimpleEditForm extends Component{
     }
 
     handleChange(name,event){
-        let formData = {[name]:event.target.value} ;
-        let newFormData = Object.assign({},this.state.formData,formData) ;
+        let propObj = {[name]:event.target.value} ;
+        let newFormData = Object.assign({},this.state.formData,propObj) ;
         this.setState({formData:newFormData}) ;
     }
     handleSubmitForm(){
