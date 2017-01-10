@@ -1,7 +1,7 @@
 'use strict';
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import SimpleEditForm from '../components/SimpleEditForm2.jsx' ;
+import SimpleEditForm from '../components/SimpleEditForm.jsx' ;
 import 'bootstrap/dist/css/bootstrap.css' ;
 //引入样式文件
 import '../styles/app.scss';
