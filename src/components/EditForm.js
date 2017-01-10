@@ -17,6 +17,10 @@ export default class EditForm extends Component{
             this.setState({formData}) ;
             //将formSchema放到state中
             this.setState({schemaFields}) ;
+            //设置从后台查询过来的数据
+            let newFormData = Object.assign({},this.state.formData);
+            newFormData.dept = 'js' ;
+            this.setState({formData:newFormData}) ;
         }) ;
     }
     handleChange(name,event){
@@ -60,7 +64,7 @@ function renderFieldItem(fieldSchema,index){
         <div className="form-group" key ={index}>
         <label  className="col-sm-2 control-label">{fieldSchema.label}</label>
         <div className="col-sm-6">
-            {fn.call(this,fieldSchema.type,fieldSchema.name)} 
+            {fn.call(this,fieldSchema)} 
         </div>
         </div>
     ) ;
@@ -71,39 +75,36 @@ let fieldItemFactory={
     email:renderSimpleInputField,
     number:renderSimpleInputField,
     password:renderSimpleInputField,
-    textarea:renderTextareaField
+    textarea:renderTextareaField,
+    select:renderSelectField
 } ;
-function renderSimpleInputField(type,name){
+
+
+function renderSimpleInputField(fieldSchema){
+    let {type,name} = fieldSchema ;
     return <input type={type} className="form-control" 
         value= {this.state.formData[name]} 
         onChange={this.handleChange.bind(this,name)} /> 
 }
-function renderTextareaField(name){
+function renderTextareaField(fieldSchema){
+   let {name} = fieldSchema ;
    return <textarea className ="form-control" 
         value={this.state.formData[name]}
         onChange={this.handleChange.bind(this,name)}/> 
 }
 
-// function renderFieldItem(fieldSchema,index){
-//     let fn = fieldItemFactory[fieldSchema.type] ;
-//     if(fn ===null || typeof fn !== 'function' ){
-//         return null ;
-//     }
-//     return (
-//         <div className="form-group" key ={index}>
-//            <label  className="col-sm-2 control-label">{fieldSchema.label}</label>
-//            <div className="col-sm-6">
-//               {fn.call(this,fieldSchema.type,fieldSchema.name)} 
-//            </div>
-//         </div>
-//     ) ;
-// } 
-
-// function renderSinpleInputField(type,name){
-//     return <input type={type} className="form-control" 
-//         value= {this.state.formData[name]} 
-//         onChange={this.handleChange.bind(this,name)} /> 
-// }
+function renderSelectField(fieldSchema){
+   let {name,options} = fieldSchema ;
+   let ops = options.map( (item,index)=>{
+       return <option value={item.value} key ={index}>{item.name}</option>
+   }) ;
+   return (<select className ="form-control" 
+        value={this.state.formData[name]}
+        onChange={this.handleChange.bind(this,name)}>
+            {ops}
+        </select>
+   )  
+}
 
 /**从后台formSchema定义中获取到formData */
 function getFormData(schemaFields){
