@@ -11,7 +11,7 @@ export default class UserEditPage extends BaseEditPage{
       super() ;
   }
   componentDidMount(){
-      let promise = Api.getEditFormSchema() ;
+      let promise = Api.getUserEditFormSchema() ;
       promise.then((schemaFields)=>{
           //console.info('schemafields  : ' + JSON.stringify(schemaFields)) ;
           let formData = getFormDataFromSchema(schemaFields) ;
