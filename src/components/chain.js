@@ -26,3 +26,37 @@ Chain.prototype.next = function(){
 	return this.successor && this.successor.passRequest.apply(this.successor,arguments) ;
 };
 export default Chain ;
+/**使用示例:
+ * 1.定义函数
+ *  *同步函数start
+ *	*	* let  fn1 = new Chain(function(){
+ *	*	* 	 if(xxx){
+ *	*	* 		xxx
+ *	*	*   }else{
+ *	*	*     return nextFlagStr ;
+ *	*	*   }
+ *	*	* }) ;
+ *	*	* let  fn2 = new Chain(function(){
+ *	*	* 	 if(xxx){
+ *	*	* 		xxx
+ *	*	*   }else{
+ *	*	*     return nextFlagStr ;
+ *	*	*   }
+ *	*	* }) ;
+ *	*同步函数end
+ *	*异步函数start
+ *	*	* let fn3 = new Chain(function(){
+ *	*	*     var _self = this ;
+ *	*	* 	   setTimeout(function() {
+ *	*	*         其他操作
+ *	*	*		  _self.next.apply(_self) ;
+ *	*	*     }, timeout);
+ *	*	* }) ;
+ *	* 异步函数end
+ *2.配置执行顺序
+ *	* fn1.setNextSuccessor(fn2) ;
+ *	* fn2.setNextSuccessor(fn3) ;
+ * 3.运行程序
+ *	* fn1.passRequest() ; //这里可以传递参数
+ */
+
