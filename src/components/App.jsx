@@ -1,12 +1,8 @@
 'use strict';
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import EditForm from './EditForm.js' ;
+import EditForm from './EditForm.jsx' ;
 require('bootstrap/dist/css/bootstrap.css') ;
-
-function g(){
-  return <text></text>
-}
 
 ReactDOM.render(
   <EditForm/>,
