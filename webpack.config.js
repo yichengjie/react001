@@ -41,11 +41,15 @@ module.exports = {
     postcss: [
         require('autoprefixer')    //调用autoprefixer插件,css3自动补全
     ],
+    resolve: {
+      extensions: ['', '.js', '.jsx']
+    },
     devServer: {
         //contentBase: './build',  //本地服务器所加载的页面所在的目录
         port: 3000,
         colors: true,  //终端中输出结果为彩色
         historyApiFallback: true,  //不跳转
+        progress: true ,
         inline: true  //实时刷新
     },
     plugins: [
