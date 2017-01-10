@@ -5,15 +5,24 @@ function  PopupContainer (Wrapper){
         constructor(props){
             super() ;
             this.state={
-                count:0
+                count:1
             } ;
+            this.handleClick = this.handleClick.bind(this) ;
         }
         componentDidMount () {
             console.info('HOC did mount ') ;
             //最好要这样写，而不要在render中写`this.handleClick.bind(this)`
             //因为每次父组件render的时候都会执行一次bind(this)都会返回一个新的函数,
             //所以相当于prop发生了改变，这时子组件一定会重新render，即是使用immutable.js也无用。
-            this.handleClick = this.handleClick.bind(this) ;
+            var timer = setInterval(()=>{
+                console.info('count : ' + this.state.count) ;
+                if(this.state.count>=10){
+                    clearInterval(timer) ; 
+                    return ;
+                }else{
+                    this.setState({count:this.state.count +1}) ;
+                }
+            },1000) ;
         }
         componentWillUnmount() {
             console.info('HOC will unmount') ;
