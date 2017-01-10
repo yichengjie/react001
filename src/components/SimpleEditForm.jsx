@@ -1,41 +1,17 @@
 import React,{Component} from 'react' ;
 
 export default class SimpleEditForm extends Component{
-    constructor(props){
-        super(props) ;
-        this.state= {
-            schemaFields:[],
-            formData:{}
-        } ;
-    }
-    componentDidMount(){
-        let promise = this.props.getEditFormSchema() ;
-        promise.then((schemaFields)=>{
-            console.info('schemafields  : ' + JSON.stringify(schemaFields)) ;
-            let formData = getFormData(schemaFields) ;
-            this.setState({formData}) ;
-            //将formSchema放到state中
-            this.setState({schemaFields}) ;
-            //设置从后台查询过来的数据
-            let newFormData = Object.assign({},this.state.formData);
-            newFormData.dept = 'js' ;
-            this.setState({formData:newFormData}) ;
-        }) ;
-    }
-
-    handleChange(name,event){
+    handleInputChange(name,event){
         let propObj = {[name]:event.target.value} ;
-        let newFormData = Object.assign({},this.state.formData,propObj) ;
-        this.setState({formData:newFormData}) ;
+        this.props.handleInputChange(propObj) ;
     }
     handleSubmitForm(){
-        //console.info('formData : ' + JSON.stringify(this.state.formData)) ;
         if(this.props.handleSubmitForm){
-            this.props.handleSubmitForm(this.state.formData)
+            this.props.handleSubmitForm()
         }
     }
     render(){
-        let fields = this.state.schemaFields.map((field,index)=>{
+        let fields = this.props.schemaFields.map((field,index)=>{
             return renderFieldItem.call(this,field,index) ;
         }) ;
         let saveBtn = null ;
@@ -83,14 +59,14 @@ let fieldItemFactory={
 function renderSimpleInputField(fieldSchema){
     let {type,name} = fieldSchema ;
     return <input type={type} className="form-control" 
-        value= {this.state.formData[name]} 
-        onChange={this.handleChange.bind(this,name)} /> 
+        value= {this.props.formData[name]} 
+        onChange={this.handleInputChange.bind(this,name)} /> 
 }
 function renderTextareaField(fieldSchema){
    let {name} = fieldSchema ;
    return <textarea className ="form-control" 
-        value={this.state.formData[name]}
-        onChange={this.handleChange.bind(this,name)}/> 
+        value={this.props.formData[name]}
+        onChange={this.handleInputChange.bind(this,name)}/> 
 }
 
 function renderSelectField(fieldSchema){
@@ -99,20 +75,11 @@ function renderSelectField(fieldSchema){
        return <option value={item.value} key ={index}>{item.name}</option>
    }) ;
    return (<select className ="form-control" 
-        value={this.state.formData[name]}
-        onChange={this.handleChange.bind(this,name)}>
+        value={this.props.formData[name]}
+        onChange={this.handleInputChange.bind(this,name)}>
             {ops}
         </select>
    )  
 }
 
-/**从后台formSchema定义中获取到formData */
-function getFormData(schemaFields){
-    let obj = {} ;
-    schemaFields.forEach(field=>{
-        //console.info('field : ' + JSON.stringify(field)) ;
-        let name = field['name'] ;
-        obj[name] = '' ;
-    }) ;
-    return obj ;
-}
+
