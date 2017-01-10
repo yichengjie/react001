@@ -8,7 +8,7 @@ import BaseEditPage from '../components/BaseEditPage.jsx' ;
 import {getFormDataFromSchema} from '../common/common.js' ;
 export default class UserEditPage extends BaseEditPage{
   constructor(props){
-      super(props) ;
+      super() ;
   }
   componentDidMount(){
       let promise = Api.getEditFormSchema() ;
