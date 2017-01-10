@@ -5,7 +5,7 @@ import SimpleEditForm from '../components/SimpleEditForm.jsx' ;
 import 'bootstrap/dist/css/bootstrap.css' ;
 //引入样式文件
 import '../styles/app.scss';
-import Api from '../api/Api' ;
+import Api from '../api/Api.js' ;
 export default class UserEditPage extends Component{
   handleSubmitForm(formData){
      console.info('submit formData is : ', formData) ;
