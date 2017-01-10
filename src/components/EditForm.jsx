@@ -23,6 +23,8 @@ export default class EditForm extends Component{
             this.setState({formData:newFormData}) ;
         }) ;
     }
+    
+
     handleChange(name,event){
         let formData = {[name]:event.target.value} ;
         let newFormData = Object.assign({},this.state.formData,formData) ;

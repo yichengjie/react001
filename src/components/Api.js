@@ -16,8 +16,3 @@ export default {
         }) ;
     }
 } ;
-
-
-function g(){
-  return text   
-}
