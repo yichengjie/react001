@@ -136,4 +136,43 @@ function demo014(){
     console.info('list2.size : ' + list2.size ); // 6
 }
 
-demo013() ;
+function demo015(){
+    var data1 = Immutable.fromJS({ a: { b: { c: 10 } } });
+
+    var data2 = data1.updateIn(['x', 'y', 'z'], 100, val => val);
+    
+    console.info('data2 === data1 : ' + (data2 === data1));
+    console.info(data2) ;
+}
+
+function demo016(){
+    var data = Immutable.fromJS({ a: { b: { c: 10 } } });
+    data = data.updateIn(['a', 'b', 'x'], 100,val => {
+      console.info('val : ' + val) ;
+       return  val * 2
+    });
+    console.info(data) ;
+    // { a: { b: { c: 20 } } }
+}
+
+
+function demo017(){
+    var map1 = Immutable.Map();
+    var map2 = map1.withMutations(map => {
+        map.set('a', 1).set('b', 2).set('c', 3);
+    });
+    console.info('map1.size : ' + map1.size); //0
+    console.info('map2.size : ' + map2.size); // 3
+}
+
+function demo018(){
+    var indexedSeq = Immutable.Seq.of('A', 'B', 'C');
+    indexedSeq.filter(v => v === 'B').toString() // Seq [ 'B' ]
+    
+    var keyedSeq = indexedSeq.toKeyedSeq();
+    keyedSeq.filter(v => v === 'B').toString() // Seq { 1: 'B' }
+
+
+}
+
+demo017() ;
