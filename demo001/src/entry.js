@@ -11,7 +11,7 @@ import Tabs from './components/tabs.jsx' ;
 
 
 ReactDOM.render(
-  <HightOrderContainer />,
+  <UserEditPage />,
   document.getElementById('app')
 );
 
