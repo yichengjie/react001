@@ -6,11 +6,12 @@ import ReactDOM from 'react-dom';
 import UserEditPage from './views/UserEditPage.jsx';
 import UserQueryPage from './views/UserQueryPage.jsx' ;
 //import HelloContainer from './other/hight-order.js' ; 
+import Tabs from './other/tabs.jsx' ;
 
 
 
 ReactDOM.render(
-  <UserQueryPage  />,
+  <Tabs />,
   document.getElementById('app')
 );
 
