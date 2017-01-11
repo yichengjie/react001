@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 
 export default class UserList extends Component{
+  
   render(){
+      //console.info( JSON.stringify(this.props.tableFields)) ;
       let titles = this.props.tableFields.map((item,index)=>{
           return <th key ={index}>{item.label}</th>
       }) ;

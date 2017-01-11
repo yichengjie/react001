@@ -5,25 +5,32 @@ import 'bootstrap/dist/css/bootstrap.css' ;
 import '../styles/app.scss';
 import Api from '../api/Api.js' ;
 import UserList from './UserList.jsx' ;
+import Immutable from 'immutable' ;
+
 
 export default class UserEditPage extends Component{
   constructor(props){
       super() ;
       this.state={
-          tableFields:[],
-          list:[]
+          tableFields:Immutable.fromJS([]),
+          list:Immutable.fromJS([])
       } ;
   }
   componentDidMount() {
       let promise = Api.getUserListTableSchema() ;
       promise.then(tableFields=>{
-          this.setState({tableFields}) ;
+          let newData = this.state.tableFields.push(...tableFields)
+          this.setState({tableFields:newData}) ;
       }) ;
   }
   handleQueryOper(){
        let promise = Api.queryUserList() ;
+       //this.state.list.clear() ;
        promise.then(list=>{
-           this.setState({list}) ;
+          let newList = this.state.list.push(...list) ;
+          console.info(newList.toJS()) ;
+          this.setState({list:newList}) ;
+          //this.setState({list}) ;
        }) ;
   }
   render(){

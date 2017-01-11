@@ -3,15 +3,15 @@ import SimpleEditForm from '../components/SimpleEditForm.jsx' ;
 export default class BaseEditPage extends Component{
   constructor(props){
       super(props) ;
-      this.state= {
-          schemaFields:[],
-          formData:{}
-      } ;
+      this.state= {} ;
       this.handleInputChange = this.handleInputChange.bind(this); 
       this.handleSubmitForm = this.handleSubmitForm.bind(this) ;
   }
   handleInputChange(propObj){/***简单对象变化 */
-     let newFormData = Object.assign({},this.state.formData,propObj) ;
+     let keys = Object.keys(propObj) ;
+     let name = keys[0] ;
+     let value = propObj[name] ;
+     let newFormData = this.state.formData.set(name,value);
      this.setState({formData:newFormData}) ;
   }
   render(){

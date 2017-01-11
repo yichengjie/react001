@@ -11,7 +11,7 @@ import HelloComp from './components/HelloComp.jsx' ;
 
 
 ReactDOM.render(
-  <HelloComp />,
+  <UserEditPage />,
   document.getElementById('app')
 );
 
