@@ -7,11 +7,11 @@ import UserEditPage from './views/UserEditPage.jsx';
 import UserQueryPage from './views/UserQueryPage.jsx' ;
 import HightOrderContainer from './other/hight-order.js' ; 
 import Tabs from './components/tabs.jsx' ;
-
+import HelloComp from './components/HelloComp.jsx' ;
 
 
 ReactDOM.render(
-  <UserEditPage />,
+  <HelloComp />,
   document.getElementById('app')
 );
 
