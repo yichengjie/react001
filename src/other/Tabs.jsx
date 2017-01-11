@@ -18,15 +18,15 @@ import React,{Component} from 'react' ;
 class Pane extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.info(' this.props : ' ,  this.props) ;
-        console.info('nextProps : ' , nextProps);
-        console.info('pane -> this.props !== nextProps : ' + this.props !== nextProps) ;
-        console.info('pane -> this.state !== nextState : ' + this.state !== nextState) ;
+        //console.info(' this.props : ' ,  this.props) ;
+        //console.info('nextProps : ' , nextProps);
+        //console.info('pane -> this.props !== nextProps : ' + this.props !== nextProps) ;
+        //console.info('pane -> this.state !== nextState : ' + this.state !== nextState) ;
         return this.props !== nextProps || this.state !== nextState;
     }
     
     render(){
-        console.info('pane render is call... ') ;
+        //console.info('pane render is call... ') ;
         return (
             <div>
                 {this.props.children}
@@ -80,7 +80,7 @@ class Tabs extends Component{
   	    return this.props !== nextProps || this.state !== nextState;
     }
     render(){
-        console.info('tabs render method is call...') ;
+        //console.info('tabs render method is call...') ;
         return (
             <div className="tabs">
                 {this._renderContent()}
