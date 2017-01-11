@@ -1,22 +1,7 @@
-/**
- * <Tabs>
-        <Pane label="Tab 1">
-            <div>This is my tab 1 contents!</div>
-        </Pane>
-        <Pane label="Tab 2">
-            <div>This is my tab 2 contents!</div>
-        </Pane>
-        <Pane label="Tab 3">
-            <div>This is my tab 3 contents!</div>
-        </Pane>
-    </Tabs>
- */
 import '../styles/tabs.css' ;
 import React,{Component} from 'react' ;
 
-
 class Pane extends Component {
-
     shouldComponentUpdate(nextProps, nextState) {
         //console.info(' this.props : ' ,  this.props) ;
         //console.info('nextProps : ' , nextProps);
@@ -106,7 +91,7 @@ class App extends Component {
     render(){
         return (
             <Tabs selected={1}>
-                 <Pane label="Tab 1">
+                <Pane label="Tab 1">
                     <div>This is my tab 1 contents!</div>
                 </Pane>
                 <Pane label="Tab 2">
@@ -119,6 +104,4 @@ class App extends Component {
         ) ;
     }
 }
-
-
 export default App ;

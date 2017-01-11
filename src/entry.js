@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import UserEditPage from './views/UserEditPage.jsx';
 import UserQueryPage from './views/UserQueryPage.jsx' ;
 import HightOrderContainer from './other/hight-order.js' ; 
-import Tabs from './other/tabs.jsx' ;
+import Tabs from './components/tabs.jsx' ;
 
 
 
