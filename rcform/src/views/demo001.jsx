@@ -5,6 +5,9 @@ class Form extends React.Component {
   submit = () => {
     this.props.form.validateFields((error, value) => {
       console.log(error, value);
+
+
+      
     });
   }
   render() {
