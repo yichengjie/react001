@@ -1,7 +1,6 @@
-import { createForm } from 'rc-form';
+//import { createForm } from 'rc-form';
+import {createForm} from '../rc-form/index.js' ; 
 import React from 'react' ;
-
-
 
 class Form extends React.Component {
   
