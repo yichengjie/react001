@@ -7,8 +7,6 @@ class MyForm extends Component{
             <div>
                 <input type = "text" {...form.getFieldProps('username')} /><br/>
                 <span className="error-tip">{form.getFieldError('username')}</span><br/>
-
-                
                 <button type="button" onClick={form.handleSubmit}>提交</button>
             </div>
         )
