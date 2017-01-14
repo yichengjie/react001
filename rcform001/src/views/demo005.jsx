@@ -1,17 +1,25 @@
 import React,{Component} from 'react' ;
-import createForm from '../components/createBaseForm.jsx' ;
+import Demo005Form from './demo005Form.jsx' ;
+import '../styles/app.scss' ;
 
-
-class MyForm extends Component{
-
+class Demo005 extends Component{
+    constructor(){
+        super() ;
+        this.handleSubmit = this.handleSubmit.bind(this) ;
+    }
+    handleSubmit(){
+        let myform = this.refs.myform ;
+        console.info(myform.state.formData) ;
+    }
     render () {
-        let {form} = this.props ;
         return (
             <div>
-                <input type = "text" {...form.getFieldProps('username')} />
+                <button type="button" onClick={this.handleSubmit}>提交</button>
+                <Demo005Form ref="myform"/>
             </div>
         )
     }
 }
 
-export default createForm(MyForm) ;
+export default Demo005 ;
+
