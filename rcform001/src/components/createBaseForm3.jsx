@@ -14,6 +14,8 @@ function createForm (WrapperComponent){
         } 
         _inner_handleSubmit(callback){
             console.info('inner handleSubmit .... ') ;
+            console.info('validationRules : ' +JSON.stringify(this.validationRules,null,2)) ;
+            //进行校验
             let flag = false ;
             if(callback && (typeof callback === 'function')){
                 callback.call(this,flag) ;
