@@ -1,6 +1,8 @@
 import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm.jsx' ;
-import createForm from '../components/createBaseForm2.jsx' ;
+//import createForm from '../components/createBaseForm2.jsx' ;
+import createForm from '../components/createBaseForm3.jsx' ;
+
 
 class MyForm extends Component{
     handleSubmit(event){
@@ -25,7 +27,7 @@ class MyForm extends Component{
         return (
             <div>
                 <label htmlFor="">用户名</label>
-                <input type = "text" {...form.getFieldProps('username')} onChange ={this.handleChange.bind(this)}/>
+                <input type = "text" {...form.getFieldProps('username')} />
                 <span className="error-tip">{form.getFieldError('username')}</span>
                 <br/>
 
