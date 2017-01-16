@@ -36,7 +36,7 @@ function createForm (WrapperComponent){
                //校验错误提示信息
                let errTip = getErrorTip(rules,value) ;
                //console.info('validator : ' ,validator)
-               if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' ){
+               if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' &&validator.length>0 ){
                    let validatorFn = this[validator] ;
                    errTip = validatorFn && validatorFn.call(this,value) || '' ;
                }

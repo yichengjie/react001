@@ -3,11 +3,9 @@ import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm2.jsx' ;
 import createForm from '../components/createBaseForm4.jsx' ;
 import {stringify} from '../common/common.js' ;
+import FormItem from '../components/FormItem.jsx' ;
 
 class MyForm extends Component{
-    constructor(props){
-        super(props) ;
-    }
     handleSubmit(event){
         event.preventDefault() ;
         var {form} = this ;
@@ -40,35 +38,20 @@ class MyForm extends Component{
 
     render () {
         let {form} = this ;
+        let username ={rules:[{required:true,message:'用户名必填!'}],
+                       validator:'handleChangeUsername'} ;
+        let email = {rules:[{email:true,message:'邮箱格式不合法!'}]} ;
+        let addr = {validator:'handleChangeAddr'} ;
+
         return (
             <div>
-
-                <label htmlFor="">用户名</label>
-                <input type = "text" {...form.getFieldProps('username',{
-                    rules:[{required:true,message:'用户名必填!'}],
-                    validator:'handleChangeUsername'
-                })} />
-                <span className="error-tip">{form.getFieldError('username')}</span>
-                <br/>
-                <br/>
-
-                <label htmlFor="">邮箱</label>
-                <input type = "email" {...form.getFieldProps('email',{
-                    rules:[{email:true,message:'邮箱格式不合法!'}]
-                })} />
-                <span className="error-tip">{form.getFieldError('email')}</span>
-                <br/>
-                <br/>
-
-                <label htmlFor="">地址</label>
-                <input type = "text" {...form.getFieldProps('addr',{
-                  validator:'handleChangeAddr'  
-                })} />
-                <span className="error-tip">{form.getFieldError('addr')}</span>
-                <br/>
-                <br/>
-
-                <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
+               <FormItem type="text" label="用户名" name="username" 
+                    options ={username}  form={form}  />
+                <FormItem type="email" label="邮箱" name="email" 
+                    options={email} form={form}  />
+               <FormItem type="password" label="地址" name="addr" 
+                    options={addr} form={form}  />
+               <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
             </div>
         )
     }
