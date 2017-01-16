@@ -24,7 +24,7 @@ class MyForm extends Component{
     //自定义校验
     handleChangeUsername(value){
         let addr = this.state.formData.addr || '' ;
-        console.info(this.state.formData) ;
+        //console.info(this.state.formData) ;
         if(addr === '' && value == '123'){
             return  '地址为空时，用户名不能为123' ;
         }

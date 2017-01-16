@@ -37,8 +37,8 @@ function createForm (WrapperComponent){
                let errTip = getErrorTip(rules,value) ;
                //console.info('validator : ' ,validator)
                if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' ){
-                   let validatorFn = this.customeValidateFactory(validator) ;
-                   errTip = validatorFn.call(this,value) ;
+                   let validatorFn = this[validator] ;
+                   errTip = validatorFn && validatorFn.call(this,value) || '' ;
                }
                this.setState(function(state){
                   state.formError[fieldName] = errTip ;
@@ -46,12 +46,12 @@ function createForm (WrapperComponent){
                }) ;
            }
         }
-        customeValidateFactory(name){
-            return function(value) {
-                //console.info(`validator is call [${value}]...  `) ;
-                return this[name].call(this,value) ;
-            }
-        }
+        // customeValidateFactory(name){
+        //     return function(value) {
+        //         //console.info(`validator is call [${value}]...  `) ;
+        //         return this[name].call(this,value) ;
+        //     }
+        // }
         render(){
             const treeNode = super.render() ;
             return treeNode ;
