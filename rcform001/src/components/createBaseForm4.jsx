@@ -14,17 +14,27 @@ function createForm (WrapperComponent){
             //this._inner_handleChange = this._inner_handleChange.bind(this) ;
             //this.handleCustomeValidate = this.handleCustomeValidate.bind(this) ;
         } 
-        _inner_handleSubmit(callback){
+        _inner_handleSubmit(callback){/**当执行form的handleSubmit()时 */
             console.info('inner handleSubmit .... ') ;
             console.info('validationRules : ' +JSON.stringify(this.validationRules,null,2)) ;
             //进行校验
-            let flag = false ;
+            let flag = this._inner_isFormValid() ;
             if(callback && (typeof callback === 'function')){
                 callback.call(this,flag) ;
             }else{
                 console.warn('请传入一个callback function') ;
             }
         }//this.handleCustomeValidate(
+        _inner_isFormValid(){/*检查表单是否验证通过*/
+             let errors = Object.values(this.state.formError) || [] ;
+             let tmps = errors.filter(function(item){
+                if(item &&　item.length > 0){
+                    return true ;
+                }
+                return false;
+             }) ; 
+             return !(tmps.length > 0) ;
+        }
         _inner_onChangeFactory(fieldName,rules,validator){
             //[{ required: true, message: 'Please input your Password!' }]
            return (event) =>{
@@ -58,7 +68,6 @@ function createForm (WrapperComponent){
         }
     }
 }
-
 
 
 function getErrorTip(rules,value){

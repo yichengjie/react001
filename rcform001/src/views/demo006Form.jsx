@@ -42,7 +42,6 @@ class MyForm extends Component{
                        validator:'handleChangeUsername'} ;
         let email = {rules:[{email:true,message:'邮箱格式不合法!'}]} ;
         let addr = {validator:'handleChangeAddr'} ;
-
         return (
             <div>
                <FormItem type="text" label="用户名" name="username" 
