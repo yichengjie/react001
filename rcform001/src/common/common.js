@@ -8,3 +8,15 @@ export function getFormDataFromSchema(schemaFields){
     }) ;
     return obj ;
 }
+
+
+function _replacer(key,value){
+    if(typeof value === 'function' ){
+        return `function ${value.name} () {...}` ;
+    }
+    return value ;
+}
+
+export function stringify(obj){
+    return JSON.stringify(obj,_replacer,2) ;
+}

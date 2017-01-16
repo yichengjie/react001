@@ -10,9 +10,10 @@ import Demo001 from './views/demo001.jsx' ;
 import Demo005 from './views/demo005.jsx' ;
 import Demo006 from './views/demo006.jsx' ;
 import Demo005Form from './views/demo005Form.jsx' ;
+import Demo006Form from './views/Demo006Form.jsx' ;
 //disabled 这样的属性默认会被赋值为true
 ReactDOM.render(
-  <Demo005Form />,
+  <Demo006Form />,
   document.getElementById('app')
 );
 
