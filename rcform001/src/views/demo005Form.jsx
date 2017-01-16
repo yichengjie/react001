@@ -3,9 +3,17 @@ import React,{Component} from 'react' ;
 import createForm from '../components/createBaseForm2.jsx' ;
 
 class MyForm extends Component{
-    constructor(props){
-        super(props) ;
-        this.handleChange = this.handleChange.bind(this) ;
+    handleSubmit(event){
+        event.preventDefault() ;
+        var {form} = this ;
+        form.handleSubmit(function(flag){
+            console.info('form validation return flag : ' + flag) ;
+            if(flag){
+                console.info('表单验证通过，准备提交表单') ;
+            }else{
+                console.info('表单验证不通过,请检查 !' ) ;
+            }
+        }) ;
     }
     //如果有的onChange太特殊，这里可以自己手动调用_inner_handleChange(event)方法
     handleChange(event){
@@ -17,7 +25,7 @@ class MyForm extends Component{
         return (
             <div>
                 <label htmlFor="">用户名</label>
-                <input type = "text" {...form.getFieldProps('username')} onChange ={this.handleChange}/>
+                <input type = "text" {...form.getFieldProps('username')} onChange ={this.handleChange.bind(this)}/>
                 <span className="error-tip">{form.getFieldError('username')}</span>
                 <br/>
 
@@ -31,7 +39,7 @@ class MyForm extends Component{
                 <span className="error-tip">{form.getFieldError('addr')}</span>
                 <br/>
 
-                <button type="button" onClick={form.handleSubmit}>提交</button>
+                <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
             </div>
         )
     }

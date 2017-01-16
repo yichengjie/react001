@@ -8,12 +8,18 @@ function createForm (WrapperComponent){
                 formError:{}
             } ;
             this.form = genForm(this) ;
-            this.handleSubmit = this.handleSubmit.bind(this) ;
-            this.form.handleSubmit = this.handleSubmit ;
+            this._inner_handleSubmit = this._inner_handleSubmit.bind(this) ;
+            this.form.handleSubmit = this._inner_handleSubmit ;
             this._inner_handleChange = this._inner_handleChange.bind(this) ;
         } 
-        handleSubmit(event){
-            console.info('formData : ' + JSON.stringify(this.state)) ;
+        _inner_handleSubmit(callback){
+            console.info('inner handleSubmit .... ') ;
+            let flag = false ;
+            if(callback && (typeof callback === 'function')){
+                callback.call(this,flag) ;
+            }else{
+                console.warn('请传入一个callback function') ;
+            }
         }
         _inner_handleChange(event){
             //console.info('handleChange this : ', this) ;
