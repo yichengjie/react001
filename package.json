@@ -36,6 +36,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "@franleplant/reform": "^5.0.6",
     "bootstrap": "^3.3.7",
     "immutable": "^3.8.1",
     "jquery": "^3.1.1",
