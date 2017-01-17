@@ -9,6 +9,7 @@ function createForm (WrapperComponent){
             this.state={
                 formData:{},
                 formError:{},
+                formSchema:[]
             } ;
             this._inner_formRules ={} ;
             this.form = genForm(this) ;
@@ -31,7 +32,7 @@ function createForm (WrapperComponent){
         }
         _inner_handleSubmit(callback){/**当执行form的handleSubmit()时 */
             console.info('inner handleSubmit .... ') ;
-            console.info('validationRules : ' +JSON.stringify(this.validationRules,null,2)) ;
+            //console.info('validationRules : ' +JSON.stringify(this.getFormValidateRules(),null,2)) ;
             //进行校验
             let flag = this._inner_validForm() ;
             if(callback && (typeof callback === 'function')){

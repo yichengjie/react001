@@ -4,12 +4,22 @@ import React,{Component} from 'react' ;
 import createForm from '../components/createBaseForm5.jsx' ;
 import {stringify} from '../common/common.js' ;
 import FormItem from '../components/FormItem.jsx' ;
+import {getUserEditFormSchemaApi} from '../api/Api2.js' ;
+
 
 class MyForm extends Component{
+
+    componentDidMount () {
+        let promise = getUserEditFormSchemaApi() ;
+        promise.then((retData)=>{
+            this.setState({formSchema:retData}) ;
+        }) ;
+    }
+
     handleSubmit(event){
         event.preventDefault() ;
         var {form} = this ;
-        console.info('this.state.formData : ' , stringify(this.state.formData)) ;
+        //console.info('this.state.formData : ' , stringify(this.state.formData)) ;
         form.handleSubmit(function(flag){
             console.info('form validation return flag : ' + flag) ;
             if(flag){
@@ -35,23 +45,19 @@ class MyForm extends Component{
         }
         return '' ;
     }
-
     render () {
         let {form} = this ;
-        let username ={require:true,validator:'handleChangeUsername'} ;
-        let email = {email:true} ;
-        let addr = {validator:'handleChangeAddr'} ;
         return (
             <div>
-               <FormItem type="text" label="用户名" name="username" 
-                    rule ={username}  form={form}  />
-                <FormItem type="email" label="邮箱" name="email" 
-                    rule={email} form={form}  />
-               <FormItem type="password" label="地址" name="addr" 
-                    rule={addr} form={form}  />
+                {renderFormSchema(this.state.formSchema,form)}
                <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
             </div>
         )
     }
+}
+function renderFormSchema(formSchema,form){
+    return formSchema.map(function(item,index){
+        return  <FormItem {...item}  form={form} key ={index} /> ;
+    }) ;
 }
 export default createForm(MyForm) ;

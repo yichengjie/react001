@@ -1,16 +1,16 @@
 export let validationFn = {
     required:function(value){
-        if(value.length >0 ){
+        if(value && value.trim().length >0 ){
             return true ;
         }
         return false;
     },
     email:function(value){
         var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-        if(myreg.test(value)){
-            return true;      
+        if(value && !(myreg.test(value))){
+            return false;      
         }
-        return false;
+        return true;
     },
     minLength:function(value,min){
        if(value && value.trim().length < min){
