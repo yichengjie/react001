@@ -14,7 +14,7 @@ export default class Form1 extends Component{
             password:'',
             confirmPassrod:''
         },
-        error:{}
+        errors:{}
     } ;
     validationRules = {
         name:{required:true,minLength:2},
@@ -22,7 +22,7 @@ export default class Form1 extends Component{
         password:{required:true,minLength:6},
         confirmPassrod:{
             required:true,
-            mustMatch:function(value){
+            mustMatch:(value)=>{/**这里一定要使用箭头函数绑定好this，否则this会丢失 */
                 //true表示校验有问题
                 if(value && value !== this.state.fields.password){
                     return true ;
@@ -31,12 +31,13 @@ export default class Form1 extends Component{
             }
         }
     } ;
-    validationMessage = {
+    validationMessages = {
         required:_ => 'Field is required',
         email:_ => 'Field must be a valid email' ,
         minLength: minLength => `Field must be at least ${minLength} long`,
         default:_ => 'Invalid field'
     } ;
+   
 
     onChangeFactory(fieldName){
         return (event) =>{
@@ -50,7 +51,7 @@ export default class Form1 extends Component{
     }
 
     render(){
-        console.log(stringify(this.state)) ;
+        //console.log(stringify(this.state)) ;
         let nameStyle = {
             border:!this.fieldIsValid('name') ? '2px solid red' : undefined
         } ;
@@ -78,9 +79,31 @@ export default class Form1 extends Component{
             </div>
             <div>
                 <p>Validate and display one error per fail rule with conditonal helper</p>
-                <input type="password" value={}/>
+                <input type="password" value={this.state.fields.password}
+                    onChange={this.onChangeFactory('password')}/>
+                <ul>
+                    {this.fieldIfError('password','required') && 
+                      <li>Password is required</li>
+                    }
+                    {this.fieldIfError('password','minLength') && 
+                      <li>Password must be at least 6 characters long</li>
+                    }
+                </ul>
             </div>
-
+            <div>
+                <p>Validate and display one error per failed rule
+                   with array helper withe specialcase</p>
+                   <input type="password" value={this.state.fields.confirmPassrod}
+                        onChange={this.onChangeFactory('confirmPassrod')}/>
+                    <ul>
+                        {
+                            this.mapFieldErrors('confirmPassrod').map((message,index)=>{
+                                <li key ={index}>{message}</li>
+                            }) 
+                        }
+                    </ul>
+            </div>
+            <button type="button" disabled={!this.formIsValid()}>Submit</button>
          </form>  
        ) 
 

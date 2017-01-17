@@ -38,6 +38,8 @@ export default class GettingStarted extends Component{
         }
     } ;
 
+    
+
     /**
      * Hook Reform into your component
      */
