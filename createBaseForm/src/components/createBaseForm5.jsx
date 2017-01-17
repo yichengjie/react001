@@ -99,17 +99,58 @@ function createForm (WrapperComponent){
             }) ;
             return validFlag ;
         }
+        handleReset(){
+            let newFormData = getClearSimpleObj(this.state.formData) ;
+            let newFormError = getClearSimpleObj(this.state.formError) ;
+            this.setState({formData:newFormData,formError:newFormError}) ;
+        }
         render () {
             return (
-                <div>
-                    {renderFormSchema(this.state.formSchema,this.form)}
-                    <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
-                </div>
+                <form  className="form-horizontal" role="form" >
+                     {renderFormSchema(this.state.formSchema,this.form)}
+                     <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-10">
+                            <button type="button" className="btn btn-default" onClick={this.handleSubmit.bind(this)}>提交</button>
+                            {'     '}
+                            <button type="button" className="btn btn-danger" onClick={this.handleReset.bind(this)}>重置</button>
+                        </div>
+                     </div>
+                </form>
             )
         }
 
     }
 }
+
+
+function getClearSimpleObj(obj){
+    let newObj = {} ;
+    if(obj!=null){
+        let keys = Object.keys(obj) ;
+        keys.forEach(key=>{
+            newObj[key] = getDefaultValue(obj[key]) ;
+        }) ;
+    }
+    return newObj ;
+}
+
+function getDefaultValue(value){
+    if(value == null){
+        return null ;
+    }else{
+        let str = Object.prototype.toString.call(value) ;
+        return defaultValueMap[str]  ;
+    }
+}
+
+let defaultValueMap ={
+    '[object String]':'',
+    '[object Array]':[],
+    '[object Number]':null,
+    '[object Boolean]':null,
+    '[object Date]':null
+} ;
+
 
 function renderFormSchema(formSchema,form){
     return formSchema.map(function(item,index){

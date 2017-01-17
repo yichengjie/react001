@@ -5,7 +5,6 @@ import createForm from '../components/createBaseForm5.jsx' ;
 import {stringify} from '../common/common.js' ;
 import {getUserEditFormSchemaApi} from '../api/Api2.js' ;
 
-
 class MyForm extends Component{
     componentDidMount () {
         let promise = getUserEditFormSchemaApi() ;

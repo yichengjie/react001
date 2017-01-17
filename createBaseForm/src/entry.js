@@ -11,6 +11,7 @@ import Demo005 from './views/demo005.jsx' ;
 import Demo006 from './views/demo006.jsx' ;
 import Demo005Form from './views/demo005Form.jsx' ;
 import Demo006Form from './views/Demo006Form.jsx' ;
+import 'bootstrap/dist/css/bootstrap.css' ;
 //disabled 这样的属性默认会被赋值为true
 ReactDOM.render(
   <Demo006Form />,
