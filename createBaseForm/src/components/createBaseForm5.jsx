@@ -100,10 +100,9 @@ function createForm (WrapperComponent){
             return validFlag ;
         }
         render () {
-            let {form} = this ;
             return (
                 <div>
-                    {renderFormSchema(this.state.formSchema,form)}
+                    {renderFormSchema(this.state.formSchema,this.form)}
                     <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
                 </div>
             )
