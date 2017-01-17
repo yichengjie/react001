@@ -8,9 +8,10 @@ import Demo001 from './components/Demo001.jsx' ;
 import Demo002 from './components/Demo002.jsx' ;
 import GettingStarted from './components/GettingStarted.jsx' ;
 import Form1 from './components/Form1.jsx' ;
+import Form2 from './components/Form2.jsx' ;
 
 ReactDOM.render(
-  <Form1 />,
+  <Form2 />,
   document.getElementById('app')
 );
 
