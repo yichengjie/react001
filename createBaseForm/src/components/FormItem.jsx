@@ -1,9 +1,9 @@
 import React,{Component} from 'react' ;
-function FormItem ({type,label,name,options,form}){
+function FormItem ({type,label,name,rule,form}){
     return (
         <div>
             <label htmlFor="">{label}</label>
-            <input type = {type} {...form.getFieldProps(name,options)} />
+            <input type = {type} {...form.getFieldProps(name,{rule})} />
             <span className="error-tip">{form.getFieldError(name)}</span>
             <br/>
             <br/>

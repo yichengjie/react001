@@ -1,7 +1,7 @@
 import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm.jsx' ;
 //import createForm from '../components/createBaseForm2.jsx' ;
-import createForm from '../components/createBaseForm4.jsx' ;
+import createForm from '../components/createBaseForm5.jsx' ;
 import {stringify} from '../common/common.js' ;
 import FormItem from '../components/FormItem.jsx' ;
 
@@ -38,18 +38,17 @@ class MyForm extends Component{
 
     render () {
         let {form} = this ;
-        let username ={rules:[{required:true,message:'用户名必填!'}],
-                       validator:'handleChangeUsername'} ;
-        let email = {rules:[{email:true,message:'邮箱格式不合法!'}]} ;
+        let username ={require:true,validator:'handleChangeUsername'} ;
+        let email = {email:true} ;
         let addr = {validator:'handleChangeAddr'} ;
         return (
             <div>
                <FormItem type="text" label="用户名" name="username" 
-                    options ={username}  form={form}  />
+                    rule ={username}  form={form}  />
                 <FormItem type="email" label="邮箱" name="email" 
-                    options={email} form={form}  />
+                    rule={email} form={form}  />
                <FormItem type="password" label="地址" name="addr" 
-                    options={addr} form={form}  />
+                    rule={addr} form={form}  />
                <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
             </div>
         )
