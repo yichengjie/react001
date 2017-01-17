@@ -30,16 +30,13 @@ function createForm (WrapperComponent){
         getFormValidateRules(){
             return this._inner_formRules ;
         }
-        _inner_handleSubmit(callback){/**当执行form的handleSubmit()时 */
+        _inner_handleSubmit(event){/**当执行form的handleSubmit()时 */
             console.info('inner handleSubmit .... ') ;
             //console.info('validationRules : ' +JSON.stringify(this.getFormValidateRules(),null,2)) ;
             //进行校验
+            //调用父类的提交钩子函数
             let flag = this._inner_validForm() ;
-            if(callback && (typeof callback === 'function')){
-                callback.call(this,flag) ;
-            }else{
-                console.warn('请传入一个callback function') ;
-            }
+            this.handleSubmit && this.handleSubmit.call(this,flag) ;
         }//this.handleCustomeValidate(
         _inner_onChangeFactory(fieldName){
             //[{ required: true, message: 'Please input your Password!' }]
@@ -99,20 +96,26 @@ function createForm (WrapperComponent){
             }) ;
             return validFlag ;
         }
-        handleReset(){
+        _inner_handleReset(){
             let newFormData = getClearSimpleObj(this.state.formData) ;
             let newFormError = getClearSimpleObj(this.state.formError) ;
             this.setState({formData:newFormData,formError:newFormError}) ;
         }
+        // _inner_handleSubmit(event){
+        //     console.info('event 111111111111 : ' ,event) ;
+        //     event.preventDefault() ;    
+
+            
+        // }
         render () {
             return (
                 <form  className="form-horizontal" role="form" >
                      {renderFormSchema(this.state.formSchema,this.form)}
                      <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10">
-                            <button type="button" className="btn btn-default" onClick={this.handleSubmit.bind(this)}>提交</button>
+                            <button type="button" className="btn btn-default" onClick={this._inner_handleSubmit.bind(this)}>提交</button>
                             {'     '}
-                            <button type="button" className="btn btn-danger" onClick={this.handleReset.bind(this)}>重置</button>
+                            <button type="button" className="btn btn-danger" onClick={this._inner_handleReset.bind(this)}>重置</button>
                         </div>
                      </div>
                 </form>
