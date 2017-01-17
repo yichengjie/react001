@@ -1,6 +1,7 @@
 'use strict';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
+var webpack = require('webpack') ;
 module.exports = {
     devtool: '#source-map',
     entry: __dirname + '/src/entry.js', //唯一入口文件
@@ -15,6 +16,7 @@ module.exports = {
     },
     module: {
         loaders: [
+            // { test: /\.tsx?$/, loader: 'ts-loader' },
             {
                 test: /\.jsx?$/,
                 loader: 'babel',
@@ -42,7 +44,7 @@ module.exports = {
         require('autoprefixer')    //调用autoprefixer插件,css3自动补全
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js', '.jsx','ts']
     },
     devServer: {
         //contentBase: './build',  //本地服务器所加载的页面所在的目录
@@ -58,7 +60,10 @@ module.exports = {
             title: 'My App',
             template:'template.html',
             filename: 'index.html'
-        })
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        }),
     ]
 
 }

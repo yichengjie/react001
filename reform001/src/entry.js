@@ -6,10 +6,11 @@ import ReactDOM from 'react-dom';
 import HelloComp from './components/HelloComp.jsx' ;
 import Demo001 from './components/Demo001.jsx' ;
 import Demo002 from './components/Demo002.jsx' ;
+import GettingStarted from './components/GettingStarted.jsx' ;
 
 
 ReactDOM.render(
-  <Demo002 />,
+  <GettingStarted />,
   document.getElementById('app')
 );
 
