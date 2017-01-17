@@ -1,6 +1,6 @@
 import React,{Component} from 'react' ;
 import {validationFn,validationMessages} from  '../common/validator.js'; 
-
+import FormItem from './FormItem.jsx' ;
 
 function createForm (WrapperComponent){
     return class HOCComponent extends WrapperComponent{
@@ -99,7 +99,23 @@ function createForm (WrapperComponent){
             }) ;
             return validFlag ;
         }
+        render () {
+            let {form} = this ;
+            return (
+                <div>
+                    {renderFormSchema(this.state.formSchema,form)}
+                    <button type="button" onClick={this.handleSubmit.bind(this)}>提交</button>
+                </div>
+            )
+        }
+
     }
+}
+
+function renderFormSchema(formSchema,form){
+    return formSchema.map(function(item,index){
+        return  <FormItem {...item}  form={form} key ={index} /> ;
+    }) ;
 }
 
 function getRuleKeyName (rule){
