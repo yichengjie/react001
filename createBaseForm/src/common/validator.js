@@ -13,10 +13,11 @@ export let validationFn = {
         return true;
     },
     minLength:function(value,min){
-       if(value && value.trim().length < min){
-          return false ;
+       let numMin = parseInt(min,10) ;
+       if(value && value.trim().length >= numMin){
+          return true ;
        }
-       return  true ;     
+       return  false ;     
     }
 } ;
 export let validationMessages ={
