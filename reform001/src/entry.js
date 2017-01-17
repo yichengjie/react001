@@ -9,9 +9,10 @@ import Demo002 from './components/Demo002.jsx' ;
 import GettingStarted from './components/GettingStarted.jsx' ;
 import Form1 from './components/Form1.jsx' ;
 import Form2 from './components/Form2.jsx' ;
+import Portal001 from './components/Portal001.jsx' ;
 
 ReactDOM.render(
-  <HelloComp />,
+  <Portal001 />,
   document.getElementById('app')
 );
 
