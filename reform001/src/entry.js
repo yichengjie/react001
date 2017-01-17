@@ -11,7 +11,7 @@ import Form1 from './components/Form1.jsx' ;
 import Form2 from './components/Form2.jsx' ;
 
 ReactDOM.render(
-  <Form2 />,
+  <HelloComp />,
   document.getElementById('app')
 );
 
