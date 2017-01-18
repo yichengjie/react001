@@ -1,6 +1,7 @@
 'use strict';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
+var webpack = require('webpack') ;
 module.exports = {
     devtool: '#source-map',
     entry: __dirname + '/src/entry.js', //唯一入口文件
@@ -58,7 +59,12 @@ module.exports = {
             title: 'My App',
             template:'template.html',
             filename: 'index.html'
-        })
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        }),
     ]
 
 }

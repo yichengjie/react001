@@ -13,9 +13,9 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true,email:true} 
         },
         {
-            type:'inputNumber',
-            label:'序列号',
-            name:'sequence',
+            type:'date',
+            label:'生日',
+            name:'birthday',
             rule:{required:true} 
         },
          {

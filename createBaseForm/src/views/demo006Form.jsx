@@ -11,7 +11,7 @@ class MyForm extends Component{
         console.info('初始化页面参数...') ;
         setTimeout(()=>{
             this.setState(state=>{
-                state.formData.sequence = 123 ;
+                state.formData.birthday = '2017-01-19' ;
                 return state ;
             }) ;
         },1000) ;

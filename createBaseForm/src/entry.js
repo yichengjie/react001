@@ -12,6 +12,11 @@ import Demo006 from './views/demo006.jsx' ;
 import Demo005Form from './views/demo005Form.jsx' ;
 import Demo006Form from './views/Demo006Form.jsx' ;
 import 'bootstrap/dist/css/bootstrap.css' ;
+import './styles/jquery_ui.datepicker-modify.css';
+import './styles/jquery-ui-timepicker-addon.css' ;
+import './lib/tui-core/index.js' ;
+import './lib/tui-drag/index.js' ;
+import './lib/jq-datepicker/index.js' ;
 //disabled 这样的属性默认会被赋值为true
 /**
  * <HelloComp>

@@ -1,5 +1,5 @@
 import React,{Component} from 'react' ;
-import InputNumber from './Input-number.jsx' ;
+import InputDate from './Input-date.jsx' ;
 
 function FormItem ({type,label,name,rule,form}){
     return (
@@ -26,8 +26,8 @@ function InputCompFactory(param){
        inputComp = <input type={type}  className='form-control' {...form.getFieldProps(name,{rule})}/> ;
     }else if('textarea' === type){
         inputComp = <textarea className='form-control' {...form.getFieldProps(name,{rule})} ></textarea>
-    }else if('inputNumber'){
-        inputComp = <InputNumber {...form.getFieldProps(name,{rule})} />
+    }else if('date'){
+        inputComp = <InputDate {...form.getFieldProps(name,{rule})} />
     }
     return inputComp ;
 }

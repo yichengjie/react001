@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --profile --colors --hot --port 3000",
     "build": "webpack --progress --profile --colors"
+  },
+  "dependencies": {
+    "jquery": "^1.12.4"
   }
 }
