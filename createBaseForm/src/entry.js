@@ -13,12 +13,15 @@ import Demo005Form from './views/demo005Form.jsx' ;
 import Demo006Form from './views/Demo006Form.jsx' ;
 import 'bootstrap/dist/css/bootstrap.css' ;
 //disabled 这样的属性默认会被赋值为true
-ReactDOM.render(
-  <HelloComp>
+/**
+ * <HelloComp>
       <h2>hello world hello comp children</h2>  
       <h2>hello world hello comp children</h2>  
       <h2>hello world hello comp children</h2>  
   </HelloComp>,
+ */
+ReactDOM.render(
+  <Demo006Form/>,
   document.getElementById('app')
 );
 
