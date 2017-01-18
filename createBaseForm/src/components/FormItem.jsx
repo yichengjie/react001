@@ -4,13 +4,10 @@ function FormItem ({type,label,name,rule,form}){
         <div className="form-group">
             <label  className="col-sm-2 control-label">{label}</label>
             <div className="col-sm-5">
-
-
-                <input type = {type} className="form-control" {...form.getFieldProps(name,{rule})} />
-
-                
+                <input type = {type} className="form-control" 
+                    {...form.getFieldProps(name,{rule})} />
             </div>
-            <span className="error-tip col-sm-2">{form.getFieldError(name)}</span>
+            <span className="error-tip col-sm-3">{form.getFieldError(name)}</span>
         </div>
     ) ;
 }

@@ -2,7 +2,7 @@ import React,{Component} from 'react' ;
 import {validationFn,validationMessages} from  '../common/validator.js'; 
 import FormItem from './FormItem.jsx' ;
 
-function createForm (WrapperComponent){
+function createForm (WrapperComponent,getSchemaApi){
     return class HOCComponent extends WrapperComponent{
         constructor(props){
             super(props) ;
@@ -18,6 +18,14 @@ function createForm (WrapperComponent){
             //this._inner_handleChange = this._inner_handleChange.bind(this) ;
             //this.handleCustomeValidate = this.handleCustomeValidate.bind(this) ;
         } 
+        componentDidMount () {
+            let promise = getSchemaApi.call(null);
+            promise.then((retData)=>{
+                this.setState({formSchema:retData}) ;
+                //当页面的控件加载完毕后执行initPageParam函数
+                this.initPageParam && this.initPageParam();
+            }) ;
+        }
         //增加表格的校验规则
         addFieldValidateRule(fieldName,rule){
             this._inner_formRules[fieldName] = {...rule} ;
@@ -88,7 +96,7 @@ function createForm (WrapperComponent){
             //如果上面的静态校验通过了，还存在自定义校验的话，将进行自定义校验
             if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' &&validator.length>0 ){
                 let validatorFn = this[validator] ;
-                errTip = validatorFn && validatorFn.call(this,value) || '' ;
+                errTip = validatorFn && validatorFn.call(this,value,fieldName) || '' ;
             }
             this.setState(function(state){
                 state.formError[fieldName] = errTip ;
@@ -104,8 +112,6 @@ function createForm (WrapperComponent){
         // _inner_handleSubmit(event){
         //     console.info('event 111111111111 : ' ,event) ;
         //     event.preventDefault() ;    
-
-            
         // }
         render () {
             return (

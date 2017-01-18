@@ -6,11 +6,18 @@ import {stringify} from '../common/common.js' ;
 import {getUserEditFormSchemaApi} from '../api/Api2.js' ;
 
 class MyForm extends Component{
-    componentDidMount () {
-        let promise = getUserEditFormSchemaApi() ;
-        promise.then((retData)=>{
-            this.setState({formSchema:retData}) ;
-        }) ;
+    //页面初始化时需要初始化页面参数请写在这里面
+    initPageParam(){
+        console.info('初始化页面参数...') ;
+    }
+    /**自定义特殊校验规则 */
+    validateUsername(value,fieldName){
+        console.info('username : ' + value) ;
+        var email = this.state.formData.email ;
+        if(email === '123' && value === '123'){
+            return '当email为123时用户名不能为123' ;
+        }
+        return '' ;
     }
     //整个函数必须被重写
     handleSubmit(flag){
@@ -21,7 +28,7 @@ class MyForm extends Component{
         }else{
             console.info('表单验证不通过,请检查 !' ) ;
         }
-    }   
+    }  
 }
 
-export default createForm(MyForm) ;
+export default createForm(MyForm,getUserEditFormSchemaApi) ;

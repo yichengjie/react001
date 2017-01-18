@@ -1,9 +1,11 @@
 export function getUserEditFormSchemaApi(){
+
+
     let formSchema =[{
             type:'text',
             label:'用户名',
             name:'username',
-            rule:{required:true,validator:'handleChangeUsername'},
+            rule:{required:true,validator:'validateUsername'},
         },
         {
             type:'email',
