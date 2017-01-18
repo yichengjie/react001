@@ -10,7 +10,7 @@ class MyForm extends Component{
     initPageParam(){
         console.info('初始化页面参数...') ;
     }
-    /**自定义特殊校验规则 */
+    //自定义特殊校验规则
     validateUsername(value,fieldName){
         console.info('username : ' + value) ;
         var email = this.state.formData.email ;
