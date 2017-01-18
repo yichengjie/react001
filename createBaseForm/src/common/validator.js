@@ -18,6 +18,12 @@ export let validationFn = {
           return true ;
        }
        return  false ;     
+    },
+    date:function(value){
+        return isLegalDate(value) ;
+    },
+    integer:function(value){
+        return /^-?\d+$/.test(value);
     }
 } ;
 export let validationMessages ={
@@ -29,8 +35,51 @@ export let validationMessages ={
     },
     minLength:function(fieldName,min){
         return `不能小于${min}个字符` ;
+    },
+    date:function(fieldName){
+        return '日期格式不合法' ;
+    },
+    integer:function(fieldName){
+        return '输入整数' ;
     }
 } ;
+
+//判断日期是否合法
+function  isLegalDate(datavalue,noTimeLimit){
+    var date = datavalue;
+    if( !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date)){
+        return false;
+    }
+    var result = true;
+    var curYear = (new Date().getFullYear() - 0);
+    var ymd = date.split(/-/);
+    var year = ymd[0] - 0;
+    var month = ymd[1] - 0;
+    var day = ymd[2] - 0;
+    /* month-day relation, January begins from index 1 */
+    var mdr = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var isLeapYear = function(){
+        // 判断年份是否是闰年
+        return (year % 400 === 0) || ((year % 4 === 0) && (year % 100 !== 0));
+    };
+    if(!noTimeLimit&&(year < curYear - 20 || year > curYear + 20)){
+    // 年份超过前后20年，则校验失败
+    result = false;
+    }
+    if(month > 12 || month < 1){
+    // 如果月份不合法，则校验失败
+    result = false;
+    }
+    if(mdr[month] < day || day < 1 || day > 31){
+    // 日期天数不合法，校验失败
+    result = false;
+    }
+    if(month === 2 && !isLeapYear() && day > 28){
+    // 年份不是闰年，日期天数不合法，校验失败
+    result = false;
+    }
+    return result;
+}
 
 // export default {
 //   validationFn ,

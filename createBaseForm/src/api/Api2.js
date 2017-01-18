@@ -16,13 +16,13 @@ export function getUserEditFormSchemaApi(){
             type:'date',
             label:'生日',
             name:'birthday',
-            rule:{required:true} 
+            rule:{required:true,date:true} 
         },
          {
-            type:'email',
-            label:'邮箱3',
-            name:'email3',
-            rule:{required:true,email:true} 
+            type:'text',
+            label:'年龄',
+            name:'age',
+            rule:{integer:true} 
         },
         {
             type:'textarea',
@@ -31,10 +31,15 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true}
         },
         {
-            type:'text',
-            label:'地址2',
-            name:'addr2',
-            rule:{minLength:2}
+            type:'select',
+            label:'专业',
+            name:'dept',
+            options:[
+                {name:'选择',value:''},
+                {name:'java',value:'java'},
+                {name:'javascript',value:'js'}
+            ],
+            rule:{required:true},
         },
         {
             type:'text',

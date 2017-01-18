@@ -8,8 +8,9 @@ export default {
             {label:'专业',name:'dept',type:'select',options:[
                 {name:'选择',value:''},
                 {name:'java',value:'java'},
-                {name:'javascript',value:'js'}]
-            }
+                {name:'javascript',value:'js'}
+            ]}
+            
         ];
         return new Promise(function(resolve,reject){
             resolve(schemaFields) ;

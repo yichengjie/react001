@@ -1,12 +1,12 @@
 import React,{Component} from 'react' ;
 import InputDate from './Input-date.jsx' ;
 
-function FormItem ({type,label,name,rule,form}){
+function FormItem ({type,label,name,rule,form,options}){
     return (
         <div className="form-group">
             <label  className="col-sm-2 control-label">{label}</label>
             <div className="col-sm-5">
-                {InputCompFactory({form,type,name,rule})}
+                {InputCompFactory({form,type,name,rule,options})}
             </div>
             <span className="error-tip col-sm-3">{form.getFieldError(name)}</span>
         </div>
@@ -19,16 +19,30 @@ export default FormItem ;
  * 获取输入框
  */
 function InputCompFactory(param){
-    let {form,type,name,rule} = param ;
+    let {form,type,name,rule,options} = param ;
     let inputComp = null ;
     if(['text','email'].includes(type)){
         //value = {} onChange={}
        inputComp = <input type={type}  className='form-control' {...form.getFieldProps(name,{rule})}/> ;
     }else if('textarea' === type){
         inputComp = <textarea className='form-control' {...form.getFieldProps(name,{rule})} ></textarea>
-    }else if('date'){
+    }else if('date' === type){
         inputComp = <InputDate {...form.getFieldProps(name,{rule})} />
+    }else if('select' === type){
+        inputComp = (
+            <select className='form-control' {...form.getFieldProps(name,{rule})} >
+                {options.map(function(t,index){
+                    return <option value={t.value} key ={index}>{t.name}</option>
+                })}
+            </select>
+        ) ;
+    }else{
+       inputComp = null ; 
     }
+    // if(name==='age'){
+    //      console.info('inputComp : ' ,inputComp) ;
+    //     //debugger;
+    // }
     return inputComp ;
 }
 

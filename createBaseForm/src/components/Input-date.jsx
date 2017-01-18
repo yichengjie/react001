@@ -6,9 +6,6 @@ function genSimulationEventByValue(value){
 }
 
 class InputDate extends Component{
-    constructor(props){
-        super(props) ;
-    }
     componentDidMount() {
         //let elem = ReactDOM.findDOMNode(this.myInput) ;
         let elem = this.myInput ;
@@ -17,19 +14,16 @@ class InputDate extends Component{
         var optionObj = {} ;
         optionObj.dateFormat = "yy-mm-dd" ;
         optionObj.onSelect = (dateText,picker) =>{
-            console.info('dateText : ' + dateText) ;
             this._inner_handleChange(dateText) ;
         };
         optionObj.minDate = minDate ;
         optionObj.showButtonPanel = true ;
         $(elem).datepicker(optionObj);
     }
-
     _inner_handleChange(value){
         let simulationEvent = genSimulationEventByValue(value) ;
         this.props.onChange(simulationEvent) ;
     }
-    
     handleInputChange(event){
        var value = event.target.value ;
        this._inner_handleChange(value) ;
