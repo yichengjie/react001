@@ -1,5 +1,4 @@
 export function getUserEditFormSchemaApi(){
-
     let formSchema =[{
             type:'text',
             label:'用户名',
@@ -25,7 +24,7 @@ export function getUserEditFormSchemaApi(){
             rule:{integer:true} 
         },
         {
-            type:'textarea',
+            type:'text',
             label:'地址',
             name:'addr',
             rule:{required:true}
@@ -42,17 +41,12 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true},
         },
         {
-            type:'text',
-            label:'地址3',
-            name:'addr3',
+            type:'textarea',
+            label:'描述',
+            name:'descr',
             rule:{minLength:2}
         },
-        {
-            type:'text',
-            label:'地址4',
-            name:'addr4',
-            rule:{minLength:2}
-        }] ;
+        ] ;
 
       return new Promise(function(resolve,reject){
 
