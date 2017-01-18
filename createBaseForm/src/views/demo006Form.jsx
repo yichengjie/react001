@@ -9,6 +9,12 @@ class MyForm extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
     initPageParam(){
         console.info('初始化页面参数...') ;
+        setTimeout(()=>{
+            this.setState(state=>{
+                state.formData.sequence = 123 ;
+                return state ;
+            }) ;
+        },1000) ;
     }
     //自定义特殊校验规则
     validateUsername(value,fieldName){

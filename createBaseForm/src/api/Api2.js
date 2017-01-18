@@ -13,10 +13,10 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true,email:true} 
         },
         {
-            type:'email',
-            label:'邮箱2',
-            name:'email2',
-            rule:{required:true,email:true} 
+            type:'inputNumber',
+            label:'序列号',
+            name:'sequence',
+            rule:{required:true} 
         },
          {
             type:'email',

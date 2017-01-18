@@ -1,10 +1,12 @@
 import React,{Component} from 'react' ;
+import InputNumber from './Input-number.jsx' ;
+
 function FormItem ({type,label,name,rule,form}){
     return (
         <div className="form-group">
             <label  className="col-sm-2 control-label">{label}</label>
             <div className="col-sm-5">
-                {InputCompFactory(form,type,name,rule)}
+                {InputCompFactory({form,type,name,rule})}
             </div>
             <span className="error-tip col-sm-3">{form.getFieldError(name)}</span>
         </div>
@@ -16,17 +18,18 @@ export default FormItem ;
 /**
  * 获取输入框
  */
-function InputCompFactory(form,type,name,rule){
+function InputCompFactory(param){
+    let {form,type,name,rule} = param ;
     let inputComp = null ;
     if(['text','email'].includes(type)){
-       inputComp = <input type={type} /> ;
+        //value = {} onChange={}
+       inputComp = <input type={type}  className='form-control' {...form.getFieldProps(name,{rule})}/> ;
     }else if('textarea' === type){
-        inputComp = <textarea ></textarea>
+        inputComp = <textarea className='form-control' {...form.getFieldProps(name,{rule})} ></textarea>
+    }else if('inputNumber'){
+        inputComp = <InputNumber {...form.getFieldProps(name,{rule})} />
     }
-    if(inputComp!=null){
-         return React.cloneElement(inputComp,{className:'form-control',...form.getFieldProps(name,{rule})},null) ;
-    }
-    return null ;
+    return inputComp ;
 }
 
 
