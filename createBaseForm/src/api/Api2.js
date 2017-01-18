@@ -1,6 +1,5 @@
 export function getUserEditFormSchemaApi(){
 
-
     let formSchema =[{
             type:'text',
             label:'用户名',
@@ -26,10 +25,10 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true,email:true} 
         },
         {
-            type:'text',
+            type:'textarea',
             label:'地址',
             name:'addr',
-            rule:{validator:'handleChangeAddr'}
+            rule:{required:true}
         },
         {
             type:'text',

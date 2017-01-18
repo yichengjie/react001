@@ -131,7 +131,9 @@ function createForm (WrapperComponent,getSchemaApi){
     }
 }
 
-
+/**
+ * 清空表单内容
+ */
 function getClearSimpleObj(obj){
     let newObj = {} ;
     if(obj!=null){
