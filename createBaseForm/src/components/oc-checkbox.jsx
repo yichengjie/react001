@@ -3,7 +3,6 @@ import React,{Component} from 'react' ;
 class OCCheckbox extends Component {
     render(){
         let {name,value,options} = this.props ;
-        
         let arr = options.map((item,index) =>{
             return (
                 <label key ={index} className="checkbox-inline">
