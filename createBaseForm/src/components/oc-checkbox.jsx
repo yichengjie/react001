@@ -6,11 +6,10 @@ class OCCheckbox extends Component {
         
         let arr = options.map((item,index) =>{
             return (
-                <label key ={index}>
+                <label key ={index} className="checkbox-inline">
                     <input type="checkbox" value={item.value} 
                         checked={value.includes(item.value)} 
                         onChange ={this.props.onChange}/>{' ' + item.name}
-                        &nbsp; &nbsp;
                 </label>
             ) ;
         }) ;

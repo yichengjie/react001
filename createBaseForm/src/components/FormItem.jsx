@@ -1,4 +1,6 @@
 import React,{Component} from 'react' ;
+import OCInput from './oc-input.jsx' ;
+import OCTextArea from './oc-textarea.jsx' ;
 import OCDate from './oc-date.jsx' ;
 import OCRadio from './oc-radio.jsx' ;
 import OCSelect from './oc-select.jsx' ;
@@ -23,11 +25,11 @@ export default FormItem ;
 function InputCompFactory(param){
     let {form,type,name,rule,options} = param ;
     let inputComp = null ;
+     //name ={} value = {} onChange={}
     if(['text','email'].includes(type)){
-        //value = {} onChange={}
-       inputComp = <input type={type}  className='form-control' {...form.getFieldProps(name,{rule})}/> ;
+        inputComp = <OCInput {...form.getFieldProps(name,{rule})} />
     }else if('textarea' === type){
-        inputComp = <textarea className='form-control' {...form.getFieldProps(name,{rule})} ></textarea>
+        inputComp = <OCTextArea {...form.getFieldProps(name,{rule})}/>
     }else if('date' === type){
         inputComp = <OCDate {...form.getFieldProps(name,{rule})} />
     }else if('select' === type){
@@ -36,8 +38,6 @@ function InputCompFactory(param){
         inputComp = <OCRadio options={options}  {...form.getFieldProps(name,{rule})} />
     }else if('checkbox' === type){
         inputComp = <OCCheckbox  options={options}  {...form.getFieldProps(name,{rule})}/>
-    }else{
-       inputComp = null ; 
     }
     return inputComp ;
 }
