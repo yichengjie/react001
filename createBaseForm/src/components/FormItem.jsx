@@ -2,6 +2,7 @@ import React,{Component} from 'react' ;
 import OCDate from './oc-date.jsx' ;
 import OCRadio from './oc-radio.jsx' ;
 import OCSelect from './oc-select.jsx' ;
+import OCCheckbox from './oc-checkbox.jsx' ;
 
 function FormItem ({type,label,name,rule,form,options}){
     return (
@@ -33,6 +34,8 @@ function InputCompFactory(param){
         inputComp = <OCSelect options={options}  {...form.getFieldProps(name,{rule})}/> ;
     }else if('radio' === type){
         inputComp = <OCRadio options={options}  {...form.getFieldProps(name,{rule})} />
+    }else if('checkbox' === type){
+        inputComp = <OCCheckbox  options={options}  {...form.getFieldProps(name,{rule})}/>
     }else{
        inputComp = null ; 
     }

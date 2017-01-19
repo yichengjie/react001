@@ -1,5 +1,6 @@
 import React,{Component} from 'react' ;
 import {validationFn,validationMessages} from  '../common/validator.js'; 
+import {isArray} from '../common/common.js' ;
 import FormItem from './FormItem.jsx' ;
 
 function createForm (WrapperComponent,getSchemaApi){
@@ -17,13 +18,14 @@ function createForm (WrapperComponent,getSchemaApi){
             this.form.handleSubmit = this._inner_handleSubmit ;
             //this._inner_handleChange = this._inner_handleChange.bind(this) ;
             //this.handleCustomeValidate = this.handleCustomeValidate.bind(this) ;
+            this._inner_initFormSchema() ;
         } 
-        componentDidMount () {
+
+        _inner_initFormSchema(){
             let promise = getSchemaApi.call(null);
             promise.then((retData)=>{
-                this.setState({formSchema:retData}) ;
-                //当页面的控件加载完毕后执行initPageParam函数
-                this.initPageParam && this.initPageParam();
+                let initialState = getFormDefaultValueState(retData) ;
+                this.setState({formData:initialState,formSchema:retData}) ;
             }) ;
         }
         //增加表格的校验规则
@@ -52,7 +54,7 @@ function createForm (WrapperComponent,getSchemaApi){
                const value = event.target.value ;
                //校验错误提示信息
                this.setState(function(state){
-                  state.formData[fieldName] = value ;
+                  putStateValue(state,fieldName,value) ;
                   return state ;
                }) ;
                this._inner_validField(fieldName,value) ;
@@ -131,6 +133,35 @@ function createForm (WrapperComponent,getSchemaApi){
     }
 }
 
+
+function putStateValue(state,fieldName,value){
+    let oldValue = state.formData[fieldName] ;
+    if(isArray(oldValue)){
+        let index = oldValue.findIndex(item=>item===value) ;
+        if(index != -1){
+            oldValue.splice(index,1) ;
+        }else{
+            oldValue.push(value);
+        } 
+    }else{
+        state.formData[fieldName] = value ;
+    }
+}
+
+
+
+/**
+ * 从FormSchema中获取默认的formData数据
+ */
+function getFormDefaultValueState(fieldSchemaList){
+    let obj = {} ;
+    for(let item of fieldSchemaList){
+        let {name,defaultValue} = item ;
+        obj[name] = defaultValue ;
+    }
+    return obj ;
+}
+
 /**
  * 清空表单内容
  */
@@ -187,7 +218,7 @@ function _fieldErrorFactory(vvm){
 }
 function _fieldPropsFactory(vvm){
     return function (fieldName,options={}){
-        let {rule} = options ;
+        let {rule,defaultValue} = options ;
         vvm.addFieldValidateRule(fieldName,rule) ;
         return {
             value:vvm.state.formData[fieldName] || '',

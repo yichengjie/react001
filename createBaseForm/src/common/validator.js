@@ -1,7 +1,12 @@
+import {isArray,isArrayNotEmpty,isStrNotEmpty} from './common.js' ;
 export let validationFn = {
     required:function(value){
-        if(value && value.trim().length >0 ){
-            return true ;
+        if(value != null){
+            if(isArray(value)){
+               return isArrayNotEmpty(value) ;
+            }else{
+               return isStrNotEmpty(value) ;
+            }
         }
         return false;
     },
