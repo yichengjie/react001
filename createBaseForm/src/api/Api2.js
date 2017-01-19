@@ -24,6 +24,16 @@ export function getUserEditFormSchemaApi(){
             rule:{integer:true} 
         },
         {
+            type:'radio',
+            label:'性别',
+            name:'sex',
+            rule:{required:true},
+            options:[
+              {name:'男',value:'1'},
+              {name:'女',value:'2'}
+            ]
+        },
+        {
             type:'text',
             label:'地址',
             name:'addr',
@@ -33,12 +43,13 @@ export function getUserEditFormSchemaApi(){
             type:'select',
             label:'专业',
             name:'dept',
+            rule:{required:true},
             options:[
                 {name:'选择',value:''},
                 {name:'java',value:'java'},
                 {name:'javascript',value:'js'}
             ],
-            rule:{required:true},
+            
         },
         {
             type:'textarea',

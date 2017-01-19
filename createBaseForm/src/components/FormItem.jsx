@@ -1,5 +1,7 @@
 import React,{Component} from 'react' ;
 import OCDate from './oc-date.jsx' ;
+import OCRadio from './oc-radio.jsx' ;
+import OCSelect from './oc-select.jsx' ;
 
 function FormItem ({type,label,name,rule,form,options}){
     return (
@@ -13,7 +15,6 @@ function FormItem ({type,label,name,rule,form,options}){
     ) ;
 }
 export default FormItem ;
-
 
 /**
  * 获取输入框
@@ -29,13 +30,9 @@ function InputCompFactory(param){
     }else if('date' === type){
         inputComp = <OCDate {...form.getFieldProps(name,{rule})} />
     }else if('select' === type){
-        inputComp = (
-            <select className='form-control' {...form.getFieldProps(name,{rule})} >
-                {options.map(function(t,index){
-                    return <option value={t.value} key ={index}>{t.name}</option>
-                })}
-            </select>
-        ) ;
+        inputComp = <OCSelect options={options}  {...form.getFieldProps(name,{rule})}/> ;
+    }else if('radio' === type){
+        inputComp = <OCRadio options={options}  {...form.getFieldProps(name,{rule})} />
     }else{
        inputComp = null ; 
     }
