@@ -25,6 +25,9 @@ class MyForm extends Component{
         }
         return '' ;
     }
+    validateRange1(value,fieldName){
+        return '自定义的范围校验不通过' ;
+    }
     //整个函数必须被重写
     handleSubmit(flag){
         var {form} = this ;

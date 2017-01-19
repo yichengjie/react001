@@ -28,6 +28,13 @@ export function getUserEditFormSchemaApi(){
             rule:{integer:true} 
         },
         {
+            type:'textTwo',
+            label:'测试范围',
+            name:'range1',
+            defaultValue:'qw$$_b',
+            rule:{validator:'validateRange1'}
+        },
+        {
             type:'radio',
             label:'性别',
             name:'sex',

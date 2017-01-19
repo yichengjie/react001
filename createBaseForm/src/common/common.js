@@ -21,8 +21,20 @@ export function stringify(obj){
     return JSON.stringify(obj,_replacer,2) ;
 }
 
+/**
+ * 只有一个value时模拟生成一个类event提供给onChange函数使用
+ */
+export function genSimulationEventByValue(value){
+    value = value+ '' ;
+    return {target:{value}} ;
+}
+
+
 export function isArray(obj){
     return Object.prototype.toString.call(obj) === '[object Array]' ;
+}
+export function isString(obj){
+    return Object.prototype.toString.call(obj) === '[object String]' ;
 }
 
 export function isArrayNotEmpty(arr){

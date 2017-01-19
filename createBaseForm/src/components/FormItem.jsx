@@ -5,8 +5,9 @@ import OCDate from './oc-date.jsx' ;
 import OCRadio from './oc-radio.jsx' ;
 import OCSelect from './oc-select.jsx' ;
 import OCCheckbox from './oc-checkbox.jsx' ;
+import OCInputTwo from './oc-input-two.jsx' ;
 /**
- * 获取输入框
+ * 获取输入框$$_a$$_b
  */
 function InputCompFactory(param){
     let {form,type,name,rule,options} = param ;
@@ -24,6 +25,8 @@ function InputCompFactory(param){
         inputComp = <OCRadio />
     }else if('checkbox' === type){
         inputComp = <OCCheckbox />
+    }else if('textTwo' === type){
+        inputComp = <OCInputTwo />
     }
     return inputComp == null ? null : 
         React.cloneElement(inputComp,{...form.getFieldProps(name,{rule}),options},null) ;

@@ -1,9 +1,6 @@
 import React,{Component} from 'react' ;
+import {genSimulationEventByValue} from '../common/common.js' ;
 
-function genSimulationEventByValue(value){
-    value = value+ '' ;
-    return {target:{value}} ;
-}
 
 class InputDate extends Component{
     componentDidMount() {
