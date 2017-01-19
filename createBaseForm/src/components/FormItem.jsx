@@ -15,7 +15,7 @@ function InputCompFactory(param){
     if(['text','email'].includes(type)){
         inputComp = <OCInput/>
     }else if('textarea' === type){
-        inputComp = <OCTextArea/>
+        inputComp = <OCTextArea />
     }else if('date' === type){
         inputComp = <OCDate />
     }else if('select' === type){
