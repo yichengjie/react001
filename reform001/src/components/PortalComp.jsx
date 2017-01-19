@@ -27,7 +27,6 @@ export default class Portal extends React.Component {
       document.addEventListener('mouseup', this.handleOutsideMouseClick);
       document.addEventListener('touchstart', this.handleOutsideMouseClick);
     }
-
     if (this.props.isOpen) {
       this.openPortal();
     }
@@ -68,14 +67,17 @@ export default class Portal extends React.Component {
     this.closePortal(true);
   }
 
+  //当点击打开时
   handleWrapperClick(e) {
     e.preventDefault();
     e.stopPropagation();
     if (this.state.active) { return; }
+    //如果没有打开，则打开
     this.openPortal();
   }
 
   openPortal(props = this.props) {
+    //设置打开状态为true
     this.setState({ active: true });
     this.renderPortal(props, true);
   }
@@ -108,6 +110,8 @@ export default class Portal extends React.Component {
     if (!this.state.active) { return; }
 
     const root = findDOMNode(this.portal);
+
+    //左键不做反应
     if (root.contains(e.target) || (e.button && e.button !== 0)) { return; }
 
     e.stopPropagation();
@@ -120,18 +124,21 @@ export default class Portal extends React.Component {
     }
   }
 
-  renderPortal(props, isOpening) {
+
+  renderPortal(props, isOpening) {//isOpening=true
     if (!this.node) {
       this.node = document.createElement('div');
       document.body.appendChild(this.node);
     }
 
-    if (isOpening) {
+    //第一次打开时isOpening为true
+    if (isOpening) {//执行onOpen的回调
       this.props.onOpen(this.node);
     }
 
     let children = props.children;
     // https://gist.github.com/jimfb/d99e0678e9da715ccf6454961ef04d1b
+
     if (typeof props.children.type === 'function') {
       children = React.cloneElement(props.children, { closePortal: this.closePortal });
     }
@@ -145,6 +152,7 @@ export default class Portal extends React.Component {
   }
 
   render() {
+    //显示那个打开modal的按钮，并且增加一个click函数
     if (this.props.openByClickOn) {
       return React.cloneElement(this.props.openByClickOn, { onClick: this.handleWrapperClick });
     }
