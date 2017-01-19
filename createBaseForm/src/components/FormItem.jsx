@@ -1,5 +1,5 @@
 import React,{Component} from 'react' ;
-import InputDate from './Input-date.jsx' ;
+import OCDate from './oc-date.jsx' ;
 
 function FormItem ({type,label,name,rule,form,options}){
     return (
@@ -27,7 +27,7 @@ function InputCompFactory(param){
     }else if('textarea' === type){
         inputComp = <textarea className='form-control' {...form.getFieldProps(name,{rule})} ></textarea>
     }else if('date' === type){
-        inputComp = <InputDate {...form.getFieldProps(name,{rule})} />
+        inputComp = <OCDate {...form.getFieldProps(name,{rule})} />
     }else if('select' === type){
         inputComp = (
             <select className='form-control' {...form.getFieldProps(name,{rule})} >
@@ -39,10 +39,6 @@ function InputCompFactory(param){
     }else{
        inputComp = null ; 
     }
-    // if(name==='age'){
-    //      console.info('inputComp : ' ,inputComp) ;
-    //     //debugger;
-    // }
     return inputComp ;
 }
 
