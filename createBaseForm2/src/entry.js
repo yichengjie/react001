@@ -10,12 +10,13 @@ import './styles/app.scss' ;
 import './lib/tui-core/index.js' ;
 import './lib/tui-drag/index.js' ;
 import './lib/jq-datepicker/index.js' ;
-//import EditPageDemo from './views/EidtPageDemo.jsx' ;
+import EditPageDemo from './views/EidtPageDemo.jsx' ;
 import QueryPageDemo from './views/QueryPageDemo.jsx' ;
+let ShowView = QueryPageDemo ;
+//ShowView = EditPageDemo ;
 
 ReactDOM.render(
-  <QueryPageDemo/>,
+  <ShowView/>,
   document.getElementById('app')
 );
-
 
