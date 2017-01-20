@@ -1,0 +1,29 @@
+html, body, div, h5, h6, p, ul, li {
+    margin: 0px;
+    padding: 0px;
+}
+
+#app {
+    //background: #09a;
+    padding: 50px;
+    .title {
+        font-size: 25px;
+        text-align: center;
+        transform: scale(0.8);
+    }
+    .error-tip{
+        color: #AE4343; 
+        padding-top: 7px;
+    }
+    .input-two .form-control{
+        display: inline-block ;
+        width: 48% ;
+    }
+    .split-line{
+        display: inline-block ;
+        width: 4%;
+        height: 100%;
+        box-sizing: border-box ;
+        padding-left: 5px;
+    }
+}
