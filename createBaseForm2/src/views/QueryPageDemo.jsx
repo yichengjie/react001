@@ -26,8 +26,12 @@ export default class UserEditPage extends Component{
            this.setState({list}) ;
        }) ;
   }
-  handleDeleteItem(item){
-    console.info('---------->'  + stringify(item)) ;
+  handleDeleteItem = (delItem)=>{
+    console.info('---------->'  + stringify(delItem)) ;
+    let newList = this.state.list.filter(function(item){
+        return delItem != item ;
+    }) ;
+    this.setState({list:newList}) ;
   }
   handleEditItem(item){
       console.info('---------->'  + stringify(item)) ;
