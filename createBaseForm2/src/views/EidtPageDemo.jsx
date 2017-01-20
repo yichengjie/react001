@@ -1,7 +1,7 @@
 import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm.jsx' ;
 //import createForm from '../components/createBaseForm2.jsx' ;
-import createForm from '../components/createBaseForm5.jsx' ;
+import createForm from '../components/createBaseForm.jsx' ;
 import {stringify} from '../common/common.js' ;
 import {getUserEditFormSchemaApi} from '../api/Api2.js' ;
 
