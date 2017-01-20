@@ -3,11 +3,12 @@ import React,{Component} from 'react';
 import {stringify} from '../common/common.js' ;
 //引入样式文件
 import Api from '../api/Api.js' ;
-import CreateBaseTable from '../components/createBaseTable.jsx' ;
+import BaseTable from '../components/BaseTable.jsx' ;
+
 
 export default class UserEditPage extends Component{
   constructor(props){
-      super() ;
+      super(props) ;
       this.state={
           tableFields:[],
           list:[]
@@ -36,10 +37,10 @@ export default class UserEditPage extends Component{
           <div>
             <button type="button" className="btn btn-primary" onClick={this.handleQueryOper.bind(this)}>查询</button>
             <br/>
-            <CreateBaseTable tableFields={this.state.tableFields} list={this.state.list}>
+            <BaseTable tableFields={this.state.tableFields} list={this.state.list}>
                 <i className="glyphicon glyphicon-trash" onClick={this.handleDeleteItem}></i>
                 <i className="glyphicon glyphicon-pencil" onClick={this.handleEditItem}></i>
-            </CreateBaseTable>
+            </BaseTable>
           </div>
       ) ;
   }
