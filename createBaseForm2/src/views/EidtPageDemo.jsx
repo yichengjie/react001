@@ -3,7 +3,7 @@ import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm2.jsx' ;
 import createForm from '../components/createBaseForm.jsx' ;
 import {stringify} from '../common/common.js' ;
-import {getUserEditFormSchemaApi} from '../api/Api2.js' ;
+import {getUserEditFormSchemaApi} from '../api/Api.js' ;
 
 class MyForm extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
