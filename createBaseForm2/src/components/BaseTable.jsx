@@ -8,14 +8,14 @@ function handleClickFactory(callback,item){
 export default class BaseTable extends Component{
     //render操作列
     renderOperColumn (dataItem){
-            //操作列的所有节点
-            let operColumnChildren =this.props.children ;
-            let opers = React.Children.map(operColumnChildren,(operElem,index)=>{
-                //将一行的数据传给onClick的回调函数中
-                let handleClick = handleClickFactory(operElem.props.onClick,dataItem) ;
-                return React.cloneElement(operElem,{key:index,onClick:handleClick}) ;
-            }) 
-            return opers ;
+        //操作列的所有节点
+        let operColumnChildren =this.props.children ;
+        let opers = React.Children.map(operColumnChildren,(operElem,index)=>{
+            //将一行的数据传给onClick的回调函数中
+            let handleClick = handleClickFactory(operElem.props.onClick,dataItem) ;
+            return React.cloneElement(operElem,{key:index,onClick:handleClick}) ;
+        }) 
+        return opers ;
     }
     //render一行中的所有td
     renderTds(dataItem){
