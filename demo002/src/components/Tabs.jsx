@@ -83,7 +83,7 @@ Tabs.propTypes={
     selected:React.PropTypes.number,
     children:React.PropTypes.oneOfType([
         React.PropTypes.array,
-        React.PropTypes.element
+        React.PropTypes.elementz
     ]).isRequired
 } ;
 
