@@ -17,6 +17,10 @@ export default class TabPane extends Component {
             [`${classPrefix}-panel`] :true,
             [`${classPrefix}-active`]:isActive
         }) ;
+
+        //这个地方确实比较精妙，这地方完全可以直接返回一个null,然后在TabContent中显示着部分内容，
+        //这样TabPane的使命就是仅仅传送数据给TabNav和TabContent使用，
+        //然而这里却返回了tabPane内容，所以精妙
         return (
             <div role="tabpanel"
                 className={classes}

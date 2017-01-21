@@ -15,16 +15,13 @@ export default  class TabContent extends Component {
             }
             const order = parseInt(child.props.order,10) ;
             const isActive = activeIndex === order ;
-
-
-            //TabPane本来就会显示子内容
+            TabPane本来就会显示子内容
             return React.cloneElement(child,{
                 classPrefix,
                 isActive,
                 children:child.props.children,/**这一个好像没太大的必要性 */
                 key:`tabpane-${order}`
             }) ;
-
         }) ;
     }
     render(){
