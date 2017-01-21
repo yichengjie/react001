@@ -1,0 +1,19 @@
+.tabs-bar ul li{
+    list-style: none ;
+}
+.tabs-tab{
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    width: 150px;
+    cursor: pointer;
+}
+.tabs-active{
+    background-color:#eee;
+}
+.tabs-content .tabs-panel{
+    display: none ;
+}
+.tabs-content .tabs-active{
+    display: block ;
+}

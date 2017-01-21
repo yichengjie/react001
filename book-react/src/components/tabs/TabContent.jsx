@@ -15,12 +15,15 @@ export default  class TabContent extends Component {
             }
             const order = parseInt(child.props.order,10) ;
             const isActive = activeIndex === order ;
+
+
             return React.cloneElement(child,{
                 classPrefix,
                 isActive,
                 children:child.props.children,
                 key:`tabpane-${order}`
             }) ;
+
         }) ;
     }
     render(){

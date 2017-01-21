@@ -21,7 +21,7 @@ export default  class TabNav extends Component{
             }) ;
             let events = {} ;
             if(!child.props.disabled){
-                events = {
+                events = {//onTabClick
                     onClick:this.props.onTabClick.bind(this,order)
                 } ;
             }
@@ -34,11 +34,12 @@ export default  class TabNav extends Component{
                   role="tab"
                   aria-disabled={this.props.disabled ? 'true' : 'false'}
                   aria-selected={activeIndex === order ? 'true' : 'false'}
-                  {...event}
+                  {...events}
                   className={classes}
                   key={order}
                   {...ref}
                 >
+                {child.props.tab}
                 </li>
             ) ;
         }) ;
