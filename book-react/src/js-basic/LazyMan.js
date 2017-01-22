@@ -1,5 +1,5 @@
 /**
- * 这个LazyMan有问题
+ * 这个LazyMan有问题(ok这个也好了hoc2-component中那个有问题)
  */
 
 function _LazyMan(name) {
@@ -14,7 +14,7 @@ function _LazyMan(name) {
 
     this.tasks.push(fn) ;
     setTimeout(function() {
-        fn() ;
+        self.next() ;
     }, 0);
 }
 
@@ -27,8 +27,10 @@ _LazyMan.prototype.next = function(){
 _LazyMan.prototype.eat = function (name){
     var self = this ;
     var fn = (function(name){
-        console.info(`Eat ${name}`) ;
-        self.next() ;
+        return function(){
+             console.info(`Eat ${name}`) ;
+            self.next() ;
+        }
     })(name) ;
     this.tasks.push(fn) ;
     return this ;
