@@ -6,10 +6,13 @@ import ReactDOM from 'react-dom';
 import HelloComp from './views/Hello.jsx' ;
 import TabDemo from './components/tabs/App.jsx' ;
 let ShowView = TabDemo ;
+ShowView = HelloComp ;
 
-ReactDOM.render(
-  <ShowView />,
+let myapp = ReactDOM.render(
+  <ShowView test="yicj" />,
   document.getElementById('app')
 );
+
+window.myapp = myapp ; 
 
 
