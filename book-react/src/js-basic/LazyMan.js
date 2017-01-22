@@ -48,11 +48,16 @@ _LazyMan.prototype.sleep = function (time){
     return this ;
 }
 
-function lazyMan (name) {
+function LazyMan (name) {
     return new _LazyMan(name) ;
 }
 
-lazyMan('zz').eat('lunch').sleep('3').eat('dinner') ;
+
+function demo1(){
+    LazyMan("Hank").eat("breakfast").sleep(1).eat("dinner").eat("dinner2") //输出
+}
+
+demo1() ;
 
 
 
