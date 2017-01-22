@@ -21,7 +21,7 @@ class HelloComp extends Component {
     render(){
          return (
             <div>
-                <h1>hello world props from top [test] : {this.props.test}</h1>
+                <h1>hello world props from top [test] : {this.props.title}</h1>
                 <p><input type="text" {...this.getFieldProps('name')}/></p>
                 <p><input type="text" {...this.getFieldProps('addr')}/></p>
                 <p>-------------------------------------------------------</p>
