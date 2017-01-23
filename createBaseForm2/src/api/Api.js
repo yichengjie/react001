@@ -49,7 +49,7 @@ export function getUserEditFormSchemaApi(){
             type:'checkbox',
             label:'喜欢的水果',
             name:'fruits',
-            defaultValue:[],
+            defaultValue:['2'],
             rule:{required:true},
             options:[
                 {name:'苹果',value:'1'},
