@@ -6,7 +6,7 @@ import Api from '../api/Api.js' ;
 import BaseTable from '../components/BaseTable.jsx' ;
 
 
-export default class UserEditPage extends Component{
+export default class UserQueryPage extends Component{
   constructor(props){
       super(props) ;
       this.state={
