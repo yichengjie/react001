@@ -10,11 +10,11 @@ import MessageBoxState from './views/states.jsx' ;
 let ShowView = TabDemo ;
 ShowView = HelloComp ;
 //ShowView = MessageBoxProps ;
-ShowView = MessageBoxState ;
+//ShowView = MessageBoxState ;
 //var title = '你好世界（来自props哦）';
 
 let myapp = ReactDOM.render(
-  <MessageBoxState />,
+  <ShowView />,
   document.getElementById('app')
 );
 

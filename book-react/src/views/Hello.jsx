@@ -9,6 +9,21 @@ class HelloComp extends Component {
             addr:'henan'
         };
     }
+
+    componentDidMount () {
+
+        document.body.addEventListener('click',e=>{
+            var target = e.target ;
+            console.info(target) ;
+            if(target.matches('p.code')){
+                console.info('不准点击我的代码...') ;
+            }
+
+        }) ;
+
+    }
+    
+
     getFieldProps(fieldName){
         return {
             value:this.state[fieldName],
@@ -41,7 +56,7 @@ class SubComp extends Component {
         return (
             <div>
                 <p>name:{this.props.name}</p>
-                <p>addr:{this.props.addr}</p>
+                <p className="code">addr:{this.props.addr}</p>
             </div>
         ) ;
     }
