@@ -48,8 +48,12 @@ class HelloComp extends Component {
 
 class SubComp extends Component {
 
+    componentDidMount(){
+        console.info('-------------- componentDidMount () is called in SubComp') ;
+    }
+
     componentWillReceiveProps (nextProps) {
-        console.info('nextProps : ' , JSON.stringify(nextProps,null,2)) ;
+        console.info('componentWillReceiveProps() is called in SubComp: nextProps : ' , JSON.stringify(nextProps,null,2)) ;
     }
 
     render(){
