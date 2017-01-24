@@ -3,10 +3,14 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打�
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
 module.exports = {
     devtool: '#source-map',
-    entry: __dirname + '/src/entry.js', //唯一入口文件
+    // entry: {
+    //     main:__dirname + '/src/entry.js', //唯一入口文件
+    //     redux01:__dirname + '/src/other/redux01.js',
+    // },
+    entry:__dirname + '/src/entry.js', //唯一入口文件
     output: {
         path: __dirname + '/dist', //打包后的文件存放的地方
-        filename: 'bundle.js', //打包后输出文件的文件名
+        filename: '[name].js', //打包后输出文件的文件名
         //publicPath:'/static'
         /**1.注意合理一定不能使用 `./dist`,否则找不到 
             2.如果不存在express提供的静态资源目录，就不要随便加这个，
