@@ -4,8 +4,7 @@
   "description": "webpack app description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --profile --colors --hot --port 3000",
-    "build": "webpack --progress --profile --colors"
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js"
   }
 }
