@@ -28,9 +28,10 @@ class CommentListContainer extends Component{
     }
 
     componentDidMount () {
+        console.info( 'CommentListContainer componentDidMount() is called ....') ;
         this.props.promise.then(response =>response.json())
-        .then(value=>this.setState({loading:false,value}))
-        .catch(error=>this.setState({loading:false,error})) ;
+            .then(value=>this.setState({loading:false,value}))
+            .catch(error=>this.setState({loading:false,error})) ;
     }
 
     render() {
@@ -44,3 +45,5 @@ class CommentListContainer extends Component{
         }
     }
 }
+
+export default CommentListContainer ;

@@ -18,7 +18,6 @@ class HelloComp extends Component {
             if(target.matches('p.code')){
                 console.info('不准点击我的代码...') ;
             }
-
         }) ;
 
     }

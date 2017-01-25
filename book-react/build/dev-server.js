@@ -57,6 +57,21 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
+
+
+app.get('/api/response.json',function(req,res){
+  var retObj ={commentList:[]} ;
+  //res.send('Hello World!');
+  res.json(retObj) ;
+}) ;
+
+app.post('/api/submit.json',function(req,res){
+  var retObj ={ok:true,commentList:[]} ;
+  //res.send('Hello World!');
+  res.json(retObj) ;
+}) ;
+
+
 var uri = 'http://localhost:' + port
 
 devMiddleware.waitUntilValid(function () {

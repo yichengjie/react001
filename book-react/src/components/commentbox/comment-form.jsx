@@ -19,7 +19,7 @@ class CommentForm extends Component{
                 <textarea value={this.state.value} 
                    onChange={this.handleChange}/>
                 <button type="button" className="comment-confirm-btn" 
-                    onClick={this.props.onSubmitComment.bind(this,this.state.value)}>评论</button>
+                    onClick={this.props.onSubmitComment.bind(this.state.value)}>评论</button>
             </div>
         ) ;
     }
