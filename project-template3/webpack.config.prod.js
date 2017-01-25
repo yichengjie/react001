@@ -56,8 +56,9 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin('vendors','vendors.js'),
        // new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':"production",
-            __DEV__:false
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
         }),
         new ExtractTextPlugin('main.css',{
             allChunks:true
