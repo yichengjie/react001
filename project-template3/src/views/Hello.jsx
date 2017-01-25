@@ -1,11 +1,13 @@
-import  React from 'react'
+import  React,{Component} from 'react'
 
-const HelloComp = () => {
-    return (
-        <div>
-            <h1>hello world</h1>
-        </div>
-    )
+class HelloComp extends Component {
+    render(){
+        return (
+            <div>
+                <h1>hello world fdfsd</h1>
+            </div>
+        )
+    }
 }
 
 export default HelloComp
