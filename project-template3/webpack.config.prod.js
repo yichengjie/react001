@@ -6,7 +6,6 @@ var fs = require('fs') ;
 var webpack = require('webpack') ;
 
 
-
 module.exports = {
     devtool: '#source-map',
     entry: {
@@ -55,9 +54,9 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('vendors','vendors.js'),
-        new webpack.optimize.DedupePlugin(),
+       // new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV':JSON.stringify(process.env.NODE_ENV),
+            'process.env.NODE_ENV':"production",
             __DEV__:false
         }),
         new ExtractTextPlugin('main.css',{
@@ -69,11 +68,11 @@ module.exports = {
                 dead_code:true
             }
         }),
-        // new HtmlWebpackPlugin({
-        //     title: 'My App',
-        //     template:'template.html',
-        //     filename: 'index.html'
-        // })
+        new HtmlWebpackPlugin({
+            title: 'My App',
+            template:'template.html',
+            filename: 'index.html'
+        })
     ]
 
 }
