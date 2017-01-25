@@ -1,12 +1,21 @@
 'use strict';
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
+var path = require('path') ;
+var fs = require('fs') ;
+var webpack = require('webpack') ;
+
+
+
 module.exports = {
     devtool: '#source-map',
-    entry: __dirname + '/src/entry.js', //唯一入口文件
+    entry: {
+        app:['./src/entry.js'],
+        vendors:['react','react-dom']
+    },
     output: {
-        path: __dirname + '/dist', //打包后的文件存放的地方
-        filename: 'bundle.js', //打包后输出文件的文件名
+        path:path.resolve(__dirname,'dist'), //打包后的文件存放的地方
+        filename: '[name].js', //打包后输出文件的文件名
         //publicPath:'/static'
         /**1.注意合理一定不能使用 `./dist`,否则找不到 
             2.如果不存在express提供的静态资源目录，就不要随便加这个，
@@ -18,7 +27,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel',
-                include: /src/,
+                include: path.resolve(__dirname,'src'),
                 exclude: /node_modules/
             },
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss")},
@@ -44,21 +53,27 @@ module.exports = {
     resolve: {
       extensions: ['', '.js', '.jsx']
     },
-    devServer: {
-        //contentBase: './build',  //本地服务器所加载的页面所在的目录
-        port: 3000,
-        colors: true,  //终端中输出结果为彩色
-        historyApiFallback: true,  //不跳转
-        progress: true ,
-        inline: true  //实时刷新
-    },
     plugins: [
-        new ExtractTextPlugin('main.css'),
-        new HtmlWebpackPlugin({
-            title: 'My App',
-            template:'template.html',
-            filename: 'index.html'
-        })
+        new webpack.optimize.CommonsChunkPlugin('vendors','vendors.js'),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV':JSON.stringify(process.env.NODE_ENV),
+            __DEV__:false
+        }),
+        new ExtractTextPlugin('main.css',{
+            allChunks:true
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress:{
+                unused:true,
+                dead_code:true
+            }
+        }),
+        // new HtmlWebpackPlugin({
+        //     title: 'My App',
+        //     template:'template.html',
+        //     filename: 'index.html'
+        // })
     ]
 
 }
