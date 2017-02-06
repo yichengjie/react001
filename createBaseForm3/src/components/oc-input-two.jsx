@@ -1,5 +1,5 @@
 import React,{Component} from 'react' ;
-import {genSimulationEventByValue,isString} from '../common/common.js' ;
+import {isString} from '../common/common.js' ;
 let splitStr = "$$_" ;
 
 class OCInputTwo extends Component {
@@ -17,7 +17,7 @@ class OCInputTwo extends Component {
            value2 = eventValue ;
         }
         let retStr = assembleValue(value1,value2) ;
-        this.props.onChange(genSimulationEventByValue(retStr)) ;
+        this.props.onChange(retStr) ;
     }
 
     render(){

@@ -1,6 +1,28 @@
 import React,{Component} from 'react' ;
 
 class OCCheckbox extends Component {
+    constructor(props){
+        super(props) ;
+        this.handleChange = this.handleChange.bind(this) ;
+
+    }
+
+    handleChange(event){
+        var checkedFlag = event.target.checked ;
+        var value = event.target.value ;
+        //如果是选中
+        var oldValue = this.props.value ;
+        var newValue = null ;
+        if(checkedFlag){
+            newValue = [value].concat(oldValue)  ;
+        }else{//选出
+            newValue = oldValue.filter(function(item){
+                return item !== value ;
+            }) ;
+        }
+        this.props.onChange(newValue) ;
+    }
+
     render(){
         let {name,value,options} = this.props ;
         let arr = options.map((item,index) =>{
@@ -8,7 +30,7 @@ class OCCheckbox extends Component {
                 <label key ={index} className="checkbox-inline">
                     <input type="checkbox" value={item.value} 
                         checked={value.includes(item.value)} 
-                        onChange ={this.props.onChange}/>{' ' + item.name}
+                        onChange ={this.handleChange}/>{' ' + item.name}
                 </label>
             ) ;
         }) ;

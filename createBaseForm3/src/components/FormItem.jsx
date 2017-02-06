@@ -6,30 +6,47 @@ import OCRadio from './oc-radio.jsx' ;
 import OCSelect from './oc-select.jsx' ;
 import OCCheckbox from './oc-checkbox.jsx' ;
 import OCInputTwo from './oc-input-two.jsx' ;
+
+function handleChange4InputFactory(form,name){
+    return function (value){
+        //var value = event.target.value ;
+        form.setFieldValue(name,value) ;
+    }
+}
+
 /**
  * 获取输入框$$_a$$_b
  */
 function InputCompFactory(param){
-    let {form,type,name,rule,options} = param ;
+    let {type,form,name,options} = param ;
     let inputComp = null ;
      //name ={} value = {} onChange={}
     if(['text','email'].includes(type)){
-        inputComp = <OCInput/>
+        inputComp = <OCInput value ={form.getFieldValue(name)} 
+            onChange={handleChange4InputFactory(form,name)}/>
     }else if('textarea' === type){
-        inputComp = <OCTextArea />
+        inputComp = <OCTextArea  value ={form.getFieldValue(name)} 
+            onChange={handleChange4InputFactory(form,name)} />
     }else if('date' === type){
-        inputComp = <OCDate />
+        inputComp = <OCDate value ={form.getFieldValue(name)} 
+            onChange={handleChange4InputFactory(form,name)}/>
     }else if('select' === type){
-        inputComp = <OCSelect /> ;
+        inputComp = <OCSelect value ={form.getFieldValue(name)} 
+            onChange={handleChange4InputFactory(form,name)} 
+            options ={options}/> ;
     }else if('radio' === type){
-        inputComp = <OCRadio />
+        inputComp = <OCRadio value ={form.getFieldValue(name)}
+            onChange={handleChange4InputFactory(form,name)} 
+            options ={options}/>
     }else if('checkbox' === type){
-        inputComp = <OCCheckbox />
+        inputComp = <OCCheckbox value ={form.getFieldValue(name)}
+            onChange={handleChange4InputFactory(form,name)} 
+            options ={options}/>
     }else if('textTwo' === type){
-        inputComp = <OCInputTwo />
+        inputComp = <OCInputTwo value ={form.getFieldValue(name)}
+            onChange={handleChange4InputFactory(form,name)}/>
     }
-    return inputComp == null ? null : 
-        React.cloneElement(inputComp,{...form.getFieldProps(name,{rule}),options},null) ;
+    return inputComp ;
 }
 
 function FormItem ({type,label,name,rule,form,options}){

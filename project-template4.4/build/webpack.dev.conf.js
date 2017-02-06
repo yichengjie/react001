@@ -5,6 +5,7 @@ var config = require('./webpack.config');
 var webpack = require('webpack') ;
 
 config.output.publicPath = '/';
+config.devtool = '#source-map' ;
 
 config.plugins = [
     // 添加三个插件
