@@ -5,12 +5,18 @@ var path = require('path') ;
 var webpack = require('webpack') ;
 var fs = require('fs') ;
 
+// var devClient = 'webpack-hot-middleware/client';
+// var devClient = './build/dev-client';
+// Object.keys(config.entry).forEach(function (name, i) {
+//     var extras = [devClient]
+//     config.entry[name] = extras.concat(config.entry[name])
+// })
 
 module.exports = {
     devtool: 'cheap-mudule-eval-source-map',
     entry:{
         app:[
-            'webpack-hot-middleware/client',
+            './dev-client.js',
             './src/entry.js'
         ],
         vendors:['react','react-dom']
