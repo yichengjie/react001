@@ -1,1 +1,1 @@
-> 仅仅加入webpack-dev和express的骨架项目模板
+> 仅仅加入webpack-dev-middleware和express的骨架项目模板
