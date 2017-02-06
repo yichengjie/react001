@@ -37,7 +37,12 @@ config.plugins = [
         //filename: 'index.html',/**(开发环境)这个目录是相对于output的path当前目录作为基目录的 */
         template: path.resolve(__dirname, '../src/html/index.html'),
         inject: true
-    })
+    }),
+    // new webpack.ProvidePlugin({
+    //     $: "jquery",
+    //     jQuery: "jquery",
+    //     "window.jQuery": "jquery"
+    // }),
 ].concat(config.plugins);
 
 module.exports = config;
