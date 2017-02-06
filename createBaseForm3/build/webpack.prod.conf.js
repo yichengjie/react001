@@ -31,7 +31,7 @@ config.plugins = [
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     // 提取css为单文件
-    new ExtractTextPlugin("../[name].[contenthash].css"),
+    //new ExtractTextPlugin("../[name].[contenthash].css"),
     new HtmlWebpackPlugin({
         filename: '../index.html',/**(上线环境)这个目录是相对于output的path当前目录作为基目录的 */
         //filename: 'index.html',/**(开发环境)这个目录是相对于output的path当前目录作为基目录的 */

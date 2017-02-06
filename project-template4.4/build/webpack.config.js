@@ -1,6 +1,9 @@
 // nodejs 中的path模块
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin') ;
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var webpack = require('webpack') ;
+
 
 module.exports = {
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
@@ -36,8 +39,10 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders:['react-hot','babel']
             },
-            { test: /\.css$/, loader: "style!css!postcss"},
-            { test: /\.scss$/, loader: "style!css!postcss!sass"},
+            //这里的提取css在开发环境下实际上是不需要的
+            { test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css!postcss")},
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract("style", "css!postcss!sass")},
+
             { test: /\.(png|jpg)$/, loader: 'url?limit=8192'},
             {test: /\.(eot|svg|ttf|woff|woff2)$/,loader: 'url',
              query: {
@@ -62,5 +67,6 @@ module.exports = {
             jQuery: "jquery",
             "window.jQuery": "jquery"
         }), 
+        new ExtractTextPlugin('main.css'),
     ]
 }
