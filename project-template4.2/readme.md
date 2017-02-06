@@ -1,1 +1,1 @@
-> 在4.1的基础上继续完善
+> 在4.1的基础上加入webpack-hot-middleware中间件

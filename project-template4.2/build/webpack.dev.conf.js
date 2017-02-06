@@ -19,4 +19,11 @@ config.plugins = [
     })
 ];
 
+// 动态向入口配置中注入 webpack-hot-middleware/client?reload=true
+var devClient = 'webpack-hot-middleware/client?reload=true';
+Object.keys(config.entry).forEach(function (name, i) {
+    var extras = [devClient]
+    config.entry[name] = extras.concat(config.entry[name])
+})
+
 module.exports = config;

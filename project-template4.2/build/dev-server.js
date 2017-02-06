@@ -20,6 +20,7 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 // 使用 webpack-hot-middleware 中间件
 var hotMiddleware = require('webpack-hot-middleware')(compiler)
 
+
 // 注册中间件
 app.use(devMiddleware)
 // 注册中间件

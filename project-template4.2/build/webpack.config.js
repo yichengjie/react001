@@ -10,10 +10,9 @@ module.exports = {
     //     path.resolve(__dirname, '../src/index.js'),
     //     'webpack-hot-middleware/client?reload=true',
     //  ]
-    entry:[
-        'webpack-hot-middleware/client?reload=true',
-        path.resolve(__dirname, '../src/index.js'),
-    ] ,
+    entry:{
+      index:  path.resolve(__dirname, '../src/index.js')
+    },
     // 输出配置
     output: {
         // 输出路径是 myProject/output/static
