@@ -12,7 +12,6 @@ function createForm (WrapperComponent,getSchemaApi){
                 formError:{},
                 formSchema:[]
             } ;
-            this._inner_formRules ={} ;
             this.form = {
                 handleSubmit: this._form_handleSubmit.bind(this) ,
                 handleReset:this._form_handleReset.bind(this) ,
