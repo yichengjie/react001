@@ -1,7 +1,7 @@
 // 引入必要的模块
 var express = require('express')
 var webpack = require('webpack')
-var config = require('./webpack.config')
+var config = require('./webpack.dev.conf')
 
 // 创建一个express实例
 var app = express()

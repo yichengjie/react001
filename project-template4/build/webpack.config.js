@@ -9,8 +9,8 @@ module.exports = {
     output: {
         // 输出路径是 myProject/output/static
         path: path.resolve(__dirname, '../output/static'),
-        //publicPath: 'static/',//(线上环境)
-        publicPath: '/',//(开发环境)
+        publicPath: 'static/',//(线上环境)
+        //publicPath: '/',//(开发环境)
         filename: '[name].[hash].js',
         chunkFilename: '[id].[chunkhash].js'
     },
@@ -47,8 +47,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            //filename: '../index.html',/**(上线环境)这个目录是相对于output的path当前目录作为基目录的 */
-            filename: 'index.html',/**(开发环境)这个目录是相对于output的path当前目录作为基目录的 */
+            filename: '../index.html',/**(上线环境)这个目录是相对于output的path当前目录作为基目录的 */
+            //filename: 'index.html',/**(开发环境)这个目录是相对于output的path当前目录作为基目录的 */
             template: path.resolve(__dirname, '../src/html/index.html'),
             inject: true
         })
