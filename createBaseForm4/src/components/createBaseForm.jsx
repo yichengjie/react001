@@ -61,9 +61,6 @@ function createForm (WrapperComponent,getSchemaApi){
                     allValid = false;
                 }
             }) ;
-
-            console.info('formError : ', this.state.formError) ;
-
             return allValid ;
         }
         
