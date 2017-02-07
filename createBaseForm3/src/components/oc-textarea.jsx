@@ -20,11 +20,4 @@ class OCTextArea extends Component {
   } 
 }
 
-
-
-function OCTextArea(){
-    return (
-        <textarea className='form-control' name={name} value={value} onChange={onChange} ></textarea>
-    ) ;
-}
 export default OCTextArea ;
