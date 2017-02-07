@@ -1,1 +1,1 @@
-> 准备将createBaseForm2重构一版
+> 准备将createBaseForm2重构一版，将value={...} onChange={...}从顶层组件移到FormItem，中增加自定义组件的灵活性
