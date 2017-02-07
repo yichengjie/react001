@@ -17,7 +17,8 @@ class OCSelect extends Component{
       let {name,value,options} = this.props ;
       return (
         <select className='form-control' name ={name} 
-            value ={value} onChange={this.handleChange}>
+            value ={value} onChange={this.handleChange}
+            style={{width:this.props.width}}>
             {options.map(function(t,index){
                 return <option value={t.value} key ={index}>{t.name}</option>
             })}

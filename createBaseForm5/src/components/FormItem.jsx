@@ -37,7 +37,7 @@ function InputCompFactory({form,schema}){
 /**
  * 简单类型
  */
-function getSimpleInputComp(form,schema,index,lastFlag){
+function getSimpleInputComp(form,schema,index){
     let {type,name,rule} = schema ;
     let inputComp = null ;
      //name ={} value = {} onChange={}
@@ -48,7 +48,7 @@ function getSimpleInputComp(form,schema,index,lastFlag){
     }else if('date' === type){
         inputComp = <OCDate />
     }else if('select' === type){
-        inputComp = <OCSelect options ={schema.options}/> ;
+        inputComp = <OCSelect options ={schema.options} /> ;
     }else if('radio' === type){
         inputComp = <OCRadio options ={schema.options}/>
     }else if('checkbox' === type){
@@ -58,6 +58,7 @@ function getSimpleInputComp(form,schema,index,lastFlag){
     }
     return inputComp ==null ? null : React.cloneElement(inputComp,{
         value:form.getFieldValue(name),
+        width:schema.width,
         handleChange:handleChange4InputFactory(form,name),
         handleValidate:handleValidateFactory(form,name),
         key:index
@@ -67,16 +68,25 @@ function getSimpleInputComp(form,schema,index,lastFlag){
 function getComplexInputComp(form,schema){
     let {fields,divline} = schema ;
     let arr = [] ;
-    for(let i =0,len = fields.length ;i < len ; i ++){
+    let len = fields.length ;
+    //let spNum = len-1 ;
+    //let spWidth = divline ? 4 : 2 ;
+    //let width = parseInt((100 - spNum*spWidth)/len);
+    for(let i =0 ;i < len ; i ++){
         let tmpInput = getSimpleInputComp(form,fields[i],i) ;
         arr.push(tmpInput) ;
+        //arr.push(React.cloneElement(tmpInput,{style: {width:width}})) ;
         //如果中间有分割线则将分割线显示出来
-        if(divline && i< len-1){
-             arr.push(<span key={'sp'+i} className="split-line">-</span>) ;
+        if(i< len-1){
+            if(divline){
+                arr.push(<span key={'sp'+i} className="split-line"></span>) ;
+            }else{
+                arr.push(<span key={'sp'+i} className="split-line-none"></span>) ;
+            }
         }
     }
     return (
-        <span className="input-two">
+        <span className="input-complex">
             {arr}
         </span>
     )

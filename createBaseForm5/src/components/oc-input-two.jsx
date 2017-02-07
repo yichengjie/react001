@@ -28,7 +28,7 @@ class OCInputTwo extends Component {
             <span className="input-two">
                 <input className="form-control"  type="text" 
                      value={arr[0]} onChange={this.handleInputChange.bind(this,'1')}/>
-                <span className="split-line">-</span>
+                <span className="split-line"></span>
                 <input className="form-control"  type="text" 
                     value={arr[1]} onChange={this.handleInputChange.bind(this,'2')}/> 
             </span>

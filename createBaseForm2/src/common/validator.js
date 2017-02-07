@@ -28,7 +28,10 @@ export let validationFn = {
         return isLegalDate(value) ;
     },
     integer:function(value){
-        return /^-?\d+$/.test(value);
+        if(value && value.length>0){
+            return /^-?\d+$/.test(value);
+        }
+        return true ;
     }
 } ;
 export let validationMessages ={

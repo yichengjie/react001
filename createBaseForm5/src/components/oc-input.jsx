@@ -15,7 +15,7 @@ class OCInput extends Component {
     render(){
         let {name,value} = this.props ;
         return (
-            <input className='form-control'  type="text"  
+            <input className='form-control'  type="text"  style={{width:this.props.width}}
             name ={name} value={value} onChange={this.handleChange}/>    
         ) ;
     }

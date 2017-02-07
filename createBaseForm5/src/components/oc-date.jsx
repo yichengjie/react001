@@ -29,6 +29,7 @@ class InputDate extends Component{
     render(){
        return (
             <input type="text" 
+                style={{width:this.props.width}}
                 value={this.props.value || ''}
                 className ="form-control" 
                 onChange={this.handleInputChange}

@@ -37,15 +37,24 @@ export function getUserEditFormSchemaApi(){
         {
             type:'complex',/**复杂类型 */
             label:'测试复杂类型',
-            divline:true, /**分割线 */
+            //divline:true, /**分割线 */
             fields:[{
               type:'text',
               name:'range2',
+              width:'24%',
+              defaultValue:'',
+              rule:{integer:true}   
+            },
+            {
+              type:'text',
+              name:'range3',
+              width:'47%',
               defaultValue:'',
               rule:{integer:true}   
             },{
               type:'select',
-              name:'range3',
+              name:'range4',
+              width:'24%',
               defaultValue:'',
               options:[
                 {name:'选择',value:''},
@@ -57,6 +66,13 @@ export function getUserEditFormSchemaApi(){
               rule:{required:true}   
             }],
         },
+        // {
+        //     type:'email',
+        //     label:'邮箱2',
+        //     name:'email2',
+        //     defaultValue:'',
+        //     rule:{required:true,email:true} 
+        // },
         {
             type:'radio',
             label:'性别',

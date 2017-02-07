@@ -27,6 +27,19 @@ html, body, div, h5, h6, p, ul, li {
         box-sizing: border-box ;
         padding-left: 5px;
     }
+    .split-line::after{
+        content: '-'
+    }
+    .split-line-none{
+        display: inline-block ;
+        width: 2%;
+        height: 100%;
+        box-sizing: border-box ;
+        padding-left: 3px;
+    }
+    .input-complex .form-control{
+        display: inline-block ;
+    }
     .oper-column i{
         margin-right: 7px ;
         cursor: pointer ;
