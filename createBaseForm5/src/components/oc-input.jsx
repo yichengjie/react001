@@ -1,4 +1,5 @@
 import React,{Component} from 'react' ;
+import classNames from 'classnames';
 
 class OCInput extends Component {
 
@@ -14,8 +15,9 @@ class OCInput extends Component {
 
     render(){
         let {name,value} = this.props ;
+        let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
         return (
-            <input className='form-control'  type="text"  style={{width:this.props.width}}
+            <input className= {classStr}  type="text"  style={{width:this.props.width}}
             name ={name} value={value} onChange={this.handleChange}/>    
         ) ;
     }

@@ -59,7 +59,7 @@ export function getUserEditFormSchemaApi(){
             },
             {
               type:'select',
-              name:'range4',
+              name:'range3',
               width:'40%',
               defaultValue:'',
               options:[
@@ -73,10 +73,11 @@ export function getUserEditFormSchemaApi(){
             },
             {
               type:'text',
-              name:'range3',
+              name:'range4',
               width:'32%',
               defaultValue:'',
-              rule:{integer:true}   
+              //rule:{integer:true,validator:'validateRange1'}
+              rule:{integer:true}     
             }],
         },
         {

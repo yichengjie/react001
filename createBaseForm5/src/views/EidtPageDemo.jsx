@@ -31,7 +31,7 @@ class MyForm extends Component{
     //整个函数必须被重写
     handleSubmit(flag){
         var {form} = this ;
-        console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
+        //console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
         if(flag){
             console.info('表单验证通过，准备提交表单') ;
         }else{

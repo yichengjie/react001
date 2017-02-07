@@ -1,5 +1,6 @@
 import React,{Component} from 'react' ;
-import {genSimulationEventByValue} from '../common/common.js' ;
+import classNames from 'classnames';
+//import {genSimulationEventByValue} from '../common/common.js' ;
 
 class InputDate extends Component{
     constructor(props){
@@ -27,11 +28,12 @@ class InputDate extends Component{
        this.props.handleValidate(value) ;
     }
     render(){
+       let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
        return (
             <input type="text" 
                 style={{width:this.props.width}}
                 value={this.props.value || ''}
-                className ="form-control" 
+                className = {classStr} 
                 onChange={this.handleInputChange}
                 ref ={ t=>this.myInput= t}/>
        ) ;

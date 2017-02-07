@@ -29,17 +29,22 @@ function InputCompFactory({form,schema}){
     if('complex' === type){
         inputComp = getComplexInputComp(form,schema) ;
     }else{
-        inputComp = getSimpleInputComp(form,schema) ;
+        let errorStr = getFieldErrorStr(form,schema) ;
+        inputComp = getSimpleInputComp(form,schema,errorStr ==null || errorStr.length === 0 ) ;
     }
     return inputComp ;
 }
 /**
  * 简单类型
+ * @param form
+ * @param schema
+ * @param index  (复杂表单才有意义)    一组控件的的第几个
+ * @param count （复杂表单才会有意义）  一组控件总数
  */
-function getSimpleInputComp(form,schema,index){
+function getSimpleInputComp(form,schema,isValid,index){
     let {type,name,rule} = schema ;
     let inputComp = null ;
-     //name ={} value = {} onChange={}
+    //name ={} value = {} onChange={}
     if(['text','email'].includes(type)){
         inputComp = <OCInput />
     }else if('textarea' === type){
@@ -58,7 +63,8 @@ function getSimpleInputComp(form,schema,index){
         width:schema.width,
         handleChange:handleChange4InputFactory(form,name),
         handleValidate:handleValidateFactory(form,name),
-        key:index
+        key:index,
+        isValid:isValid
     }) ;
 }
 
@@ -69,8 +75,9 @@ function getComplexInputComp(form,schema){
     //let spNum = len-1 ;
     //let spWidth = divline ? 4 : 2 ;
     //let width = parseInt((100 - spNum*spWidth)/len);
+    let errFlagArr = getComplexErrorArr(form,fields) ;
     for(let i =0 ;i < len ; i ++){
-        let tmpInput = getSimpleInputComp(form,fields[i],i) ;
+        let tmpInput = getSimpleInputComp(form,fields[i],errFlagArr[i],(i+1)) ;
         arr.push(tmpInput) ;
         //arr.push(React.cloneElement(tmpInput,{style: {width:width}})) ;
         //如果中间有分割线则将分割线显示出来
@@ -87,6 +94,32 @@ function getComplexInputComp(form,schema){
             {arr}
         </span>
     )
+}
+
+//遍历一组schema,如果存在一个校验失败的，则后面将不显示错误信息
+//一组中如果前面存在错误，后面都显示正确
+function getComplexErrorArr(form,fields){
+    let errIndex = 0 ;
+    let retArr = [] ;
+    let flag = true ;
+    let len = fields.length ;
+    for(let i = 0 ; i < len; i ++){
+        let name = fields[i].name ;
+        let error = form.getFieldError(name) 
+        if(error && error.trim() !== ''){
+            flag = false;
+            errIndex = i ;
+            break ;
+        }
+    }
+    for(let j = 0 ; j < len ; j++){
+        if(errIndex=== j){
+            retArr.push(flag) ;
+        }else{
+            retArr.push(true) ;
+        }
+    }
+    return retArr ;
 }
 
 function getFieldErrorStr(form,schema){

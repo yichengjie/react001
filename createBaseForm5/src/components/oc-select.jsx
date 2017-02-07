@@ -1,5 +1,5 @@
 import React,{Component} from 'react' ;
-
+import classNames from 'classnames';
 
 class OCSelect extends Component{
     
@@ -15,8 +15,9 @@ class OCSelect extends Component{
 
   render(){
       let {name,value,options} = this.props ;
+      let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
       return (
-        <select className='form-control' name ={name} 
+        <select className= {classStr} name ={name} 
             value ={value} onChange={this.handleChange}
             style={{width:this.props.width}}>
             {options.map(function(t,index){

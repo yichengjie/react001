@@ -1,6 +1,6 @@
 import React,{Component} from 'react' ;
 import {validationFn,validationMessages} from  '../common/validator.js'; 
-import {isArray} from '../common/common.js' ;
+import {isArray,stringify} from '../common/common.js' ;
 import FormItem from './FormItem.jsx' ;
 
 function createForm (WrapperComponent,getSchemaApi){
@@ -70,7 +70,7 @@ function createForm (WrapperComponent,getSchemaApi){
                     allValid = false;
                 }
             }) ;
-            //console.info('------- > ' , this.state.formError);
+            //console.info('------- > ' , stringify(this.state.formError));
             return allValid ;
         }
         
