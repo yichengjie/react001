@@ -29,7 +29,26 @@ export function getUserEditFormSchemaApi(){
         },
         {
             type:'complex',/**复杂类型 */
-            label:'测试复杂类型',
+            label:'年龄范围',
+            divline:true, /**分割线 */
+            fields:[{
+              type:'text',
+              name:'age1',
+              width:'48%',
+              defaultValue:'',
+              rule:{integer:true}   
+            },
+            {
+              type:'text',
+              name:'age2',
+              width:'48%',
+              defaultValue:'',
+              rule:{integer:true}   
+            }],
+        },
+        {
+            type:'complex',/**复杂类型 */
+            label:'通用券',
             //divline:true, /**分割线 */
             fields:[{
               type:'text',
@@ -39,15 +58,9 @@ export function getUserEditFormSchemaApi(){
               rule:{integer:true}   
             },
             {
-              type:'text',
-              name:'range3',
-              width:'47%',
-              defaultValue:'',
-              rule:{integer:true}   
-            },{
               type:'select',
               name:'range4',
-              width:'24%',
+              width:'40%',
               defaultValue:'',
               options:[
                 {name:'选择',value:''},
@@ -57,6 +70,13 @@ export function getUserEditFormSchemaApi(){
                 {name:'香蕉',value:'4'}
               ],
               rule:{required:true}   
+            },
+            {
+              type:'text',
+              name:'range3',
+              width:'32%',
+              defaultValue:'',
+              rule:{integer:true}   
             }],
         },
         // {
