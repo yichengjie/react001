@@ -28,13 +28,6 @@ export function getUserEditFormSchemaApi(){
             rule:{integer:true} 
         },
         {
-            type:'textTwo',
-            label:'测试范围',
-            name:'range1',
-            defaultValue:'qw$$_b',
-            rule:{validator:'validateRange1'}
-        },
-        {
             type:'complex',/**复杂类型 */
             label:'测试复杂类型',
             //divline:true, /**分割线 */

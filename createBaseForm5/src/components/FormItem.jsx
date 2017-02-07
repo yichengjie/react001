@@ -5,7 +5,6 @@ import OCDate from './oc-date.jsx' ;
 import OCRadio from './oc-radio.jsx' ;
 import OCSelect from './oc-select.jsx' ;
 import OCCheckbox from './oc-checkbox.jsx' ;
-import OCInputTwo from './oc-input-two.jsx' ;
 
 function handleChange4InputFactory(form,name){
     return function (value){
@@ -16,7 +15,7 @@ function handleChange4InputFactory(form,name){
 
 function handleValidateFactory(form,name){
     return function (value){
-        console.info(`name:${name} , value: ${value}`) ;
+        //console.info(`name:${name} , value: ${value}`) ;
         form.validateField(name,value) ;
     }
 }
@@ -53,8 +52,6 @@ function getSimpleInputComp(form,schema,index){
         inputComp = <OCRadio options ={schema.options}/>
     }else if('checkbox' === type){
         inputComp = <OCCheckbox options ={schema.options}/>
-    }else if('textTwo' === type){
-        inputComp = <OCInputTwo />
     }
     return inputComp ==null ? null : React.cloneElement(inputComp,{
         value:form.getFieldValue(name),
