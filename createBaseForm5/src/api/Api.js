@@ -79,13 +79,6 @@ export function getUserEditFormSchemaApi(){
               rule:{integer:true}   
             }],
         },
-        // {
-        //     type:'email',
-        //     label:'邮箱2',
-        //     name:'email2',
-        //     defaultValue:'',
-        //     rule:{required:true,email:true} 
-        // },
         {
             type:'radio',
             label:'性别',
