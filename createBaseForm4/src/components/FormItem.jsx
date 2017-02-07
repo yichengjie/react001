@@ -22,31 +22,24 @@ function InputCompFactory(param){
     let inputComp = null ;
      //name ={} value = {} onChange={}
     if(['text','email'].includes(type)){
-        inputComp = <OCInput value ={form.getFieldValue(name)} 
-            onChange={handleChange4InputFactory(form,name)}/>
+        inputComp = <OCInput />
     }else if('textarea' === type){
-        inputComp = <OCTextArea  value ={form.getFieldValue(name)} 
-            onChange={handleChange4InputFactory(form,name)} />
+        inputComp = <OCTextArea />
     }else if('date' === type){
-        inputComp = <OCDate value ={form.getFieldValue(name)} 
-            onChange={handleChange4InputFactory(form,name)}/>
+        inputComp = <OCDate />
     }else if('select' === type){
-        inputComp = <OCSelect value ={form.getFieldValue(name)} 
-            onChange={handleChange4InputFactory(form,name)} 
-            options ={options}/> ;
+        inputComp = <OCSelect options ={options}/> ;
     }else if('radio' === type){
-        inputComp = <OCRadio value ={form.getFieldValue(name)}
-            onChange={handleChange4InputFactory(form,name)} 
-            options ={options}/>
+        inputComp = <OCRadio options ={options}/>
     }else if('checkbox' === type){
-        inputComp = <OCCheckbox value ={form.getFieldValue(name)}
-            onChange={handleChange4InputFactory(form,name)} 
-            options ={options}/>
+        inputComp = <OCCheckbox options ={options}/>
     }else if('textTwo' === type){
-        inputComp = <OCInputTwo value ={form.getFieldValue(name)}
-            onChange={handleChange4InputFactory(form,name)}/>
+        inputComp = <OCInputTwo />
     }
-    return inputComp ;
+    return inputComp ==null ? null : React.cloneElement(inputComp,{
+        value:form.getFieldValue(name),
+        onChange:handleChange4InputFactory(form,name)
+    }) ;
 }
 
 function FormItem ({type,label,name,rule,form,options}){
