@@ -4,7 +4,6 @@ class OCCheckbox extends Component {
     constructor(props){
         super(props) ;
         this.handleChange = this.handleChange.bind(this) ;
-
     }
 
     handleChange(event){
@@ -20,7 +19,8 @@ class OCCheckbox extends Component {
                 return item !== value ;
             }) ;
         }
-        this.props.onChange(newValue) ;
+        this.props.handleChange(newValue) ;
+        this.props.handleValidate(newValue) ;
     }
 
     render(){

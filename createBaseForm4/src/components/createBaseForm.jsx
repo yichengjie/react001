@@ -19,7 +19,8 @@ function createForm (WrapperComponent,getSchemaApi){
                 handleReset:this._form_handleReset.bind(this) ,
                 setFieldValue:this._form_setFieldValue.bind(this),
                 getFieldValue:this._form_getFieldValue.bind(this) ,
-                getFieldError:this._form_getFieldError.bind(this)
+                getFieldError:this._form_getFieldError.bind(this),
+                validateField:this._form_validSingleField.bind(this)
             } ;
             this._inner_initFormSchema() ;
         } 
@@ -55,45 +56,17 @@ function createForm (WrapperComponent,getSchemaApi){
             let allValid = true ;
             keys.forEach(fieldName=>{
                 let value = this.state.formData[fieldName] ;
-                let tmpFlag = this._inner_validSingleField(fieldName,value) ;
+                let tmpFlag = this._form_validSingleField(fieldName,value) ;
                 if(!tmpFlag){
                     allValid = false;
                 }
             }) ;
+
+            console.info('formError : ', this.state.formError) ;
+
             return allValid ;
         }
-         //校验表单的某一个字段
-        _inner_validSingleField(fieldName,value){
-            let rule = this._inner_getSingleFieldValidateRule(fieldName) ;
-            if(rule==null) return false;
-            //如果存在校验规则
-            let {validator,...other} = rule ;
-            //other :{email: true}
-            var keys = Object.keys(other) ;
-            let errTip = '' ;
-            let validFlag = true ;
-            for(let key of keys){
-                let param = other[key] ;
-                if(validationFn[key]){
-                   let flag = validationFn[key].call(null,value,param) ;
-                   if(!flag){//如果校验没有通过的话
-                      validFlag = false;
-                      errTip= validationMessages[key].call(null,fieldName,param) ;
-                      break ;
-                   }
-                } 
-            }
-            //如果上面的静态校验通过了，还存在自定义校验的话，将进行自定义校验
-            if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' &&validator.length>0 ){
-                let validatorFn = this[validator] ;
-                errTip = validatorFn && validatorFn.call(this,value,fieldName) || '' ;
-            }
-            this.setState(function(state){
-                state.formError[fieldName] = errTip ;
-                return state ;
-            }) ;
-            return validFlag ;
-        }
+        
         /**私有方法end */
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
@@ -122,7 +95,7 @@ function createForm (WrapperComponent,getSchemaApi){
             formData:newFormData
           }) ; 
           //并触发校验
-          this._inner_validSingleField(fieldName,fieldValue) ;
+          //this._inner_validSingleField(fieldName,fieldValue) ;
         }
 
         _form_getFieldValue(name){
@@ -131,6 +104,41 @@ function createForm (WrapperComponent,getSchemaApi){
 
         _form_getFieldError(fieldName){
             return this.state.formError[fieldName] || '' 
+        }
+         //校验表单的某一个字段
+        _form_validSingleField(fieldName,value){
+            let rule = this._inner_getSingleFieldValidateRule(fieldName) ;
+            if(rule==null) return false;
+            //如果存在校验规则
+            let {validator,...other} = rule ;
+            //other :{email: true}
+            var keys = Object.keys(other) ;
+            let errTip = '' ;
+            let validFlag = true ;
+            for(let key of keys){
+                let param = other[key] ;
+                if(validationFn[key]){
+                   let flag = validationFn[key].call(null,value,param) ;
+                   if(!flag){//如果校验没有通过的话
+                      validFlag = false;
+                      errTip= validationMessages[key].call(null,fieldName,param) ;
+                      break ;
+                   }
+                } 
+            }
+            //如果上面的静态校验通过了，还存在自定义校验的话，将进行自定义校验
+            if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' &&validator.length>0 ){
+                let validatorFn = this[validator] ;
+                errTip = validatorFn && validatorFn.call(this,value,fieldName) || '' ;
+                if(errTip&&errTip.length>0){
+                    validFlag = false ;
+                }
+            }
+            this.setState(function(state){
+                state.formError[fieldName] = errTip ;
+                return state ;
+            }) ;
+            return validFlag ;
         }
         /**公共方法api end */
         render () {

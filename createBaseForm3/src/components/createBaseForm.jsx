@@ -87,6 +87,9 @@ function createForm (WrapperComponent,getSchemaApi){
             if(errTip.length==0 && validator && Object.prototype.toString.call(validator) === '[object String]' &&validator.length>0 ){
                 let validatorFn = this[validator] ;
                 errTip = validatorFn && validatorFn.call(this,value,fieldName) || '' ;
+                if(errTip&&errTip.length>0){
+                    validFlag = false ;
+                }
             }
             this.setState(function(state){
                 state.formError[fieldName] = errTip ;

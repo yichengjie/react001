@@ -17,7 +17,8 @@ class OCInputTwo extends Component {
            value2 = eventValue ;
         }
         let retStr = assembleValue(value1,value2) ;
-        this.props.onChange(retStr) ;
+        this.props.handleChange(retStr) ;
+        this.props.handleValidate(retStr) ;
     }
 
     render(){

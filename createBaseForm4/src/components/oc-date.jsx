@@ -14,7 +14,8 @@ class InputDate extends Component{
         var optionObj = {} ;
         optionObj.dateFormat = "yy-mm-dd" ;
         optionObj.onSelect = (dateText,picker) =>{
-            this.props.onChange(dateText) ;
+            this.props.handleChange(dateText) ;
+            this.props.handleValidate(dateText) ;
         };
         optionObj.minDate = minDate ;
         optionObj.showButtonPanel = true ;
@@ -22,7 +23,8 @@ class InputDate extends Component{
     }
     handleInputChange(event){
        var value = event.target.value ;
-       this.props.onChange(value) ;
+       this.props.handleChange(value) ;
+       this.props.handleValidate(value) ;
     }
     render(){
        return (

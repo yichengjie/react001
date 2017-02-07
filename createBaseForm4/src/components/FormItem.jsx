@@ -14,6 +14,12 @@ function handleChange4InputFactory(form,name){
     }
 }
 
+function handleValidateFactory(form,name){
+    return function (value){
+        form.validateField(name,value) ;
+    }
+}
+
 /**
  * 获取输入框$$_a$$_b
  */
@@ -38,7 +44,8 @@ function InputCompFactory(param){
     }
     return inputComp ==null ? null : React.cloneElement(inputComp,{
         value:form.getFieldValue(name),
-        onChange:handleChange4InputFactory(form,name)
+        handleChange:handleChange4InputFactory(form,name),
+        handleValidate:handleValidateFactory(form,name)
     }) ;
 }
 
