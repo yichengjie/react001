@@ -1,0 +1,1 @@
+> 在createBaseForm3，的基础上尝试将validate放到FormItem中去调用。
