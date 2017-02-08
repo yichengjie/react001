@@ -207,9 +207,9 @@ function getDefaultValue(value){
 let defaultValueMap ={
     '[object String]':'',
     '[object Array]':[],
-    '[object Number]':null,
-    '[object Boolean]':null,
-    '[object Date]':null
+    '[object Number]':'',
+    '[object Boolean]':'',
+    '[object Date]':''
 } ;
 
 
