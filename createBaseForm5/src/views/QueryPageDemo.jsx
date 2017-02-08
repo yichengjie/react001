@@ -4,6 +4,7 @@ import {stringify} from '../common/common.js' ;
 //引入样式文件
 import Api from '../api/Api.js' ;
 import BaseTable from '../components/BaseTable.jsx' ;
+import Navbar from '../components/Navbar.jsx' ;
 
 
 export default class UserQueryPage extends Component{
@@ -39,6 +40,7 @@ export default class UserQueryPage extends Component{
   render(){
       return (
           <div>
+            <Navbar/>
             <button type="button" className="btn btn-primary" onClick={this.handleQueryOper.bind(this)}>查询</button>
             <br/>
             <BaseTable tableFields={this.state.tableFields} list={this.state.list}>

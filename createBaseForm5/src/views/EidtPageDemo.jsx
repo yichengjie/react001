@@ -5,6 +5,7 @@ import createForm from '../components/createBaseForm.jsx' ;
 import {stringify,dealPromise4Callback} from '../common/common.js' ;
 import Api,{getUserEditFormSchemaApi} from '../api/Api.js' ;
 import FormOperContainer from '../components/form-oper-container.jsx' ;
+import Navbar from '../components/Navbar.jsx' ;
 
 class MyEditPageDemo extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
@@ -34,6 +35,7 @@ class MyEditPageDemo extends Component{
     render(){
         return (
             <div>
+                <Navbar />
                 {this.renderBaseForm() /**输出页面的form部分*/}
                 {/**下面开发自定义的按钮操作部分*/}
                 <FormOperContainer>

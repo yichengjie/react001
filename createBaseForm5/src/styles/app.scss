@@ -5,7 +5,7 @@ html, body, div, h5, h6, p, ul, li {
 
 #app {
     //background: #09a;
-    padding: 50px;
+    padding: 0px;
     .title {
         font-size: 25px;
         text-align: center;
@@ -46,5 +46,8 @@ html, body, div, h5, h6, p, ul, li {
     }
     .error-input-border{
         border-color: #a94442;
+    }
+    .navbar{
+        border-radius: 0;
     }
 }
