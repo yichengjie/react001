@@ -9,6 +9,7 @@ class MyForm extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
     initPageParam(){
         console.info('初始化页面参数...') ;
+        //这里我们可能去查询后台，填充页面表单的数据。
         setTimeout(()=>{
             this.form.setFieldValue('birthday','2017-02-19') ;
         },1000) ;
