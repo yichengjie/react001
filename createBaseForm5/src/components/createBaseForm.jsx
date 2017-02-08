@@ -15,12 +15,13 @@ function createForm (WrapperComponent,getSchemaApi){
             //这个是专供内部使用的校验规则
             this._inner_formRules ={} ;
             this.form = {
-                handleSubmit: this._form_handleSubmit.bind(this) ,
+                //handleSubmit: this._form_handleSubmit.bind(this) ,
                 handleReset:this._form_handleReset.bind(this) ,
                 setFieldValue:this._form_setFieldValue.bind(this),
                 getFieldValue:this._form_getFieldValue.bind(this) ,
                 getFieldError:this._form_getFieldError.bind(this),
-                validateField:this._form_validSingleField.bind(this)
+                validateField:this._form_validSingleField.bind(this),
+                validateForm:this._form_validateForm.bind(this)
             } ;
             this._inner_initFormSchema() ;
         } 
@@ -58,9 +59,23 @@ function createForm (WrapperComponent,getSchemaApi){
         //获取表单的所有校验规则
         _inner_getAllFieldValidateRules(){
             return this._inner_formRules ;
-        }
+        }  
+        /**私有方法end */
+        //////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////
+        /**公共方法api start */
+        //从服务器获取表单的显示以及校验信息
+        // _form_handleSubmit(event){/**当执行form的handleSubmit()时 */
+        //     console.info('inner handleSubmit .... ') ;
+        //     //console.info('validationRules : ' +JSON.stringify(this.getFormValidateRules(),null,2)) ;
+        //     //进行校验
+        //     //调用父类的提交钩子函数
+        //     let flag = this._inner_validForm() ;
+        //     this.handleSubmit && this.handleSubmit.call(this,flag) ;
+        // }//this.handleCustomeValidate
         //校验整个表单
-        _inner_validForm(){
+        _form_validateForm(){
             let rules = this._inner_getAllFieldValidateRules() ;
             let keys = rules && Object.keys(rules) ;
             let allValid = true ;
@@ -74,22 +89,6 @@ function createForm (WrapperComponent,getSchemaApi){
             //console.info('------- > ' , stringify(this.state.formError));
             return allValid ;
         }
-        
-        /**私有方法end */
-        //////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////
-        /**公共方法api start */
-        //从服务器获取表单的显示以及校验信息
-        _form_handleSubmit(event){/**当执行form的handleSubmit()时 */
-            console.info('inner handleSubmit .... ') ;
-            //console.info('validationRules : ' +JSON.stringify(this.getFormValidateRules(),null,2)) ;
-            //进行校验
-            //调用父类的提交钩子函数
-            let flag = this._inner_validForm() ;
-            this.handleSubmit && this.handleSubmit.call(this,flag) ;
-        }//this.handleCustomeValidate
-
         _form_handleReset(){
             let newFormData = getClearSimpleObj(this.state.formData) ;
             let newFormError = getClearSimpleObj(this.state.formError) ;
@@ -149,17 +148,10 @@ function createForm (WrapperComponent,getSchemaApi){
             return validFlag ;
         }
         /**公共方法api end */
-        render () {
+        renderBaseForm () {
             return (
                 <form  className="form-horizontal" role="form" >
                      {renderFormSchema(this.state.formSchema,this.form)}
-                     <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10">
-                            <button type="button" className="btn btn-default" onClick={this.form.handleSubmit}>提交</button>
-                            {'     '}
-                            <button type="button" className="btn btn-danger" onClick={this.form.handleReset}>重置</button>
-                        </div>
-                     </div>
                 </form>
             )
         }
