@@ -172,7 +172,8 @@ export default {
         let retData = {
             flag:true,
             formData:{
-                'birthday':'2017-02-19'
+                birthday:'2017-02-19',
+                age:22
             }
         } ;
         return new Promise(function(resolve,reject){
