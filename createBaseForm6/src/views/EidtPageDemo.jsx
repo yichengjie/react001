@@ -15,17 +15,21 @@ class MyEditPageDemo extends Component{
         let promise = Api.queryUserById(1) ;
         dealPromise4Callback(promise,dealResult4EditFactory(this.form)) ;
     }
-
     //----------自定义特殊校验规则 start----------------------
-    validateRange1(value,fieldName){
-        return '自定义的范围校验不通过' ;
+    changeServiceType(value,fieldName){
+        console.info(`fieldName : ${fieldName} , value : ${value}`) ;
+        if(value==='M'){
+            this.form.setFieldHideFlag('email',true) ;
+        }else{
+            this.form.setFieldHideFlag('email',false) ;
+        }
+        return '' ;
     }
     //----------自定义特殊校验规则 end------------------------
-
     //点击提交表单的处理函数
     handleSubmit = (event) => {
         var flag = this.form.validateForm() ;
-        //console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
+        console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
         if(flag){
             console.info('表单验证通过，准备提交表单') ;
         }else{
@@ -55,6 +59,7 @@ function dealResult4EditFactory(form){
         for(let key of keys){
             form.setFieldValue(key,formData[key]) ;
         }
+        //form.setFieldHideFlag('range2',true) ;
     }
 }
 

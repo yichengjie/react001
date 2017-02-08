@@ -1,5 +1,19 @@
 export function getUserEditFormSchemaApi(){
-    let formSchema = [{
+    let formSchema = [
+        {
+            type:'select',
+            label:'服务类型',
+            name:'serviceType',
+            defaultValue:'',
+            rule:{required:true,validator:'changeServiceType'},
+            options:[
+                {name:'选择',value:''},
+                {name:'F类型',value:'F'},
+                {name:'M类型',value:'M'},
+                {name:'T类型',value:'T'}
+            ],
+        },
+        {
             type:'text',
             label:'用户名',
             name:'username',
@@ -105,19 +119,6 @@ export function getUserEditFormSchemaApi(){
             ]
         },
         {
-            type:'select',
-            label:'专业',
-            name:'dept',
-            defaultValue:'',
-            rule:{required:true},
-            options:[
-                {name:'选择',value:''},
-                {name:'java',value:'java'},
-                {name:'javascript',value:'js'}
-            ],
-            
-        },
-        {
             type:'textarea',
             label:'描述',
             name:'descr',
@@ -173,7 +174,7 @@ export default {
             flag:true,
             formData:{
                 birthday:'2017-02-19',
-                age:22
+                //age:22
             }
         } ;
         return new Promise(function(resolve,reject){

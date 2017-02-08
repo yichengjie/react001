@@ -77,17 +77,21 @@ function getComplexInputComp(form,schema){
     //let width = parseInt((100 - spNum*spWidth)/len);
     let errFlagArr = getComplexErrorArr(form,fields) ;
     for(let i =0 ;i < len ; i ++){
-        let tmpInput = getSimpleInputComp(form,fields[i],errFlagArr[i],(i+1)) ;
-        arr.push(tmpInput) ;
-        //arr.push(React.cloneElement(tmpInput,{style: {width:width}})) ;
-        //如果中间有分割线则将分割线显示出来
-        if(i< len-1){
-            if(divline){
-                arr.push(<span key={'sp'+i} className="split-line"></span>) ;
-            }else{
-                arr.push(<span key={'sp'+i} className="split-line-none"></span>) ;
+        let tmpFieldName = fields[i]['name'] ;
+        let hideFlag = form.getFieldHideFlag(tmpFieldName) ;
+        //console.info(`fieldName: ${tmpFieldName},  hideFlag : ${hideFlag}`) ;
+        if(hideFlag !== true){
+            if(arr.length > 0){
+                if(divline){
+                    arr.push(<span key={'sp'+i} className="split-line"></span>) ;
+                }else{
+                    arr.push(<span key={'sp'+i} className="split-line-none"></span>) ;
+                }
             }
+            let tmpInput = getSimpleInputComp(form,fields[i],errFlagArr[i],(i+1)) ;
+            arr.push(tmpInput) ;
         }
+        //如果中间有分割线则将分割线显示出来
     }
     return (
         <span className="input-complex">
@@ -143,6 +147,12 @@ function getFieldErrorStr(form,schema){
 }
 
 function FormItem ({form,schema}){
+    let formGroupHideFlag = getHideFormGroup(form,schema) ;
+    //console.info(`fieldName : ${schema.name} , formGroupHideFlag :　${formGroupHideFlag}`) ;
+    if(formGroupHideFlag){
+        return null ;
+    }
+    //如果需要显示form group
     let {label} = schema ;
     return (
         <div className="form-group">
@@ -154,4 +164,34 @@ function FormItem ({form,schema}){
         </div>
     ) ;
 }
+
+
+function getHideFormGroup(form,schema){
+    let formGroupType = schema.type ;
+    //如果是复杂类型
+    if(formGroupType==='complex'){
+        let fields = schema.fields ;
+        let hideNum = 0 ;
+        for(let field of fields){
+            let cfname = field.name ;
+            let tmpFlag = form.getFieldHideFlag(cfname) ;
+            if(tmpFlag){
+                hideNum ++ ;
+            }
+        }
+        if(hideNum === fields.length){
+            return true ;
+        }
+        return false ;
+    }else{
+        //如果是简单类型  
+        let simpleFieldName = schema.name ;  
+        return form.getFieldHideFlag(simpleFieldName) ;
+    }
+}
+
+
 export default FormItem ;
+
+
+

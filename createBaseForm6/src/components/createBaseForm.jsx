@@ -10,7 +10,8 @@ function createForm (WrapperComponent,getSchemaApi){
             this.state={
                 formData:{},
                 formError:{},
-                formSchema:[]
+                formSchema:[],
+                hideState:{}
             } ;
             //这个是专供内部使用的校验规则
             this._inner_formRules ={} ;
@@ -21,7 +22,9 @@ function createForm (WrapperComponent,getSchemaApi){
                 getFieldValue:this._form_getFieldValue.bind(this) ,
                 getFieldError:this._form_getFieldError.bind(this),
                 validateField:this._form_validSingleField.bind(this),
-                validateForm:this._form_validateForm.bind(this)
+                validateForm:this._form_validateForm.bind(this),
+                getFieldHideFlag:this._form_getFieldHideFlag.bind(this),
+                setFieldHideFlag:this._form_setFieldHideFlag.bind(this)
             } ;
             this._inner_initFormSchema() ;
         } 
@@ -60,6 +63,17 @@ function createForm (WrapperComponent,getSchemaApi){
         _inner_getAllFieldValidateRules(){
             return this._inner_formRules ;
         }  
+        _inner_clearFieldError(fieldName){
+            let newFormError = Object.assign({},this.state.formError,{[fieldName]:null}) ;
+            //console.info(`fieldName : ${fieldName} , ${stringify(this.state.formError)}`) ;
+            this.setState({formError:newFormError}) ;
+        }
+        _inner_resetFieldValue(fieldName){
+            let oldValue = this.state.formData[fieldName] ;
+            let defaultValue = getDefaultValue(oldValue) ;
+            this._form_setFieldValue(fieldName,defaultValue) ;
+        }
+
         /**私有方法end */
         //////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////
@@ -77,9 +91,11 @@ function createForm (WrapperComponent,getSchemaApi){
         //校验整个表单
         _form_validateForm(){
             let rules = this._inner_getAllFieldValidateRules() ;
+            //console.info('rules : ' , stringify(rules)) ;
             let keys = rules && Object.keys(rules) ;
             let allValid = true ;
             keys.forEach(fieldName=>{
+                //let hideFlag = 
                 let value = this.state.formData[fieldName] ;
                 let tmpFlag = this._form_validSingleField(fieldName,value) ;
                 if(!tmpFlag){
@@ -105,15 +121,34 @@ function createForm (WrapperComponent,getSchemaApi){
           //this._inner_validSingleField(fieldName,fieldValue) ;
         }
 
-        _form_getFieldValue(name){
-            return this.state.formData[name] ;
+        _form_getFieldValue(fieldName){
+            return this.state.formData[fieldName] ;
         }
 
         _form_getFieldError(fieldName){
             return this.state.formError[fieldName] || '' 
         }
+        _form_getFieldHideFlag(fieldName){
+            //console.info(`getFieldHideFlag () , fieldName : ${fieldName}` , this.state.hideState) ;
+            return this.state.hideState[fieldName] || false ;
+        }
+        _form_setFieldHideFlag(fieldName,hideFlag){
+            let newHideState = Object.assign({},this.state.hideState,{[fieldName]:hideFlag}) ;
+            if(hideFlag){//如果隐藏当前字段
+                //，清空要字段的错误提示信息清空
+                this._inner_clearFieldError(fieldName) ;
+                //将字段的value置为空
+                this._inner_resetFieldValue(fieldName) ;
+            }
+            return this.setState({hideState:newHideState}) ;
+        }
          //校验表单的某一个字段
         _form_validSingleField(fieldName,value){
+            let hideFlag = this.form.getFieldHideFlag(fieldName) ;
+            if(hideFlag){
+                return true;
+            }
+            //如果字段没有隐藏，则进行常规校验
             let rule = this._inner_getSingleFieldValidateRule(fieldName) ;
             if(rule==null) return false;
             //如果存在校验规则
