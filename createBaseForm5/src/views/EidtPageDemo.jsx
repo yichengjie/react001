@@ -35,7 +35,8 @@ class MyEditPageDemo extends Component{
     render(){
         return (
             <div>
-                {this.renderBaseForm()}
+                {this.renderBaseForm() /**输出页面的form部分*/}
+                {/**下面开发自定义的按钮操作部分*/}
                 <FormOperContainer>
                     <button type="button" className="btn btn-default" onClick={this.handleSubmit}>提交</button>{'     '}
                     <button type="button" className="btn btn-danger" onClick={this.form.handleReset}>重置</button>
