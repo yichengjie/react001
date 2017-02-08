@@ -5,7 +5,7 @@ import createForm from '../components/createBaseForm.jsx' ;
 import {stringify} from '../common/common.js' ;
 import {getUserEditFormSchemaApi} from '../api/Api.js' ;
 
-class MyForm extends Component{
+class MyEditPageDemo extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
     initPageParam(){
         console.info('初始化页面参数...') ;
@@ -30,4 +30,4 @@ class MyForm extends Component{
     }  
 }
 
-export default createForm(MyForm,getUserEditFormSchemaApi) ;
+export default createForm(MyEditPageDemo,getUserEditFormSchemaApi) ;
