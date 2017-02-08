@@ -13,7 +13,7 @@ import './lib/jq-datepicker/index.js' ;
 import EditPageDemo from './views/EidtPageDemo.jsx' ;
 import QueryPageDemo from './views/QueryPageDemo.jsx' ;
 let ShowView = QueryPageDemo ;
-//ShowView = EditPageDemo ;
+ShowView = EditPageDemo ;
 
 window.Perf = Perf ;
 
