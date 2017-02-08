@@ -49,3 +49,12 @@ export function isStrNotEmpty(str){
     }
     return true;
 }
+
+
+export function dealPromise4Callback(promise,callback){
+    promise.then(function(retData){
+        callback(retData) ;
+    },function(err){
+        console.error('查询后台出错！') ;
+    }) ;
+}

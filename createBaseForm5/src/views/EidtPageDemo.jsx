@@ -2,18 +2,17 @@ import React,{Component} from 'react' ;
 //import createForm from '../components/createBaseForm.jsx' ;
 //import createForm from '../components/createBaseForm2.jsx' ;
 import createForm from '../components/createBaseForm.jsx' ;
-import {stringify} from '../common/common.js' ;
-import {getUserEditFormSchemaApi} from '../api/Api.js' ;
+import {stringify,dealPromise4Callback} from '../common/common.js' ;
+import Api,{getUserEditFormSchemaApi} from '../api/Api.js' ;
 import FormOperContainer from '../components/form-oper-container.jsx' ;
 
 class MyEditPageDemo extends Component{
     //页面初始化时需要初始化页面参数请写在这里面
     initPageParam(){
         console.info('初始化页面参数...') ;
-        //这里我们可能去查询后台，填充页面表单的数据。
-        setTimeout(()=>{
-            this.form.setFieldValue('birthday','2017-02-19') ;
-        },1000) ;
+        //查询后台，填充页面表单的数据。
+        let promise = Api.queryUserById(1) ;
+        dealPromise4Callback(promise,dealResult4EditFactory(this.form)) ;
     }
 
     //----------自定义特殊校验规则 start----------------------
@@ -46,7 +45,15 @@ class MyEditPageDemo extends Component{
     }
 }
 
-
-
+//回填表单数据
+function dealResult4EditFactory(form){
+    return function (retData){
+        let {formData} = retData ;
+        let keys = Object.keys(formData) ; 
+        for(let key of keys){
+            form.setFieldValue(key,formData[key]) ;
+        }
+    }
+}
 
 export default createForm(MyEditPageDemo,getUserEditFormSchemaApi) ;

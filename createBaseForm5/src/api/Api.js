@@ -145,6 +145,8 @@ export function getUserEditFormSchemaApi(){
       }) ;
 }
 
+
+
 export default { 
     getUserListTableSchema(){
         let tableFields = [
@@ -164,6 +166,19 @@ export default {
         ]
         return new Promise(function(resolve,reject){
             resolve(list) ;
+        }) ;
+    },
+    queryUserById(id,callback){
+        let retData = {
+            flag:true,
+            formData:{
+                'birthday':'2017-02-19'
+            }
+        } ;
+        return new Promise(function(resolve,reject){
+            setTimeout(function(){
+                resolve(retData) ;
+            },1000) ;
         }) ;
     }
 }
