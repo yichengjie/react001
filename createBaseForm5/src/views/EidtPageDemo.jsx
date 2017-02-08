@@ -10,21 +10,10 @@ class MyForm extends Component{
     initPageParam(){
         console.info('初始化页面参数...') ;
         setTimeout(()=>{
-            this.setState(state=>{
-                state.formData.birthday = '2017-01-19' ;
-                return state ;
-            }) ;
+            this.form.setFieldValue('birthday','2017-02-19') ;
         },1000) ;
     }
     //自定义特殊校验规则
-    validateUsername(value,fieldName){
-        console.info('username : ' + value) ;
-        var email = this.state.formData.email ;
-        if(email === '123' && value === '123'){
-            return '当email为123时用户名不能为123' ;
-        }
-        return '' ;
-    }
     validateRange1(value,fieldName){
         return '自定义的范围校验不通过' ;
     }

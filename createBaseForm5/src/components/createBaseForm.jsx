@@ -32,6 +32,7 @@ function createForm (WrapperComponent,getSchemaApi){
                 let initialState = getFormDefaultValueState(retData) ;
                 this.setState({formData:initialState,formSchema:retData}) ;
                 this._inner_assembleFormValidRule(retData) ;
+                this.initPageParam() ;
             }) ;
         }
         //组装表单的所有字段校验规则
