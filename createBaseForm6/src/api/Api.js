@@ -173,10 +173,11 @@ export default {
         let retData = {
             flag:true,
             formData:{
-                //username:'ttt',
-                serviceType:'F',
-                //birthday:'2017-02-19',
-                //age:'xx',
+                username:'ttt',
+                serviceType:'M',
+                birthday:'2017-02-19',
+                age:'xx',
+                email:'xxxx'
                 //email:'test'
             }
         } ;

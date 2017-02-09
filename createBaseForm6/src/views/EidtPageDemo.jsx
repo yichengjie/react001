@@ -29,10 +29,9 @@ class MyEditPageDemo extends Component{
             descr = 'test-m' ;
         }
         //setFieldValueAndValidate
-        //this.form.setFieldHideFlag('email',hideFlag) ;
-        this.form.setFieldValue('username',username) ;
-        this.form.setFieldValue('age',age) ;
-        this.form.setFieldValue('email','rrr') ;
+        this.form.setFieldValueAndValidate('username',username) ;
+        this.form.setFieldValueAndValidate('age',age) ;
+        this.form.setFieldHideFlag('email',hideFlag) ;
         //this.form.setFieldValue('descr',descr) ;
         //this.form.setFieldValue('username','rrrrr2222222') ;
         return '' ;
