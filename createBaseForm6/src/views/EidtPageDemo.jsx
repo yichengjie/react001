@@ -31,7 +31,7 @@ class MyEditPageDemo extends Component{
     //点击提交表单的处理函数
     handleSubmit = (event) => {
         var flag = this.form.validateForm() ;
-        //console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
+        console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
         if(flag){
             console.info('表单验证通过，准备提交表单') ;
         }else{
