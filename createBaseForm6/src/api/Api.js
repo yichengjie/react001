@@ -8,9 +8,9 @@ export function getUserEditFormSchemaApi(){
             rule:{required:true,validator:'changeServiceType'},
             options:[
                 {name:'选择',value:''},
-                {name:'F类型',value:'F'},
-                {name:'M类型',value:'M'},
-                {name:'T类型',value:'T'}
+                {name:'F类型-显示邮箱',value:'F'},
+                {name:'M类型-隐藏邮箱',value:'M'},
+                {name:'T类型-显示邮箱',value:'T'}
             ],
         },
         {
