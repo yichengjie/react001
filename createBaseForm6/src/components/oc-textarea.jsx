@@ -1,5 +1,5 @@
 import React,{Component} from 'react' ;
-
+import classNames from 'classnames';
 
 class OCTextArea extends Component {
   constructor(props){
@@ -12,8 +12,9 @@ class OCTextArea extends Component {
   }
   render(){
     let {name,value} = this.props ;
+    let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
     return (
-        <textarea className='form-control' 
+        <textarea className= {classStr} 
             name={name} value={value} 
             onChange={this.handleChange} ></textarea>
     ) ;

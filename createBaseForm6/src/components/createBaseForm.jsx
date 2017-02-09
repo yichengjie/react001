@@ -69,10 +69,14 @@ function createForm (WrapperComponent,getSchemaApi){
             //console.info(`fieldName : ${fieldName} , ${stringify(this.state.formError)}`) ;
             this.setState({formError:newFormError}) ;
         }
-        _inner_resetFieldValue(fieldName){
+        _inner_resetFieldValue(fieldName,callback){
             let oldValue = this.state.formData[fieldName] ;
             let defaultValue = getDefaultValue(oldValue) ;
-            this._form_setFieldValue(fieldName,defaultValue) ;
+            let newFormData = Object.assign({},this.state.formData,{[fieldName]:defaultValue}) ;
+            //如果callback存在，当设置完formData后执行callback
+            this.setState({formData:newFormData},function(){
+                callback && callback() ;
+            }) ;
         }
 
         /**私有方法end */
@@ -121,6 +125,15 @@ function createForm (WrapperComponent,getSchemaApi){
           }) ; 
         }
 
+        // _form_setFieldValues(obj){
+        //      var oldformData = this.state.formData ;
+        //     var newFormData = Object.assign({},oldformData,obj) ;
+        //     //当value设置完成以后触发校验
+        //     this.setState({formData:newFormData},()=>{//并触发校验
+        //         this._form_validSingleField(fieldName,fieldValue) ;
+        //     }) ; 
+        // }
+
         _form_getFieldValue(fieldName){
             return this.state.formData[fieldName] ;
         }
@@ -132,14 +145,16 @@ function createForm (WrapperComponent,getSchemaApi){
             //console.info(`getFieldHideFlag () , fieldName : ${fieldName}` , this.state.hideState) ;
             return this.state.hideState[fieldName] || false ;
         }
-        _form_setFieldHideFlag(fieldName,hideFlag){
+        _form_setFieldHideFlag(fieldName,hideFlag,callback){
             //console.info(`xxx -- -- fieldName : ${fieldName} , hideFlag : ${hideFlag}`) ;
             let newHideState = Object.assign({},this.state.hideState,{[fieldName]:hideFlag}) ;
             if(hideFlag){//如果隐藏当前字段
                 //清空要字段的错误提示信息清空
                 this._inner_clearFieldError(fieldName) ;
                 //将字段的value置为空
-                this._inner_resetFieldValue(fieldName) ;
+                this._inner_resetFieldValue(fieldName,callback) ;
+            }else{//如果是显示，直接执行回调函数
+                callback && callback() ;
             }
             return this.setState({hideState:newHideState}) ;
         }
