@@ -25,16 +25,13 @@ class MyEditPageDemo extends Component{
         if(value==='M'){
             hideFlag = true ;
             username = 'yicj-m' ;
-            age = '22' ;
+            age = '22x' ;
             descr = 'test-m' ;
         }
-        this.form.setFieldHideFlag('email',hideFlag,()=>{
-            //可能需要设置其他字段的默认值都需要在回调函数中执行
-            //这里面的多个设置不能保证同步，所有操作会被最后一个覆盖
-            //this.form.setFieldValue('username',username) ;
-            //this.form.setFieldValue('age',age) ;
-            //this.form.setFieldValue('descr',descr) ;
-        }) ;
+        this.form.setFieldHideFlag('email',hideFlag) ;
+        this.form.setFieldValue('username',username) ;
+        this.form.setFieldValue('age',age) ;
+        this.form.setFieldValue('descr',descr) ;
         return '' ;
     }
     //----------自定义特殊校验规则 end------------------------
