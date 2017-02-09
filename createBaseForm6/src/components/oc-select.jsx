@@ -10,7 +10,6 @@ class OCSelect extends Component{
   handleChange(event){
     var value = event.target.value ;
     this.props.handleChange(value) ;
-    this.props.handleValidate(value) ;
   }
 
   render(){

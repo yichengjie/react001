@@ -9,7 +9,6 @@ class OCTextArea extends Component {
   handleChange(event){
     var value = event.target.value ;
     this.props.handleChange(value) ;
-    this.props.handleValidate(value) ;
   }
   render(){
     let {name,value} = this.props ;

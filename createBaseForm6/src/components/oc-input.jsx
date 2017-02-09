@@ -10,7 +10,6 @@ class OCInput extends Component {
     handleChange(event){
         var value = event.target.value ;
         this.props.handleChange(value) ;
-        this.props.handleValidate(value) ;
     }
 
     render(){
@@ -18,7 +17,7 @@ class OCInput extends Component {
         let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
         return (
             <input className= {classStr}  type="text"  style={{width:this.props.width}}
-            name ={name} value={value} onChange={this.handleChange}/>    
+                name ={name} value={value} onChange={this.handleChange}/>    
         ) ;
     }
 }

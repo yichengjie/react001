@@ -20,7 +20,6 @@ class OCCheckbox extends Component {
             }) ;
         }
         this.props.handleChange(newValue) ;
-        this.props.handleValidate(newValue) ;
     }
 
     render(){

@@ -62,9 +62,8 @@ function getSimpleInputComp(form,schema,isValid,index){
         value:form.getFieldValue(name),
         width:schema.width,
         handleChange:handleChange4InputFactory(form,name),
-        handleValidate:handleValidateFactory(form,name),
         key:index,
-        isValid:isValid
+        isValid:isValid/**是否合法 */
     }) ;
 }
 

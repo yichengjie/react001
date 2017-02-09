@@ -17,10 +17,12 @@ class MyEditPageDemo extends Component{
     }
     //----------自定义特殊校验规则 start----------------------
     changeServiceType(value,fieldName){
-        console.info(`fieldName : ${fieldName} , value : ${value}`) ;
+        // console.info(`fieldName : ${fieldName} , value : ${value}`) ;
         if(value==='M'){
+            //console.info('隐藏') ;
             this.form.setFieldHideFlag('email',true) ;
         }else{
+            //console.info('显示') ;
             this.form.setFieldHideFlag('email',false) ;
         }
         return '' ;
@@ -29,7 +31,7 @@ class MyEditPageDemo extends Component{
     //点击提交表单的处理函数
     handleSubmit = (event) => {
         var flag = this.form.validateForm() ;
-        console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
+        //console.info('点击提交时页面上的表单数据 : ' , stringify(this.state.formData)) ;
         if(flag){
             console.info('表单验证通过，准备提交表单') ;
         }else{
