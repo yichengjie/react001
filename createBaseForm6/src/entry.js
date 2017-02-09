@@ -12,8 +12,10 @@ import './lib/tui-drag/index.js' ;
 import './lib/jq-datepicker/index.js' ;
 import EditPageDemo from './views/EidtPageDemo.jsx' ;
 import QueryPageDemo from './views/QueryPageDemo.jsx' ;
+import HelloDemo from './views/HelloDemo.jsx' ;
 let ShowView = QueryPageDemo ;
 ShowView = EditPageDemo ;
+//ShowView = HelloDemo ;
 
 window.Perf = Perf ;
 
