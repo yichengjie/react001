@@ -46,6 +46,8 @@ class HelloComp extends Component {
         this.setFieldValue2('username','yicj') ;
         this.setFieldValue2('addr','henan') ;
         this.setFieldValue2('email','666@qq.com') ;
+
+        this.setFieldValue2('username','yicj222222222222') ;
     }
 
     setFieldValue(fieldName,value){

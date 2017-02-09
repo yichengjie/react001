@@ -5,7 +5,7 @@ export function getUserEditFormSchemaApi(){
             label:'服务类型',
             name:'serviceType',
             defaultValue:'',
-            rule:{required:true,validator:'changeServiceType'},
+            rule:{required:true,validator:'customValidateServiceType'},
             options:[
                 {name:'选择',value:''},
                 {name:'F类型-显示邮箱',value:'F'},
@@ -17,7 +17,7 @@ export function getUserEditFormSchemaApi(){
             type:'text',
             label:'用户名',
             name:'username',
-            defaultValue:'yicj',
+            defaultValue:'',
             rule:{required:true,validator:'validateUsername'},
         },
         {
@@ -173,8 +173,11 @@ export default {
         let retData = {
             flag:true,
             formData:{
-                birthday:'2017-02-19',
-                //age:22
+                //username:'ttt',
+                serviceType:'F',
+                //birthday:'2017-02-19',
+                //age:'xx',
+                //email:'test'
             }
         } ;
         return new Promise(function(resolve,reject){

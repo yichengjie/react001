@@ -9,16 +9,16 @@ import OCCheckbox from './oc-checkbox.jsx' ;
 function handleChange4InputFactory(form,name){
     return function (value){
         //var value = event.target.value ;
-        form.setFieldValue(name,value) ;
+        form.setFieldValueAndValidate(name,value) ;
     }
 }
 
-function handleValidateFactory(form,name){
-    return function (value){
-        //console.info(`name:${name} , value: ${value}`) ;
-        form.validateField(name,value) ;
-    }
-}
+// function handleValidateFactory(form,name){
+//     return function (value){
+//         //console.info(`name:${name} , value: ${value}`) ;
+//         form.validateField(name,value) ;
+//     }
+// }
 
 /**
  * 获取输入框$$_a$$_b

@@ -19,6 +19,7 @@ function createForm (WrapperComponent,getSchemaApi){
                 //handleSubmit: this._form_handleSubmit.bind(this) ,
                 handleReset:this._form_handleReset.bind(this) ,
                 setFieldValue:this._form_setFieldValue.bind(this),
+                setFieldValueAndValidate:this._form_setFieldValueAndValidate.bind(this),
                 getFieldValue:this._form_getFieldValue.bind(this) ,
                 getFieldError:this._form_getFieldError.bind(this),
                 //validateField:this._form_validSingleField.bind(this),
@@ -125,8 +126,12 @@ function createForm (WrapperComponent,getSchemaApi){
              state.formData = newFormData ;
              return state ;
           }) ;
-          this._form_validSingleField(fieldName,fieldValue) ;
         }
+        //设置并校验
+         _form_setFieldValueAndValidate(fieldName,fieldValue){
+            this._form_setFieldValue(fieldName,fieldValue) ;
+            this._form_validSingleField(fieldName,fieldValue) ;
+         }
 
         // _form_setFieldValues(obj){
         //      var oldformData = this.state.formData ;

@@ -16,22 +16,25 @@ class MyEditPageDemo extends Component{
         dealPromise4Callback(promise,dealResult4EditFactory(this.form)) ;
     }
     //----------自定义特殊校验规则 start----------------------
-    changeServiceType(value,fieldName){
-        // console.info(`fieldName : ${fieldName} , value : ${value}`) ;
+    customValidateServiceType(value,fieldName){
+        console.info(`customValidateServiceType() is called , fieldName : ${fieldName} , value : ${value}`) ;
         let username = 'yicj-no-m' ;
         let hideFlag = false;
         let age = '11' ;
         let descr = 'test-no-m' ;
         if(value==='M'){
             hideFlag = true ;
-            username = 'yicj-m' ;
+            username = 'yicj-x' ;
             age = '22x' ;
             descr = 'test-m' ;
         }
-        this.form.setFieldHideFlag('email',hideFlag) ;
+        //setFieldValueAndValidate
+        //this.form.setFieldHideFlag('email',hideFlag) ;
         this.form.setFieldValue('username',username) ;
         this.form.setFieldValue('age',age) ;
-        this.form.setFieldValue('descr',descr) ;
+        this.form.setFieldValue('email','rrr') ;
+        //this.form.setFieldValue('descr',descr) ;
+        //this.form.setFieldValue('username','rrrrr2222222') ;
         return '' ;
     }
     //----------自定义特殊校验规则 end------------------------
@@ -69,6 +72,8 @@ function dealResult4EditFactory(form){
             form.setFieldValue(key,formData[key]) ;
         }
         //form.setFieldHideFlag('range2',true) ;
+        //这里手动执行下整个表单的校验
+        form.validateForm() ;
     }
 }
 
