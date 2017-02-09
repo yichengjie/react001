@@ -130,6 +130,7 @@ function createForm (WrapperComponent,getSchemaApi){
         //设置并校验
          _form_setFieldValueAndValidate(fieldName,fieldValue){
             this._form_setFieldValue(fieldName,fieldValue) ;
+            //console.info(`fieldName :　${fieldName} , fieldValue : ${fieldValue} `) ;
             this._form_validSingleField(fieldName,fieldValue) ;
          }
 
@@ -210,6 +211,13 @@ function createForm (WrapperComponent,getSchemaApi){
                 state.formError= newFormError ;
                 return state ;
             }) ;
+
+            if(fieldName === 'age'){
+                console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , errTip : ${errTip}`) ;
+                //debugger ;
+            }
+
+
             return validFlag ;
         }
         /**公共方法api end */

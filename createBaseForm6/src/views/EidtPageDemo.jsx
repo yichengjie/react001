@@ -17,7 +17,7 @@ class MyEditPageDemo extends Component{
     }
     //----------自定义特殊校验规则 start----------------------
     customValidateServiceType(value,fieldName){
-        console.info(`customValidateServiceType() is called , fieldName : ${fieldName} , value : ${value}`) ;
+        //console.info(`customValidateServiceType() is called , fieldName : ${fieldName} , value : ${value}`) ;
         let username = 'yicj-no-m' ;
         let hideFlag = false;
         let age = '11' ;
@@ -29,6 +29,7 @@ class MyEditPageDemo extends Component{
             descr = 'test-m' ;
         }
         //setFieldValueAndValidate
+        console.info('tttttttttttttttttttt') ;
         this.form.setFieldValueAndValidate('username',username) ;
         this.form.setFieldValueAndValidate('age',age) ;
         this.form.setFieldHideFlag('email',hideFlag) ;
