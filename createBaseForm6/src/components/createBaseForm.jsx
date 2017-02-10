@@ -66,9 +66,11 @@ function createForm (WrapperComponent,getSchemaApi){
             return this._inner_formRules ;
         }  
         _inner_clearFieldError(fieldName){
-            let newFormError = Object.assign({},this.state.formError,{[fieldName]:null}) ;
             //console.info(`fieldName : ${fieldName} , ${stringify(this.state.formError)}`) ;
-            this.setState({formError:newFormError}) ;
+            this.setState(function(state){
+                let newFormError = Object.assign({},state.formError,{[fieldName]:null}) ;
+                {formError:newFormError}
+            }) ;
         }
         _inner_resetFieldValue(fieldName){
             //如果callback存在，当设置完formData后执行callback
@@ -216,8 +218,6 @@ function createForm (WrapperComponent,getSchemaApi){
                 console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , validFlag : ${validFlag}, errTip : ${errTip}`) ;
                 //debugger ;
             }
-
-
             return validFlag ;
         }
         /**公共方法api end */
