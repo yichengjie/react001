@@ -29,11 +29,10 @@ class MyEditPageDemo extends Component{
             descr = 'test-m' ;
         }
         //setFieldValueAndValidate
-        console.info('tttttttttttttttttttt') ;
         this.form.setFieldValueAndValidate('username',username) ;
         this.form.setFieldValueAndValidate('age',age) ;
         this.form.setFieldHideFlag('email',hideFlag) ;
-
+        
         //this.form.setFieldValue('descr',descr) ;
         //this.form.setFieldValue('username','rrrrr2222222') ;
         return '' ;
@@ -59,9 +58,7 @@ class MyEditPageDemo extends Component{
                     <button type="button" className="btn btn-default" onClick={this.handleSubmit}>提交</button>{'     '}
                     <button type="button" className="btn btn-danger" onClick={this.form.handleReset}>重置</button>
                 </FormOperContainer>
-                <pre>
-                    {stringify(this.state.formError) }
-                </pre>
+                {/*<pre>{stringify(this.state.formError) } </pre>*/}
             </div>
         )
     }
