@@ -213,7 +213,7 @@ function createForm (WrapperComponent,getSchemaApi){
             }) ;
 
             if(fieldName === 'age'){
-                console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , errTip : ${errTip}`) ;
+                console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , validFlag : ${validFlag}, errTip : ${errTip}`) ;
                 //debugger ;
             }
 
