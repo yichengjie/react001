@@ -69,7 +69,8 @@ function createForm (WrapperComponent,getSchemaApi){
             //console.info(`fieldName : ${fieldName} , ${stringify(this.state.formError)}`) ;
             this.setState(function(state){
                 let newFormError = Object.assign({},state.formError,{[fieldName]:null}) ;
-                {formError:newFormError}
+                state.formError = newFormError ;
+                return state ;
             }) ;
         }
         _inner_resetFieldValue(fieldName){
@@ -214,10 +215,10 @@ function createForm (WrapperComponent,getSchemaApi){
                 return state ;
             }) ;
 
-            if(fieldName === 'age'){
-                console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , validFlag : ${validFlag}, errTip : ${errTip}`) ;
-                //debugger ;
-            }
+            // if(fieldName === 'age'){
+            //     console.info(`fieldName : ${fieldName} , value: ${value} , hideFlag : ${hideFlag} , validFlag : ${validFlag}, errTip : ${errTip}`) ;
+            //     //debugger ;
+            // }
             return validFlag ;
         }
         /**公共方法api end */
