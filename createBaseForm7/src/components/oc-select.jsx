@@ -13,7 +13,8 @@ class OCSelect extends Component{
   }
 
   render(){
-      let {name,value,options} = this.props ;
+      let {name,value} = this.props ;
+      let options = this.props.options || [] ;
       let classStr = classNames('form-control', { 'error-input-border': !this.props.isValid }); // => 'foo bar'
       return (
         <select className= {classStr} name ={name} 

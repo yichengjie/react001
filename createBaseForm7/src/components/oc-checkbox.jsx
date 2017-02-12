@@ -5,12 +5,11 @@ class OCCheckbox extends Component {
         super(props) ;
         this.handleChange = this.handleChange.bind(this) ;
     }
-
     handleChange(event){
         var checkedFlag = event.target.checked ;
-        var value = event.target.value ;
+        var value = event.target.value || [] ;
         //如果是选中
-        var oldValue = this.props.value ;
+        var oldValue = this.props.value || [] ;
         var newValue = null ;
         if(checkedFlag){
             newValue = [value].concat(oldValue)  ;
@@ -23,7 +22,9 @@ class OCCheckbox extends Component {
     }
 
     render(){
-        let {name,value,options} = this.props ;
+        let {name} = this.props ;
+        let value = this.props.value || [];
+        let options = this.props.options || [] ;
         let arr = options.map((item,index) =>{
             return (
                 <label key ={index} className="checkbox-inline">

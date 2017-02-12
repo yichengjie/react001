@@ -2,6 +2,8 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Perf from 'react-addons-perf' ; // ES6
+import { Provider } from 'react-redux';
+import store from './redux/stroe.js' ;
 //引入组件
 import 'bootstrap/dist/css/bootstrap.css' ;
 import './styles/jquery_ui.datepicker-modify.css';
@@ -13,6 +15,8 @@ import './lib/jq-datepicker/index.js' ;
 import EditPageDemo from './views/EidtPageDemo.jsx' ;
 import QueryPageDemo from './views/QueryPageDemo.jsx' ;
 import HelloDemo from './views/HelloDemo.jsx' ;
+
+
 let ShowView = QueryPageDemo ;
 ShowView = EditPageDemo ;
 //ShowView = HelloDemo ;
@@ -20,7 +24,9 @@ ShowView = EditPageDemo ;
 window.Perf = Perf ;
 
 ReactDOM.render(
-  <ShowView/>,
+  <Provider store={store}>
+    <ShowView/>
+  </Provider>,
   document.getElementById('app')
 );
 

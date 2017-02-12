@@ -12,7 +12,8 @@ export default class OCRadio extends Component{
   }
 
   render(){
-      let {name,value,options} = this.props ;
+      let {name,value} = this.props ;
+      let options = this.props.options || [] ;
       let radios = options.map((item,index)=>{
           let curValue = item.value ;
           let curLabel = item.name ;
