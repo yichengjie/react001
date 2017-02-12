@@ -9,7 +9,7 @@ export function setFieldValue(fieldName,fieldValue) {
 function formData(state = {}, action) {
   switch (action.type) {
     case (profix+SET_FIELD_VALUE):
-      return Object.assign({},state,{[action.fieldName]:action.fieldValue}) ;
+      return {...state,...{[action.fieldName]:action.fieldValue}} ;
     default:
       return state
   }
