@@ -58,3 +58,34 @@ export function dealPromise4Callback(promise,callback){
         console.error('查询后台出错！') ;
     }) ;
 }
+
+
+/**
+ * 清空表单内容
+ */
+export function getEmptySimpleObj(obj){
+    let newObj = {} ;
+    if(obj!=null){
+        let keys = Object.keys(obj) ;
+        keys.forEach(key=>{
+            newObj[key] = getDefaultValue(obj[key]) ;
+        }) ;
+    }
+    return newObj ;
+}
+function getDefaultValue(value){
+    if(value == null){
+        return null ;
+    }else{
+        let str = Object.prototype.toString.call(value) ;
+        return defaultValueMap[str]  ;
+    }
+}
+
+let defaultValueMap ={
+    '[object String]':'',
+    '[object Array]':[],
+    '[object Number]':'',
+    '[object Boolean]':'',
+    '[object Date]':''
+} ;

@@ -29,10 +29,10 @@ class MyEditPageDemo extends Component{
             descr = 'test-m' ;
         }
         //setFieldValueAndValidate
+        //console.info(`fieldName : ${fieldName}, fieldValue : ${value}, username : ${username} , age : ${age}`) ;
         this.form.setFieldValueAndValidate('username',username) ;
         this.form.setFieldValueAndValidate('age',age) ;
         this.form.setFieldHideFlag('email',hideFlag) ;
-        
         //this.form.setFieldValue('descr',descr) ;
         //this.form.setFieldValue('username','rrrrr2222222') ;
         return '' ;
@@ -41,7 +41,7 @@ class MyEditPageDemo extends Component{
     //点击提交表单的处理函数
     handleSubmit = (event) => {
         var flag = this.form.validateForm() ;
-        console.info('点击提交时页面上的表单数据 : ' , stringify(this.form.getFormData())) ;
+        //console.info('点击提交时页面上的表单数据 : ' , stringify(this.form.getFormData())) ;
         if(flag){
             console.info('表单验证通过，准备提交表单') ;
         }else{
@@ -56,9 +56,10 @@ class MyEditPageDemo extends Component{
                 {/**下面开发自定义的按钮操作部分*/}
                 <FormOperContainer>
                     <button type="button" className="btn btn-default" onClick={this.handleSubmit}>提交</button>{'     '}
-                    <button type="button" className="btn btn-danger" onClick={this.form.handleReset}>重置</button>
+                    <button type="button" className="btn btn-danger" onClick={this.form.resetForm}>重置</button>
                 </FormOperContainer>
                 {/*<pre>{stringify(this.state.formError) } </pre>*/}
+                {/*<pre>{stringify(this.form.getFormHide()) } </pre>*/}
             </div>
         )
     }
@@ -68,10 +69,6 @@ class MyEditPageDemo extends Component{
 function dealResult4EditFactory(form){
     return function (retData){
         let {formData} = retData ;
-        let keys = Object.keys(formData) ; 
-        for(let key of keys){
-            form.setFieldValue(key,formData[key]) ;
-        }
         //form.setFieldHideFlag('range2',true) ;
         //这里手动执行下整个表单的校验
         form.validateForm() ;
