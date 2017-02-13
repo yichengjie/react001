@@ -15,7 +15,7 @@ const createStore = (reducer) => {
     }
   };
   dispatch({});
-  return { getState, dispatch, subscribe };
+  return { getState, dispatch, subscribe};
 };
 
 
