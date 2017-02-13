@@ -69,6 +69,7 @@ class MyEditPageDemo extends Component{
 function dealResult4EditFactory(form){
     return function (retData){
         let {formData} = retData ;
+        form.initFormData(formData) ;
         //form.setFieldHideFlag('range2',true) ;
         //这里手动执行下整个表单的校验
         form.validateForm() ;
