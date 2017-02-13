@@ -216,10 +216,10 @@ function createForm (WrapperComponent,getSchemaApi){
 // 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？
 function mapStateToProps(state) {
   return {
-    _inner_redux_formData: state.formData,
-    _inner_redux_formSchema:state.formSchema,
-    _inner_redux_formError:state.formError,
-    _inner_redux_formHide:state.formHide
+    _inner_redux_formData: state.baseForm.formData,
+    _inner_redux_formSchema:state.baseForm.formSchema,
+    _inner_redux_formError:state.baseForm.formError,
+    _inner_redux_formHide:state.baseForm.formHide
   };
 }
 // 哪些 action 创建函数是我们想要通过 props 获取的？

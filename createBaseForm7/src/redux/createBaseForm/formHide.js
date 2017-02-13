@@ -1,4 +1,4 @@
-const profix = 'formHide_' ;
+const profix = 'basefrom_formHide_' ;
 const SET_FIELD_HIDE = profix+'SET_FIELD_HIDE' ;
 //////////////////////action start/////////////////////////////
 export function setFieldHide(fieldName,hideFlag) {

@@ -1,5 +1,5 @@
 import {getEmptySimpleObj} from '../../common/common.js' ;
-const profix = 'formError_' ;
+const profix = 'basefrom_formError_' ;
 const SET_FIELD_ERROR = profix + 'SET_FIELD_ERROR' ;
 const RESET_FORM_ERROR = profix + 'RESET_FORM_ERROR' ;
 //////////////////////action start/////////////////////////////

@@ -1,5 +1,5 @@
 import {getEmptySimpleObj} from '../../common/common.js' ;
-const profix = 'formData_' ;
+const profix = 'basefrom_formData_' ;
 const SET_FIELD_VALUE = profix+'SET_FIELD_VALUE' ;
 const INIT_FORM_DATA = profix + 'INIT_FORM_DATA' ;
 const RESET_FORM_DATA = profix + 'RESET_FORM_DATA' ; 

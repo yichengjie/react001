@@ -1,4 +1,4 @@
-const profix = 'formSchema_' ;
+const profix = 'basefrom_formSchema_' ;
 const INIT_FORM_SCHEMA = profix +'INIT_FORM_SCHEMA' ;
 //////////////////////action start/////////////////////////////
 export function initFormSchema(formSchema) {
