@@ -15,18 +15,24 @@ function createForm (WrapperComponent,getSchemaApi){
             //这个是专供内部使用的校验规则
             this._inner_formRules ={} ;
             this.form = {
+                /**-----------------field value 相关 api----------------- */
                 getFieldValue:this._form_getFieldValue.bind(this) ,
                 setFieldValue:this._form_setFieldValue.bind(this),
-                initFormData:this._form_initFormData.bind(this),
-                getFieldHideFlag:this._form_getFieldHideFlag.bind(this),
-                getFieldError:this._form_getFieldError.bind(this),
                 setFieldValueAndValidate:this._form_setFieldValueAndValidate.bind(this),
-                validateForm:this._form_validateForm.bind(this),
-                getFormData:this._form_getFormData.bind(this),
+                /**-----------------field error 相关 api------------------ */
+                getFieldError:this._form_getFieldError.bind(this),
+                getFormError:this._form_getFormError.bind(this),
+                /**-----------------field hide 相关 api------------------- */
                 setFieldHideFlag:this._form_setFieldHideFlag.bind(this),
                 getFieldHideFlag:this._form_getFieldHideFlag.bind(this),
+                /**-----------------form 相关操作 api-------------------- */
+                initFormData:this._form_initFormData.bind(this),
+                validateForm:this._form_validateForm.bind(this),
+                resetForm:this._form_resetForm.bind(this),
+                /**------------------form 相关信息获取 api--------------- */
+                getFormData:this._form_getFormData.bind(this),
                 getFormHide:this._form_getFormHide.bind(this),
-                resetForm:this._form_resetForm.bind(this)
+                /**------------------------------------------------- ----*/
             } ;
             this._inner_initFormSchema() ;
         } 
@@ -36,16 +42,16 @@ function createForm (WrapperComponent,getSchemaApi){
             promise.then((retData)=>{
                 let initialState = getFormDefaultValueState(retData) ;
                 //console.info('initFormData : ' , initialState) ;
-                this.props._inner_initFormSchema(retData) ;
+                this.props._inner_redux_initFormSchema(retData) ;
                 this._inner_assembleFormValidRule(retData) ;
-                this.props._inner_initFormData(initialState) ;
+                this.props._inner_redux_initFormData(initialState) ;
                 //初始化页面参数
                 this.initPageParam() ;
             }) ;
             
         }
          _inner_getFormSchema(){
-            return this.props._inner_formSchema ;
+            return this.props._inner_redux_formSchema ;
         }
          //获取表单项校验规则
         _inner_getSingleFieldValidateRule(fieldName){
@@ -61,31 +67,43 @@ function createForm (WrapperComponent,getSchemaApi){
             let defaultValue = getDefaultValue(oldValue) ;
             this.form.setFieldValue(fieldName,defaultValue) ;
         }
+        _inner_clearFieldError(fieldName){
+           this.props._inner_redux_setFieldError(fieldName,'') ; 
+        }
         _form_getFieldValue(fieldName){
-           return this.props._inner_formData[fieldName] ;
+           return this.props._inner_redux_formData[fieldName] ;
         }
         _form_setFieldValue(fieldName,fieldValue){
-            this.props._inner_setFieldValue(fieldName,fieldValue) ;
+            this.props._inner_redux_setFieldValue(fieldName,fieldValue) ;
         }
         _form_initFormData(formData){
-            this.props._inner_initFormData(formData) ;
+            this.props._inner_redux_initFormData(formData) ;
         }
         _form_getFieldError(fieldName){//_inner_formError
-            return this.props._inner_formError[fieldName] || '' ;
+            return this.props._inner_redux_formError[fieldName] || '' ;
         }
         _form_setFieldError(fieldName,fieldError){//_inner_formError
-           this.props._inner_setFieldError(fieldName,fieldError)
+           this.props._inner_redux_setFieldError(fieldName,fieldError)
+        }
+        _form_getFormError(){
+            return this.props._inner_redux_formError ;
         }
         _form_getFieldHideFlag(fieldName){
-            let hideFlag = this.props._inner_formHide[fieldName] || false;
+            let hideFlag = this.props._inner_redux_formHide[fieldName] || false;
             return hideFlag ;
         }
         _form_setFieldHideFlag(fieldName,hideFlag){
             //console.info(`setFieldHideFlag () , fieldName : ${fieldName} , hideFlag : ${hideFlag}`) ;
-            this.props._inner_setFieldHide(fieldName,hideFlag) ;
+            //如果是隐藏字段，还要清楚错误提示和当前填写过的value
+            if(hideFlag){
+                //重置表单元素的value
+                this._inner_resetFieldValue(fieldName) ;
+                this._inner_clearFieldError(fieldName) ;
+            }
+            this.props._inner_redux_setFieldHide(fieldName,hideFlag) ;
         }
         _form_getFormHide(){
-            return this.props._inner_formHide ;
+            return this.props._inner_redux_formHide ;
         }
         //设值并校验值的正确性
         _form_setFieldValueAndValidate(fieldName,fieldValue){
@@ -93,7 +111,7 @@ function createForm (WrapperComponent,getSchemaApi){
             this._inner_validSingleField(fieldName,fieldValue) ;
         }
         _form_getFormData(){
-            return this.props._inner_formData ;
+            return this.props._inner_redux_formData ;
         }
         _form_validateForm(){
             let rules = this._inner_getAllFieldValidateRules() ;
@@ -113,11 +131,15 @@ function createForm (WrapperComponent,getSchemaApi){
         }
         _form_resetForm(){
             //console.info('resetForm () is called ...') ;
-            this.props._inner_resetFormData() ;
-            this.props._inner_resetFormError() ;
+            this.props._inner_redux_resetFormData() ;
+            this.props._inner_redux_resetFormError() ;
         }
          //校验表单的某一个字段
         _inner_validSingleField(fieldName,fieldValue){
+            let hideFlag = this.form.getFieldHideFlag(fieldName) ;
+            if(hideFlag){
+                return true;
+            }
             let value = '' ;
             //如果字段没有隐藏，则进行常规校验
             let rule = this._inner_getSingleFieldValidateRule(fieldName) ;
@@ -152,7 +174,7 @@ function createForm (WrapperComponent,getSchemaApi){
                     validFlag = false ;
                 }
             }
-            this.props._inner_setFieldError(fieldName,errTip) ;
+            this.props._inner_redux_setFieldError(fieldName,errTip) ;
             // if(fieldName === 'age'){
                  //console.info(`fieldName : ${fieldName} , fieldName: ${fieldName} , validFlag : ${validFlag}, errTip : ${errTip}`) ;
             //     //debugger ;
@@ -194,22 +216,22 @@ function createForm (WrapperComponent,getSchemaApi){
 // 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？
 function mapStateToProps(state) {
   return {
-    _inner_formData: state.formData,
-    _inner_formSchema:state.formSchema,
-    _inner_formError:state.formError,
-    _inner_formHide:state.formHide
+    _inner_redux_formData: state.formData,
+    _inner_redux_formSchema:state.formSchema,
+    _inner_redux_formError:state.formError,
+    _inner_redux_formHide:state.formHide
   };
 }
 // 哪些 action 创建函数是我们想要通过 props 获取的？
 function mapDispatchToProps(dispatch) {
   return {
-    _inner_setFieldValue: (fieldName,fieldValue) => dispatch(setFieldValue(fieldName,fieldValue)),
-    _inner_initFormData:(formData) => dispatch(initFormData(formData)),
-    _inner_initFormSchema:(formSchema) => dispatch(initFormSchema(formSchema)),
-    _inner_setFieldError:(fieldName,fieldError) => dispatch(setFieldError(fieldName,fieldError)),
-    _inner_setFieldHide:(fieldName,hideFlag) => dispatch(setFieldHide(fieldName,hideFlag)),
-    _inner_resetFormData:() => dispatch(resetFormData()),
-    _inner_resetFormError:()=>dispatch(resetFormError())
+    _inner_redux_setFieldValue: (fieldName,fieldValue) => dispatch(setFieldValue(fieldName,fieldValue)),
+    _inner_redux_initFormData:(formData) => dispatch(initFormData(formData)),
+    _inner_redux_initFormSchema:(formSchema) => dispatch(initFormSchema(formSchema)),
+    _inner_redux_setFieldError:(fieldName,fieldError) => dispatch(setFieldError(fieldName,fieldError)),
+    _inner_redux_setFieldHide:(fieldName,hideFlag) => dispatch(setFieldHide(fieldName,hideFlag)),
+    _inner_redux_resetFormData:() => dispatch(resetFormData()),
+    _inner_redux_resetFormError:()=>dispatch(resetFormError())
   };
 }
 function renderFormSchema(formSchema,form){
