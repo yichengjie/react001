@@ -1,7 +1,7 @@
 'use strict';
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import Perf from 'react-addons-perf' ; // ES6
+//import Perf from 'react-addons-perf' ; // ES6
 import { Provider } from 'react-redux';
 import store from './redux/stroe.js' ;
 //引入组件
@@ -21,7 +21,7 @@ let ShowView = QueryPageDemo ;
 ShowView = EditPageDemo ;
 //ShowView = HelloDemo ;
 
-window.Perf = Perf ;
+//window.Perf = Perf ;
 
 ReactDOM.render(
   <Provider store={store}>
