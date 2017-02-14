@@ -25,17 +25,17 @@ class MyEditPageDemo extends Component{
         if(value==='M'){
             hideFlag = true ;
             username = 'yicj-x' ;
-            age = '22x' ;
-            descr = 'test-m' ;
+            age = '22' ;
+            descr = 't-m' ;
         }
         //setFieldValueAndValidate
         //console.info(`fieldName : ${fieldName}, fieldValue : ${value}, username : ${username} , age : ${age}`) ;
-        this.form.setFieldValueAndValidate('username',username) ;
-        this.form.setFieldValueAndValidate('age',age) ;
-
-
+        //注意这里最好不要使用，setFieldValueAndValidate(fieldName,fieldValue),
+        //原因:这里是自己手动赋值，所以你要自己保证值得准确性，二不能依赖程序。
+        this.form.setFieldDefaultValue('username',username) ;
+        this.form.setFieldDefaultValue('age',age) ;
+        this.form.setFieldDefaultValue('descr',descr) ;
         this.form.setFieldHideFlag('email',hideFlag) ;
-        //this.form.setFieldValue('descr',descr) ;
         //this.form.setFieldValue('username','rrrrr2222222') ;
         return '' ;
     }
@@ -50,6 +50,9 @@ class MyEditPageDemo extends Component{
             console.info('表单验证不通过,请检查 !' ) ;
         }
     } 
+    handleReset = (event) => {
+        this.form.resetForm() ;
+    }
     render(){
         return (
             <div>
@@ -58,10 +61,11 @@ class MyEditPageDemo extends Component{
                 {/**下面开发自定义的按钮操作部分*/}
                 <FormOperContainer>
                     <button type="button" className="btn btn-default" onClick={this.handleSubmit}>提交</button>{'     '}
-                    <button type="button" className="btn btn-danger" onClick={this.form.resetForm}>重置</button>
+                    <button type="button" className="btn btn-danger" onClick={this.handleReset}>重置</button>
                 </FormOperContainer>
-                {<pre>{stringify(this.form.getFormError()) } </pre>}
+                {/*<pre>{stringify(this.form.getFormError()) } </pre>*/}
                 {/*<pre>{stringify(this.form.getFormHide()) } </pre>*/}
+                {<pre>{stringify(this.form.getFormData()) } </pre>}
             </div>
         )
     }
