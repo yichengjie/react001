@@ -18,7 +18,7 @@ import HelloDemo from './views/HelloDemo.jsx' ;
 
 
 let ShowView = QueryPageDemo ;
-ShowView = EditPageDemo ;
+//ShowView = EditPageDemo ;
 //ShowView = HelloDemo ;
 
 //window.Perf = Perf ;

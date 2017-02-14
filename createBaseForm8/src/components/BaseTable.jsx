@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 
 function handleClickFactory(callback,item){
     return function(event){
-        callback && callback.call(null,item) ;
+        return callback && callback.call(null,item) ;
     }
 }
 export default class BaseTable extends Component{
@@ -12,7 +12,7 @@ export default class BaseTable extends Component{
         let operColumnChildren =this.props.children ;
         let opers = React.Children.map(operColumnChildren,(operElem,index)=>{
             //将一行的数据传给onClick的回调函数中
-            let handleClick = handleClickFactory(operElem.props.onClick,dataItem) ;
+            let handleClick = handleClickFactory(operElem.props.handleClick,dataItem) ;
             return React.cloneElement(operElem,{key:index,onClick:handleClick}) ;
         }) 
         return opers ;
@@ -26,8 +26,8 @@ export default class BaseTable extends Component{
     }
 
     //render表头部分
-    renderTitle(){
-        let titles =  this.props.tableFields.map((item,index)=>{
+    renderTitle(tableFields){
+        let titles =  tableFields.map((item,index)=>{
             return <th key ={index}>{item.label}</th>
         }) ;
         //<th>操作</th>
@@ -38,30 +38,31 @@ export default class BaseTable extends Component{
         return titles ;
     }
 
-    renderTrs(){
-        let names = this.props.tableFields.map(item=>item.name) ;
-        return this.props.list.map((item,index)=>{
+    renderTrs(tableFields,list){
+        let names = tableFields.map(item=>item.name) ;
+        return list.map((item,index)=>{
             return (
                     <tr key={index}>
-                    {this.renderTds(item)}
-                    <td className="oper-column">
-                        {this.renderOperColumn(item) }
-                    </td>
+                        {this.renderTds(item)}
+                        <td className="oper-column">
+                            {this.renderOperColumn(item) }
+                        </td>
                     </tr>
             ) ;
         }) ;
     }
     render(){
+        let {tableFields,list} = this.props ;
         return (
             <div>
                 <table className="table table-striped table-border">
                     <thead>
                         <tr>
-                            {this.renderTitle()}
+                            {this.renderTitle(tableFields)}
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderTrs()}
+                        {this.renderTrs(tableFields,list)}
                     </tbody>
                 </table>
             </div>

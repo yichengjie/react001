@@ -44,8 +44,8 @@ export default class UserQueryPage extends Component{
             <button type="button" className="btn btn-primary" onClick={this.handleQueryOper.bind(this)}>查询</button>
             <br/>
             <BaseTable tableFields={this.state.tableFields} list={this.state.list}>
-                <i className="glyphicon glyphicon-trash" onClick={this.handleDeleteItem}></i>
-                <i className="glyphicon glyphicon-pencil" onClick={this.handleEditItem}></i>
+                <i className="glyphicon glyphicon-trash" handleClick={this.handleDeleteItem}></i>
+                <i className="glyphicon glyphicon-pencil" handleClick={this.handleEditItem}></i>
             </BaseTable>
           </div>
       ) ;
