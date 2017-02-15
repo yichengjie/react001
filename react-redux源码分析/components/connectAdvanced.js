@@ -217,12 +217,12 @@ export default function connectAdvanced(
                     const subscription = this.subscription = new Subscription(this.store, this.parentSub)  
                     const dummyState = {}  
   
-                    // 在Subsciption模块中，通过redux.store.dispatch方法触发父子组件的this.subscription.onStateChange  
+                    // 在Subsciption模块中，通过redux.store.dispatch方法触发父子组件的
+                    //this.subscription.onStateChange  
                     // 更新嵌套组件的props，同时按shouldComponentUpdate条件触发组件重绘  
                     subscription.onStateChange = function onStateChange() {  
                         // 更新组件的props  
                         this.selector.run(this.props)  
-  
                         // this.selector.shouldComponentUpdate为真值重绘当前组件，否则更新子组件的props、按条件重绘子组件  
                         if (!this.selector.shouldComponentUpdate) {  
                             subscription.notifyNestedSubs()  

@@ -48,7 +48,6 @@ export function wrapMapToPropsFunc(mapToProps, methodName) {
   
         // 判断通过redux的state、dispatch更新react组件的props时，是否需要原有的props作为参数，就此形成新的props  
         proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps)  
-  
         // 参数stateOrDispatch、ownProps在selectorFactory模块中传入  
         //      针对mapStateToProps传入state，针对mapDispatchToProps传入dispatch  
         // 通过proxy.mapToProps方法执行过程中按条件重写proxy.mapToProps，构成递归调用proxy.mapToProps  
@@ -61,7 +60,6 @@ export function wrapMapToPropsFunc(mapToProps, methodName) {
             // 当再次调用proxy函数时将获取mapToProps返回对象并执行  
             proxy.mapToProps = mapToProps  
             let props = proxy(stateOrDispatch, ownProps)  
-  
             // 用户传入的mapToProps函数(即mapStateToProps、mapDispatchToProps)返回函数  
             // 通常是mapDispatchToProps，需要通过执行redux.store.dispatch更新props  
             // 再次调用proxy获取该函数的返回对象  
@@ -70,10 +68,8 @@ export function wrapMapToPropsFunc(mapToProps, methodName) {
                 proxy.dependsOnOwnProps = getDependsOnOwnProps(props)  
                 props = proxy(stateOrDispatch, ownProps)  
             }  
-  
             // 校验props为普通对象  
             if (process.env.NODE_ENV !== 'production') verifyPlainObject(props, displayName, methodName)  
-  
             // 用户传入的mapToProps函数返回值，对象形式  
             // 即connect接口接受的mapStateToProps或mapDispatchToProps参数函数返回值  
             return props  

@@ -9,7 +9,7 @@ class HelloComp extends Component {
                 username:'',
                 addr:'',
                 email:''
-            }
+            },
         } ;
     }
 
@@ -50,6 +50,11 @@ class HelloComp extends Component {
         this.setFieldValue2('username','yicj222222222222') ;
     }
 
+    handleTest3(){
+        //这里面设置空的state照样会重新执行render方法
+        this.setState({}) ;
+    }
+
     setFieldValue(fieldName,value){
         let formData = Object.assign({},this.state.formData,{[fieldName]:value}) ;
         this.setState({formData});
@@ -67,6 +72,9 @@ class HelloComp extends Component {
 
 
     render() {
+
+        console.info('HelloDemo render method is call ...') ;
+
         return (
             <div>
                 <input type="text" {...this.getFieldProp('username')}/><br/>
@@ -75,6 +83,8 @@ class HelloComp extends Component {
                 <button type="button" onClick={()=>this.handleSubmit()}>提交表单</button><br/>
                 <button type="button" onClick={()=>this.handleTest1()}>测试1</button><br/>
                 <button type="button" onClick={()=>this.handleTest2()}>测试2</button><br/>
+                <button type="button" onClick={()=>this.handleTest3()}>测试3</button><br/>
+                <pre>{JSON.stringify(this.state.formData,null,2)}</pre>
             </div>
         );
     }
