@@ -8,6 +8,5 @@ export  function createEditPageStore(reducerObj){
         baseForm,
         ...reducerObj
     }) ;
-    let store = createStore(reducers,applyMiddleware(thunk)) ;
-    return store ;
+    return createStore(reducers,applyMiddleware(thunk))  ;
 }
