@@ -72,6 +72,7 @@ export default class Subscription {
     // 当前组件为顶层组件，this.store挂载this.onStateChange方法  
     // 当前组件为子组件，通过父组件的onStateChange调用subscription.notifyNestedSubs挂载this.onStateChange方法  
     trySubscribe() {  
+        //如果unsubscript不存在的话
         if (!this.unsubscribe) {  
             // this.onStateChange is set by connectAdvanced.initSubscription()  
             // 当前组件为顶层组件时，通过this.store.subscribe挂载this.onStateChange方法  

@@ -103,7 +103,8 @@ export default function connectAdvanced(
                 // Provider容器组件中，通过context.store向子组件传入Redux的store，storeKey默认为store  
                 // 未曾设置Provider的情形下呢？？？？  
                 this.store = this.props[storeKey] || this.context[storeKey]  
-                // 父组件的subscription回调队列属性，当前为顶层组件时为null  
+                // 父组件的subscription回调队列属性，当前为顶层组件时为null 
+                //这里的 subscriptionKey = ‘storeSubscription’ ---> this.subscription || this.parentSub
                 this.parentSub = props[subscriptionKey] || context[subscriptionKey]  
   
                 this.setWrappedInstance = this.setWrappedInstance.bind(this)  
@@ -122,7 +123,7 @@ export default function connectAdvanced(
                 this.initSelector()  
   
                 // 构建this.subscription回调函数队列，构建subscription.onStateChange方法，但不挂载  
-                // componentDidMount方法中，顶层组件redux.store回调队列中挂载父子组件的onStateChange方法  
+                // componentDidMount方法中，方法  
                 // redux.store.dispatch方法执行时，触发父子组件的onStateChange方法  
                 //    更新嵌套组件的props，同时按shouldComponentUpdate条件触发组件重绘  
                 this.initSubscription()  
@@ -204,8 +205,7 @@ export default function connectAdvanced(
                             selector.error = error  
                         }  
                     }  
-                }  
-            }  
+                }            }  
   
             // 构建this.subscription回调函数队列，构建subscription.onStateChange方法，但不挂载  
             // 顶层组件subscription回调函数队列的onStateChange方法由本组件Redux.store.dispatch触发执行  
