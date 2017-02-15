@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 //import Perf from 'react-addons-perf' ; // ES6
 import { Provider } from 'react-redux';
-import store from './redux/stroe.js' ;
+import store from './redux/editPageStore.js' ;
 //引入组件
 import 'bootstrap/dist/css/bootstrap.css' ;
 import './styles/jquery_ui.datepicker-modify.css';
@@ -18,7 +18,7 @@ import HelloDemo from './views/HelloDemo.jsx' ;
 
 
 let ShowView = QueryPageDemo ;
-//ShowView = EditPageDemo ;
+ShowView = EditPageDemo ;
 //ShowView = HelloDemo ;
 
 //window.Perf = Perf ;
