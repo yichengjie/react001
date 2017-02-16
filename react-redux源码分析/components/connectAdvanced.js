@@ -58,8 +58,8 @@ export default function connectAdvanced(
     const version = hotReloadingVersion++  
   
     const contextTypes = {  
-        [storeKey]: storeShape,  
-        [subscriptionKey]: PropTypes.instanceOf(Subscription),  
+        [storeKey]: storeShape,  //store:storeShape
+        [subscriptionKey]: PropTypes.instanceOf(Subscription),  //storeSubscription:PropTypes.instanceOf(Subscription)
     }  
     const childContextTypes = {  
         [subscriptionKey]: PropTypes.instanceOf(Subscription)  
@@ -104,7 +104,7 @@ export default function connectAdvanced(
                 // 未曾设置Provider的情形下呢？？？？  
                 this.store = this.props[storeKey] || this.context[storeKey]  
                 // 父组件的subscription回调队列属性，当前为顶层组件时为null 
-                //这里的 subscriptionKey = ‘storeSubscription’ ---> this.subscription || this.parentSub
+                //这里的 subscriptionKey = 'storeSubscription' ---> this.subscription || this.parentSub
                 this.parentSub = props[subscriptionKey] || context[subscriptionKey]  
   
                 this.setWrappedInstance = this.setWrappedInstance.bind(this)  
@@ -216,7 +216,6 @@ export default function connectAdvanced(
                 if (shouldHandleStateChanges) {  
                     const subscription = this.subscription = new Subscription(this.store, this.parentSub)  
                     const dummyState = {}  
-  
                     // 在Subsciption模块中，通过redux.store.dispatch方法触发父子组件的
                     //this.subscription.onStateChange  
                     // 更新嵌套组件的props，同时按shouldComponentUpdate条件触发组件重绘  
@@ -263,7 +262,6 @@ export default function connectAdvanced(
                 const selector = this.selector  
                 // 初始化渲染时，以redux更新props后，不予的重绘？？？  
                 selector.shouldComponentUpdate = false  
-  
                 if (selector.error) {  
                     throw selector.error  
                 } else {  
@@ -277,14 +275,12 @@ export default function connectAdvanced(
         Connect.childContextTypes = childContextTypes  
         Connect.contextTypes = contextTypes  
         Connect.propTypes = contextTypes  
-  
         // 开发环境，保证props可由redux机制顺利更新，并完成组件重绘  
         if (process.env.NODE_ENV !== 'production') {  
             Connect.prototype.componentWillUpdate = function componentWillUpdate() {  
                 if (this.version !== version) {  
                     this.version = version  
                     this.initSelector()  
-  
                     if (this.subscription) this.subscription.tryUnsubscribe()  
                     this.initSubscription()  
                     if (shouldHandleStateChanges) this.subscription.trySubscribe()  

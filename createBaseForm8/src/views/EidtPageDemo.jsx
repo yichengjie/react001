@@ -54,6 +54,7 @@ class MyEditPageDemo extends Component{
         this.form.resetForm() ;
     }
     render(){
+        console.info('EidtPageDemo render method is called ...') ;
         return (
             <div>
                 <Navbar />

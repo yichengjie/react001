@@ -19,9 +19,20 @@ import HelloDemo from './views/HelloDemo.jsx' ;
 
 let ShowView = QueryPageDemo ;
 ShowView = EditPageDemo ;
-ShowView = HelloDemo ;
-
+//ShowView = HelloDemo ;
 //window.Perf = Perf ;
+// class App extends Component{
+// 	constructor(props){
+// 		super(props) ;
+// 	}
+// 	render(){
+// 		console.info('App render method is call...') ;
+// 		return (
+// 			<ShowView/>
+// 		) ;
+// 	}
+// }
+
 
 ReactDOM.render(
   <Provider store={store}>
