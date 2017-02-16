@@ -1,4 +1,4 @@
-import {ADD_TODO,COMPLETE_TODO,SET_VISIBILITY_FILTER} from '../action-type.js' ;
+import {ADD_TODO,COMPLETE_TODO,SET_VISIBILITY_FILTER,SET_TODO_VALUE} from '../action-type.js' ;
 /*
  * action 创建函数
  */
@@ -12,4 +12,8 @@ export function completeTodo(index) {
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
+}
+
+export function setTodoValue(value){
+  return { type: SET_TODO_VALUE, value}
 }

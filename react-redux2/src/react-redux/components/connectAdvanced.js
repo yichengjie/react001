@@ -137,7 +137,6 @@ export default function connectAdvanced(
       }
 
       getChildContext() {
-
         console.info('Connect component getChildContext method is call...') ;
         // If this component received store from props, its subscription should be transparent
         // to any descendants receiving store+subscription from context; it passes along
@@ -191,6 +190,7 @@ export default function connectAdvanced(
       }
 
       initSelector() {
+
         const sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions)
         this.selector = makeSelectorStateful(sourceSelector, this.store)
         this.selector.run(this.props)
@@ -198,13 +198,14 @@ export default function connectAdvanced(
 
       initSubscription() {
         //如果shouldHandleStateChanges为false的话，直接返回
-        console.info(`shouldHandleStateChanges : ${shouldHandleStateChanges}`) ;
+        //console.info(`shouldHandleStateChanges : ${shouldHandleStateChanges}`) ;
         if (!shouldHandleStateChanges) return
         // parentSub's source should match where store came from: props vs. context. A component
         // connected to the store via props shouldn't use subscription from context, or vice versa.
         //parentSubscription
         const parentSub = (this.propsMode ? this.props : this.context)[subscriptionKey]
-        console.info('parentSub : ' ,parentSub) ;
+        //一般情况下这里也全为null
+        //console.info('initSubscription () ------> parentSub : ' ,parentSub) ;
         this.subscription = new Subscription(this.store, parentSub, this.onStateChange.bind(this))
         // `notifyNestedSubs` is duplicated to handle the case where the component is  unmounted in
         // the middle of the notification loop, where `this.subscription` will then be null. An

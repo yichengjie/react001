@@ -3,6 +3,7 @@ import Todo from './Todo'
 
 export default class TodoList extends Component {
   render() {
+    console.info('TodoList Component render method is call... ') ;
     return (
       <ul>
         {this.props.todos.map((todo, index) =>

@@ -9,6 +9,7 @@ import Footer from '../containers/Footer'
 
 class App extends Component {
   render() {
+    console.info('hello world') ;
     return (
       <div>
         <AddTodo />

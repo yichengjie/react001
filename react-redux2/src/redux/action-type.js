@@ -4,6 +4,7 @@
 export const ADD_TODO = 'ADD_TODO';
 export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const SET_TODO_VALUE = 'SET_INPUT_VALUE' ;
 
 /*
  * 其它的常量

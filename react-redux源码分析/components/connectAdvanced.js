@@ -205,7 +205,8 @@ export default function connectAdvanced(
                             selector.error = error  
                         }  
                     }  
-                }            }  
+                }           
+            }  
   
             // 构建this.subscription回调函数队列，构建subscription.onStateChange方法，但不挂载  
             // 顶层组件subscription回调函数队列的onStateChange方法由本组件Redux.store.dispatch触发执行  

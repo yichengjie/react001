@@ -6,7 +6,8 @@ import {setVisibilityFilter} from '../redux/actions/index.js' ;
 
 function mapStateToProps(state){
     return {
-        filter: state.visibilityFilter
+        filter: state.visibilityFilter,
+        todo:state.todo
     } ;
 }
 
