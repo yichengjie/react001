@@ -138,7 +138,6 @@ export default function connectAdvanced(
             // connect方法执行过程中，由redux.store.state初始化数据更新组件props组件属性  
             componentDidMount() {  
                 if (!shouldHandleStateChanges) return  
-  
                 // 顶层组件redux.store、this.subscrption回调队列中挂载父子组件的onStateChange方法  
                 this.subscription.trySubscribe()  
                 // connect(mapStateToProps,mapDispatchToProps)方法执行时  
@@ -188,13 +187,13 @@ export default function connectAdvanced(
                 const { getState } = this;  
                 // 返回react.props计算函数，返回函数在redux.store.dispatch派发action事件时执行  
                 const sourceSelector = selectorFactory(dispatch, selectorFactoryOptions)  
-  
                 const selector = this.selector = {  
                     shouldComponentUpdate: true,  
                     props: sourceSelector(getState(), this.props),// 重新计算react.props  
                     run: function runComponentSelector(props) {  
                         try {  
-                            const nextProps = sourceSelector(getState(), props)  
+                            const nextProps = sourceSelector(getState(), props) 
+                            //当前props和新的props不相同的话 
                             if (selector.error || nextProps !== selector.props) {  
                                 selector.shouldComponentUpdate = true  
                                 selector.props = nextProps  
@@ -224,15 +223,14 @@ export default function connectAdvanced(
                         // 更新组件的props  
                         this.selector.run(this.props)  
                         // this.selector.shouldComponentUpdate为真值重绘当前组件，否则更新子组件的props、按条件重绘子组件  
-                        if (!this.selector.shouldComponentUpdate) {  
+                        if (!this.selector.shouldComponentUpdate) {//shouldComponentUpdate为false时  
                             subscription.notifyNestedSubs()  
-                        } else {  
+                        } else {  //shouldComponentUpdate为true时  
                             // 更新组件完成后执行回调，  
                             this.componentDidUpdate = function componentDidUpdate() {  
                                 this.componentDidUpdate = undefined  
                                 subscription.notifyNestedSubs()  
                             }  
-  
                             // 调用setState更新react组件，setState方法不论prevState、currentState改变与否  
                             // 都会比较组件的props进行重绘？？？  
                             this.setState(dummyState)  
@@ -276,6 +274,7 @@ export default function connectAdvanced(
         Connect.childContextTypes = childContextTypes  
         Connect.contextTypes = contextTypes  
         Connect.propTypes = contextTypes  
+
         // 开发环境，保证props可由redux机制顺利更新，并完成组件重绘  
         if (process.env.NODE_ENV !== 'production') {  
             Connect.prototype.componentWillUpdate = function componentWillUpdate() {  

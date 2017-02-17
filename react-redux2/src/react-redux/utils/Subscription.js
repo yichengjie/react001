@@ -19,6 +19,7 @@ function createListenerCollection() {
 
     notify() {
       const listeners = current = next
+      //console.info('xxxxxxxxxxxxxxxx: length : ' + listeners.length) ;
       for (let i = 0; i < listeners.length; i++) {
         listeners[i]()
       }
@@ -28,11 +29,9 @@ function createListenerCollection() {
       let isSubscribed = true
       if (next === current) next = current.slice()
       next.push(listener)
-
       return function unsubscribe() {
         if (!isSubscribed || current === CLEARED) return
         isSubscribed = false
-
         if (next === current) next = current.slice()
         next.splice(next.indexOf(listener), 1)
       }
@@ -62,6 +61,8 @@ export default class Subscription {
     return Boolean(this.unsubscribe)
   }
 
+  //在store上subscribe回调函数onStateChange
+  //如果不是顶层组件，则在父listeners中添加嵌套subscribe的回调函数onStateChange
   trySubscribe() {
     if (!this.unsubscribe) {
       this.unsubscribe = this.parentSub

@@ -5,9 +5,10 @@ import {setVisibilityFilter} from '../redux/actions/index.js' ;
 
 
 function mapStateToProps(state){
+    //console.info('Footer component mapDispatchToProps ... ') ;
     return {
-        filter: state.visibilityFilter,
-        todo:state.todo
+        todo:state.todo,
+        filter: state.visibilityFilter
     } ;
 }
 

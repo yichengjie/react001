@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 export default class AddTodo extends Component {
   render() {
+    //console.info(`AddTodo render method is call...`) ;
     return (
       <div>
         <input type='text' value={this.props.todo} onChange={this.handleChange} />

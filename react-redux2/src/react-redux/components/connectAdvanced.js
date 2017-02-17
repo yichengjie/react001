@@ -15,6 +15,8 @@ function makeSelectorStateful(sourceSelector, store) {
     run: function runComponentSelector(props) {
       try {
         const nextProps = sourceSelector(store.getState(), props)
+        //获取最新的props
+        //如果新的props和旧的props不相同的或则 selector.error存在的话
         if (nextProps !== selector.props || selector.error) {
           selector.shouldComponentUpdate = true
           selector.props = nextProps
@@ -132,12 +134,11 @@ export default function connectAdvanced(
 
         this.initSelector()
         this.initSubscription()
-
-        console.info('Connect component constructor method is call ...') ;
+        //console.info('Connect component constructor method is call ...') ;
       }
 
       getChildContext() {
-        console.info('Connect component getChildContext method is call...') ;
+        //console.info('Connect component getChildContext method is call...') ;
         // If this component received store from props, its subscription should be transparent
         // to any descendants receiving store+subscription from context; it passes along
         // subscription passed to it. Otherwise, it shadows the parent subscription, which allows
@@ -148,7 +149,6 @@ export default function connectAdvanced(
 
       componentDidMount() {
         if (!shouldHandleStateChanges) return
-
         // componentWillMount fires during server side rendering, but componentDidMount and
         // componentWillUnmount do not. Because of this, trySubscribe happens during ...didMount.
         // Otherwise, unsubscription would never take place during SSR, causing a memory leak.
@@ -189,9 +189,11 @@ export default function connectAdvanced(
         this.wrappedInstance = ref
       }
 
+      //更新最新的props，并保存到selector中
       initSelector() {
-
         const sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions)
+        //console.info(`sourceSelector : {displayName}` ,sourceSelector) ;
+        //获取新的selector//最新的props
         this.selector = makeSelectorStateful(sourceSelector, this.store)
         this.selector.run(this.props)
       }
@@ -204,6 +206,7 @@ export default function connectAdvanced(
         // connected to the store via props shouldn't use subscription from context, or vice versa.
         //parentSubscription
         const parentSub = (this.propsMode ? this.props : this.context)[subscriptionKey]
+        //console.info(`parentSub : ${displayName}` , parentSub) ;
         //一般情况下这里也全为null
         //console.info('initSubscription () ------> parentSub : ' ,parentSub) ;
         this.subscription = new Subscription(this.store, parentSub, this.onStateChange.bind(this))
@@ -217,11 +220,16 @@ export default function connectAdvanced(
       }
 
       onStateChange() {
+        //获取最新的props
         this.selector.run(this.props)
-
-        if (!this.selector.shouldComponentUpdate) {
-          this.notifyNestedSubs()
-        } else {
+        //render方法执行以后shouldComponentUpdate会变为false,但是在每次selector.run之后shouldComponentUpdate又会重新变为true
+        console.info(`this.selector.shouldComponentUpdate : ${displayName}` + this.selector.shouldComponentUpdate) ;
+        if (!this.selector.shouldComponentUpdate) {//【false】分支
+          //console.info('1111111111111111') ;
+          this.notifyNestedSubs()//如果是顶层组件，这里将什么也不做
+        } else {//【true】分支
+          //所以正常每次都会
+          //console.info('2222222222222222') ;
           this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate
           this.setState(dummyState)
         }
@@ -256,8 +264,8 @@ export default function connectAdvanced(
 
       render() {
         const selector = this.selector
+        //render方法执行以后selector.shouldComponentUpdate变为false
         selector.shouldComponentUpdate = false
-
         if (selector.error) {
           throw selector.error
         } else {

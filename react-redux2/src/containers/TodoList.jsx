@@ -19,6 +19,7 @@ function selectTodos(todos, filter) {
 
 
 function mapStateToProps(state){
+    //console.info('TodoList component mapDispatchToProps ... ') ;
     return {
         todos: selectTodos(state.todos, state.visibilityFilter),
     } ;

@@ -17,7 +17,7 @@ export default class Footer extends Component {
   }
 
   render() {
-    console.info('Footer Component render method is call... ') ;
+    //console.info('Footer Component render method is call... ') ;
     return (
       <p>
         Show:

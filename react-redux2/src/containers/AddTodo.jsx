@@ -5,6 +5,7 @@ import {addTodo,setTodoValue} from '../redux/actions/index.js' ;
 
 
 function mapStateToProps(state){
+    //console.info('AddTodo component mapDispatchToProps ... ') ;
     return {
         todo:state.todo
     } ;

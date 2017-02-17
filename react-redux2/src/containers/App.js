@@ -9,7 +9,7 @@ import Footer from '../containers/Footer'
 
 class App extends Component {
   render() {
-    console.info('hello world') ;
+    //console.info(`App Component render method is call...`) ;
     return (
       <div>
         <AddTodo />
@@ -19,6 +19,11 @@ class App extends Component {
     )
   }
 }
+function mapStateToProps(state){
+   return {
+     todo:state.todo
+   };
+}
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
 //export default App
-export default connect()(App) 
+export default connect(mapStateToProps)(App) 
